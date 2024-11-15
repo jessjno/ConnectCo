@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root "organizations#index"
   # Routes for the Member resource:
 
   # CREATE
@@ -18,7 +19,6 @@ Rails.application.routes.draw do
 
   #------------------------------
 
-  root "home#index"
   # Routes for the Responsibility resource:
   
   # CREATE
