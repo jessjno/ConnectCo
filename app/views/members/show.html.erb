@@ -1,0 +1,86 @@
+<div>
+  <div>
+    <h1>
+      Member #<%= @the_member.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/members">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_member/<%= @the_member.id %>">
+          Delete member
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Role
+      </dt>
+      <dd>
+        <%= @the_member.role %>
+      </dd>
+
+      <dt>
+        Employee
+      </dt>
+      <dd>
+        <%= @the_member.employee_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_member.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_member.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit member
+    </h2>
+
+    <form action="/modify_member/<%= @the_member.id %>"  method="post" >
+      <div>
+        <label for="role_box">
+          Role
+        </label>
+
+        <input type="text" id="role_box" name="query_role" value="<%= @the_member.role %>">
+      </div>
+
+      <div>
+        <label for="employee_id_box">
+          Employee
+        </label>
+
+        <input type="text" id="employee_id_box" name="query_employee_id" value="<%= @the_member.employee_id %>">
+      </div>
+
+      <button>
+        Update member
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
