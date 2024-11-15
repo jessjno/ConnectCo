@@ -29,7 +29,7 @@ class Employee < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   belongs_to :organization, required: true, class_name: "Organization", foreign_key: "organization_id", counter_cache: true
-  #has_many  :responsibilities, class_name: "Responsibility", foreign_key: "employee_id", dependent: :nullify
-  #has_many  :memberships, class_name: "Member", foreign_key: "employee_id", dependent: :nullify
+  has_many  :responsibilities, class_name: "Responsibility", foreign_key: "employee_id", dependent: :nullify
+  has_many  :memberships, class_name: "Member", foreign_key: "employee_id", dependent: :nullify
 
 end
