@@ -1,0 +1,134 @@
+<div>
+  <div>
+    <h1>
+      List of all organizations
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new organization
+    </h2>
+
+    <form action="/insert_organization" method="post">
+      <div>
+        <label for="name_box">
+          Name
+        </label>
+
+        <input type="text" id="name_box" name="query_name">
+      </div>
+
+      <div>
+        <label for="description_box">
+          Description
+        </label>
+
+        <input type="text" id="description_box" name="query_description">
+      </div>
+
+      <div>
+        <label for="parent_id_box">
+          Parent
+        </label>
+
+        <input type="text" id="parent_id_box" name="query_parent_id">
+      </div>
+
+      <div>
+        <label for="employees_count_box">
+          Employees count
+        </label>
+
+        <input type="text" id="employees_count_box" name="query_employees_count">
+      </div>
+
+      <button>
+        Create organization
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Name
+        </th>
+
+        <th>
+          Description
+        </th>
+
+        <th>
+          Parent
+        </th>
+
+        <th>
+          Employees count
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_organizations.each do |an_organization| %>
+      <tr>
+        <td>
+          <%= an_organization.id %>
+        </td>
+
+        <td>
+          <%= an_organization.name %>
+        </td>
+
+        <td>
+          <%= an_organization.description %>
+        </td>
+
+        <td>
+          <%= an_organization.parent_id %>
+        </td>
+
+        <td>
+          <%= an_organization.employees_count %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(an_organization.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(an_organization.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/organizations/<%= an_organization.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>
