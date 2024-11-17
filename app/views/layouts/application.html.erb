@@ -11,6 +11,15 @@
   </head>
 
   <body>
+  <nav>
+    <a href="/">Home</a>
+    <a href="">My Profile</a>
+    <% if current_employee != nil %>
+      <a href="/employees/sign_out"></a>
+    <% else %>
+      <a href="/employees/sign_in"></a>
+    <% end %>
+  </nav>
     <%= yield %>
   </body>
 </html>

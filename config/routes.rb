@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :employees
+  resources :employee, only: [:show, :edit, :update]
   root "organizations#index"
   # Routes for the Member resource:
 
@@ -36,7 +38,6 @@ Rails.application.routes.draw do
 
   #------------------------------
 
-  devise_for :employees
 
   # Routes for the Organization resource:
   # CREATE
