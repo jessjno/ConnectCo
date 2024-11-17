@@ -11,5 +11,8 @@
 class Member < ApplicationRecord
 
   belongs_to :employee, class_name: "Employee", foreign_key: "employee_id", counter_cache: :memberships_count
+  belongs_to :organization
+
+  enum role: { admin: 'admin', manager: 'manager', employee: 'employee', viewer: 'viewer', guest: 'guest' }
 
 end
