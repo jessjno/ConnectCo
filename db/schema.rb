@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_15_210858) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_18_181828) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -28,13 +28,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_15_210858) do
     t.integer "memberships_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "member_id"
     t.index ["email"], name: "index_employees_on_email", unique: true
     t.index ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true
   end
 
   create_table "members", force: :cascade do |t|
     t.string "role"
-    t.integer "employee_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -54,6 +54,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_15_210858) do
     t.integer "employee_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "organization_id"
   end
 
 end

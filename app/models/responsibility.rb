@@ -2,12 +2,13 @@
 #
 # Table name: responsibilities
 #
-#  id          :bigint           not null, primary key
-#  description :string
-#  name        :string
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  employee_id :integer
+#  id              :bigint           not null, primary key
+#  description     :string
+#  name            :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  employee_id     :integer
+#  organization_id :integer
 #
 class Responsibility < ApplicationRecord
   

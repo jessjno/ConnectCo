@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
-  before_action :authenticate_employee!
+  # todo: uncomment later
+  # before_action :authenticate_employee!
   skip_forgery_protection
 
   helper_method :current_employee
