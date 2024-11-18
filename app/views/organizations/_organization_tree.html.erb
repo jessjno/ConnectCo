@@ -1,0 +1,10 @@
+<ul>
+  <% tree.each do |node| %>
+    <li>
+      <strong><%= node[:organization].name %></strong>
+      <% if node[:children].any? %>
+        <%= render partial: "organization_tree", locals: { tree: node[:children] } %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

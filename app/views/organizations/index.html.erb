@@ -1,4 +1,7 @@
-<div>
+<h1>Organization Tree</h1>
+<%= render partial: "organization_tree", locals: { tree: @organization_tree } %>
+
+<!--<div>
   <div>
     <h1>
       List of all organizations
@@ -91,44 +94,45 @@
         </th>
       </tr>
 
-      <% @list_of_organizations.each do |an_organization| %>
-      <tr>
+      <%# @list_of_organizations.each do |an_organization| %>-->
+<!--      <tr>
         <td>
-          <%= an_organization.id %>
-        </td>
+          <%#= an_organization.id %>-->
+<!--        </td>
 
         <td>
-          <%= an_organization.name %>
-        </td>
+          <%#= an_organization.name %>-->
+<!--        </td>
 
         <td>
-          <%= an_organization.description %>
-        </td>
+          <%#= an_organization.description %>-->
+<!--        </td>
 
         <td>
-          <%= an_organization.parent_id %>
-        </td>
+          <%#= an_organization.parent_id %>-->
+<!--        </td>
 
         <td>
-          <%= an_organization.employees_count %>
-        </td>
+          <%#= an_organization.employees_count %>-->
+<!--        </td>
 
         <td>
-          <%= time_ago_in_words(an_organization.created_at) %> ago
-        </td>
+          <%#= time_ago_in_words(an_organization.created_at) %> ago-->
+<!--        </td>
         <td>
-          <%= time_ago_in_words(an_organization.updated_at) %> ago
-        </td>
+          <%#= time_ago_in_words(an_organization.updated_at) %> ago-->
+<!--        </td>
 
         <td>
-          <a href="/organizations/<%= an_organization.id %>">
+          <a href="/organizations/<%#= an_organization.id %>">
             Show details
           </a>
         </td>
       </tr>
-      <% end %>
-    </table>
+      <%# end %>-->
+<!--    </table>
   </div>
 </div>
 
 <hr>
+-->

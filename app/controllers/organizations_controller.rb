@@ -1,8 +1,7 @@
 class OrganizationsController < ApplicationController
   def index
-    matching_organizations = Organization.all
-
-    @list_of_organizations = matching_organizations.order({ :created_at => :desc })
+    organizations = Organization.all
+    @organization_tree = Organization.build_tree(organizations)
 
     render({ :template => "organizations/index" })
   end
