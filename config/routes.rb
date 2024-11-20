@@ -3,11 +3,15 @@ Rails.application.routes.draw do
   resources :employee, only: [:show, :edit, :update]
   root "organizations#index"
 
-  resources :organizations do
-    member do
-      get :employees # Adds a route for `/organizations/:id/employees`
-    end
-  end
+  
+  # resources :organizations do
+  #   member do
+  #     get :employees # Adds a route for `/organizations/:id/employees`
+  #   end
+  # end
+
+  get '/organizations/org_chart_data', to: 'organizations#org_chart_data', as: 'organizations_org_chart_data'
+  resources :organizations
   # Routes for the Member resource:
   # CREATE
   post("/insert_member", { :controller => "members", :action => "create" })
@@ -38,7 +42,7 @@ Rails.application.routes.draw do
   post("/insert_organization", { :controller => "organizations", :action => "create" })
   # READ
   get("/organizations", { :controller => "organizations", :action => "index" })
-  get("/organizations/:path_id", { :controller => "organizations", :action => "show" })
+  get("/organizations/:id", { :controller => "organizations", :action => "show" })
   # UPDATE
   post("/modify_organization/:path_id", { :controller => "organizations", :action => "update" })
   # DELETE

@@ -7,13 +7,10 @@ class OrganizationsController < ApplicationController
   end
 
   def show
-    the_id = params.fetch("path_id")
+  @organization = Organization.find(params[:id])
+  employees = @organization.employees.includes(:member) # Eager load members for performance
 
-    matching_organizations = Organization.where({ :id => the_id })
-
-    @the_organization = matching_organizations.at(0)
-
-    render({ :template => "organizations/show" })
+  @employee_hierarchy = build_employee_hierarchy(employees)
   end
 
   def create
@@ -56,4 +53,65 @@ class OrganizationsController < ApplicationController
 
     redirect_to("/organizations", { :notice => "Organization deleted successfully."} )
   end
+
+  # def org_chart_data
+  #   # data = build_tree(Organization.all)
+  #   # render json: data
+    
+  #   # organizations = Organization.all
+  #   # render json: organizations.as_json(only: [:id, :name, :parent_id])
+  # end
+  def org_chart_data
+    organizations = Organization.all
+    Rails.logger.info(organizations.to_json)
+    render json: organizations.as_json(only: [:id, :name, :parent_id])
+  end
+  
+  private
+
+  def build_tree(nodes)
+    nodes = nodes.map { |org| org.attributes.symbolize_keys }
+    id_map = nodes.index_by { |node| node[:id] }
+    root = []
+
+    nodes.each do |node|
+      if node[:parent_id].nil?
+        root << node
+      else
+        parent = id_map[node[:parent_id]]
+        parent[:children] ||= []
+        parent[:children] << node
+      end
+    end
+
+    root
+  end
+
+  def build_employee_hierarchy(employees)
+    # Fetch managers and non-managers using Active Record queries
+    managers = employees.joins(:member).where(members: { role: 'manager' })
+    non_managers = employees.joins(:member).where(members: { role: 'employee' })
+  
+    # Return an empty hierarchy if no managers are found
+    return [] if managers.empty?
+  
+    # Build the hierarchy
+    hierarchy = managers.map do |manager|
+      {
+        id: manager.id,
+        name: "#{manager.first_name} #{manager.last_name}",
+        title: manager.title,
+        subordinates: non_managers.map do |employee|
+          {
+            id: employee.id,
+            name: "#{employee.first_name} #{employee.last_name}",
+            title: employee.title
+          }
+        end
+      }
+    end
+  
+    hierarchy
+  end
+  
 end

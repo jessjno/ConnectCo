@@ -28,6 +28,10 @@ class Employee < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  
+  belongs_to :member, optional: true # Assuming an employee may or may not have a role
   belongs_to :organization
-  # TODO: associations
+
+  validates :first_name, :last_name, :organization_id, presence: true
+
 end

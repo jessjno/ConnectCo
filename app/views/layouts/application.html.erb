@@ -3,17 +3,21 @@
   <head>
     <title>Rails Template</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= favicon_link_tag 'favicon.png', type: 'image/png' %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
   </head>
 
   <body>
   <nav>
     <a href="/">Home</a>
-    <a href="">My Profile</a>
+
     <% if current_employee != nil %>
       <a href="/employees/sign_out"></a>
     <% else %>

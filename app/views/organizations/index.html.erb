@@ -1,138 +1,149 @@
-<h1>Organization Tree</h1>
-<%= render partial: "organization_tree", locals: { tree: @organization_tree } %>
+<h1>Discovery Partner</h1>
 
-<!--<div>
-  <div>
-    <h1>
-      List of all organizations
-    </h1>
-  </div>
-</div>
+<div id="org-chart-container"></div>
 
-<hr>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  fetch('/organizations/org_chart_data')
+    .then(response => response.json())
+    .then(orgData => {
+      console.log("Fetched Data:", orgData); // Debug log
+      const hierarchy = createHierarchy(orgData);
+      console.log("hierarchy data", hierarchy)
+      renderOrgChart(hierarchy);
+    })
+    .catch(error => console.error("Error fetching data:", error));
+});
 
-<div>
-  <div>
-    <h2>
-      Add a new organization
-    </h2>
+function createHierarchy(orgData) {
+  console.log(orgData)
+  const hierarchy = d3.stratify()
+    .id(d => d.id)
+    .parentId(d => d.parent_id)(orgData);
+  console.log("created hierarchy", hierarchy)
+  return hierarchy
+}
 
-    <form action="/insert_organization" method="post">
-      <div>
-        <label for="name_box">
-          Name
-        </label>
 
-        <input type="text" id="name_box" name="query_name">
-      </div>
+function renderOrgChart(hierarchy) {
+  const svgWidth = 1200;
+  const svgHeight = 800;
 
-      <div>
-        <label for="description_box">
-          Description
-        </label>
+  const svg = d3.select("#org-chart-container")
+    .append("svg")
+    .attr("width", svgWidth)
+    .attr("height", svgHeight);
 
-        <input type="text" id="description_box" name="query_description">
-      </div>
+  const treeLayout = d3.tree().size([svgWidth - 200, svgHeight - 200]);
+  <!--const root = d3.hierarchy(hierarchy);-->
 
-      <div>
-        <label for="parent_id_box">
-          Parent
-        </label>
+  treeLayout(hierarchy);
 
-        <input type="text" id="parent_id_box" name="query_parent_id">
-      </div>
+  // Links (lines connecting nodes)
+  svg.selectAll("line")
+    .data(hierarchy.links())
+    .enter()
+    .append("line")
+    .attr("x1", d => d.source.x)
+    .attr("y1", d => d.source.y)
+    .attr("x2", d => d.target.x)
+    .attr("y2", d => d.target.y)
+    .attr("stroke", "black");
 
-      <div>
-        <label for="employees_count_box">
-          Employees count
-        </label>
+  // Nodes (groups with rectangles and text)
+  const nodeGroups = svg.selectAll(".node-group")
+    .data(hierarchy.descendants())
+    .enter()
+    .append("g")
+    .attr("class", "node-group")
+    .attr("transform", d => `translate(${d.x}, ${d.y})`);
 
-        <input type="text" id="employees_count_box" name="query_employees_count">
-      </div>
+  // Rectangles for organizations
+  nodeGroups.append("rect")
+    .attr("width", 120) // Adjust the width of the rectangle
+    .attr("height", 40) // Adjust the height of the rectangle
+    .attr("x", -60) // Center the rectangle around the node
+    .attr("y", -20) // Center the rectangle vertically
+    .attr("fill", "lightblue")
+    .attr("stroke", "black")
+    .style("cursor", "pointer")
+    .on("click", function(event, d) {  // Note: 'd' is the second argument here
+      console.log("node data:", d);   // Logs the data bound to the node
+       if (d && d.data && d.data.id) {
+      console.log("node id:", d.data.id);
+      window.location.href = `/organizations/${d.data.id}`;
+    } else {
+      console.error("Error: Data is undefined for this node:", d);
+    }
+  });
 
-      <button>
-        Create organization
-      </button>
-    </form>
-  </div>
-</div>
 
-<hr>
-<div>
-  <div>
-    <table border="1">
-      <tr>
-        <th>
-          ID
-        </th>
 
-        <th>
-          Name
-        </th>
+  // Labels inside rectangles
+  nodeGroups.append("text")
+    .attr("text-anchor", "middle")
+    .attr("dominant-baseline", "middle")
+    .attr("font-size", "12px")
+    .text(d => {
+      console.log("node name:", d);
+      return d.data.name;
+    })
+    .style("pointer-events", "none"); // Prevent text from blocking rectangle clicks
+}
 
-        <th>
-          Description
-        </th>
+  console.log("Hierarchy Data:", hierarchy);
 
-        <th>
-          Parent
-        </th>
+</script>
 
-        <th>
-          Employees count
-        </th>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const employeeHierarchy = <%= @employee_hierarchy.to_json.html_safe %>;
 
-        <th>
-          Created at
-        </th>
+  const svgWidth = 1200;
+  const svgHeight = 800;
 
-        <th>
-          Updated at
-        </th>
+  const svg = d3.select("#employee-org-chart")
+    .append("svg")
+    .attr("width", svgWidth)
+    .attr("height", svgHeight);
 
-        <th>
-        </th>
-      </tr>
+  const treeLayout = d3.tree().size([svgWidth - 200, svgHeight - 200]);
 
-      <%# @list_of_organizations.each do |an_organization| %>-->
-<!--      <tr>
-        <td>
-          <%#= an_organization.id %>-->
-<!--        </td>
+  const root = d3.hierarchy(employeeHierarchy[0]); // Assume first manager is the root
+  treeLayout(root);
 
-        <td>
-          <%#= an_organization.name %>-->
-<!--        </td>
+  // Render links
+  svg.selectAll("line")
+    .data(root.links())
+    .enter()
+    .append("line")
+    .attr("x1", d => d.source.x)
+    .attr("y1", d => d.source.y)
+    .attr("x2", d => d.target.x)
+    .attr("y2", d => d.target.y)
+    .attr("stroke", "black");
 
-        <td>
-          <%#= an_organization.description %>-->
-<!--        </td>
+  // Render nodes
+  const nodeGroups = svg.selectAll(".node-group")
+    .data(root.descendants())
+    .enter()
+    .append("g")
+    .attr("class", "node-group")
+    .attr("transform", d => `translate(${d.x}, ${d.y})`);
 
-        <td>
-          <%#= an_organization.parent_id %>-->
-<!--        </td>
+  nodeGroups.append("rect")
+    .attr("width", 120)
+    .attr("height", 40)
+    .attr("x", -60)
+    .attr("y", -20)
+    .attr("fill", d => (d.data.role === "Manager" ? "lightblue" : "lightgreen"))
+    .attr("stroke", "black");
 
-        <td>
-          <%#= an_organization.employees_count %>-->
-<!--        </td>
+  nodeGroups.append("text")
+    .attr("text-anchor", "middle")
+    .attr("dominant-baseline", "middle")
+    .attr("font-size", "12px")
+    .text(d => d.data.name);
+});
 
-        <td>
-          <%#= time_ago_in_words(an_organization.created_at) %> ago-->
-<!--        </td>
-        <td>
-          <%#= time_ago_in_words(an_organization.updated_at) %> ago-->
-<!--        </td>
-
-        <td>
-          <a href="/organizations/<%#= an_organization.id %>">
-            Show details
-          </a>
-        </td>
-      </tr>
-      <%# end %>-->
-<!--    </table>
-  </div>
-</div>
-
-<hr>
--->
+</script>

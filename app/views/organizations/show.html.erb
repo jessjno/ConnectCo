@@ -1,116 +1,27 @@
-<div>
-  <div>
-    <h1>
-      Organization #<%= @the_organization.id %> details
-    </h1>
+<div id="employee-org-chart"></div>
+<h1><%= @organization.name %> - Employees</h1>
+<p><%= @organization.description %></p>
 
-    <div>
-      <div>
-        <a href="/organizations">
-          Go back
-        </a>
-      </div>
-
-      <div>
-        <a href="/delete_organization/<%= @the_organization.id %>">
-          Delete organization
-        </a>
-      </div>
-    </div>
-
-    <dl>
-      <dt>
-        Name
-      </dt>
-      <dd>
-        <%= @the_organization.name %>
-      </dd>
-
-      <dt>
-        Description
-      </dt>
-      <dd>
-        <%= @the_organization.description %>
-      </dd>
-
-      <dt>
-        Parent
-      </dt>
-      <dd>
-        <%= @the_organization.parent_id %>
-      </dd>
-
-      <dt>
-        Employees count
-      </dt>
-      <dd>
-        <%= @the_organization.employees_count %>
-      </dd>
-
-      <dt>
-        Created at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_organization.created_at) %> ago
-      </dd>
-
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_organization.updated_at) %> ago
-      </dd>
-    </dl>
-  </div>
-</div>
-
-<hr>
-
-
-<div>
-  <div>
-    <h2>
-      Edit organization
-    </h2>
-
-    <form action="/modify_organization/<%= @the_organization.id %>"  method="post" >
-      <div>
-        <label for="name_box">
-          Name
-        </label>
-
-        <input type="text" id="name_box" name="query_name" value="<%= @the_organization.name %>">
-      </div>
-
-      <div>
-        <label for="description_box">
-          Description
-        </label>
-
-        <input type="text" id="description_box" name="query_description" value="<%= @the_organization.description %>">
-      </div>
-
-      <div>
-        <label for="parent_id_box">
-          Parent
-        </label>
-
-        <input type="text" id="parent_id_box" name="query_parent_id" value="<%= @the_organization.parent_id %>">
-      </div>
-
-      <div>
-        <label for="employees_count_box">
-          Employees count
-        </label>
-
-        <input type="text" id="employees_count_box" name="query_employees_count" value="<%= @the_organization.employees_count %>">
-      </div>
-
-      <button>
-        Update organization
-      </button>
-    </form>
-  </div>
-</div>
-
-<hr>
+<% if @employee_hierarchy.any? %>
+  <h2>Employee Hierarchy</h2>
+  
+  <ul>
+    <% @employee_hierarchy.each do |manager| %>
+      <li>
+        <strong><%= manager[:name] %> (Manager)</strong>
+        
+        <% if manager[:subordinates].any? %>
+          <ul>
+            <% manager[:subordinates].each do |subordinate| %>
+              <li>
+                <%= subordinate[:name] %> (Employee)
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No employees found for this organization.</p>
+<% end %>

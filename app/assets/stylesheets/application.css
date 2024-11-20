@@ -13,3 +13,20 @@
  *= require_tree .
  *= require_self
  */
+
+
+#org-chart-container svg {
+  border: 1px solid #ccc;
+}
+
+circle {
+  stroke: black;
+  stroke-width: 2px;
+}
+
+text {
+  font-size: 12px;
+  fill: black;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+}
