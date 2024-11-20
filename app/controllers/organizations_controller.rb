@@ -8,9 +8,9 @@ class OrganizationsController < ApplicationController
 
   def show
   @organization = Organization.find(params[:id])
-  employees = @organization.employees.includes(:member) # Eager load members for performance
-
-  @employee_hierarchy = build_employee_hierarchy(employees)
+  # employees = @organization.employees.includes(:member) 
+  @employees = @organization.employees
+  @employee_hierarchy = build_employee_hierarchy(@employees)
   end
 
   def create
@@ -54,13 +54,6 @@ class OrganizationsController < ApplicationController
     redirect_to("/organizations", { :notice => "Organization deleted successfully."} )
   end
 
-  # def org_chart_data
-  #   # data = build_tree(Organization.all)
-  #   # render json: data
-    
-  #   # organizations = Organization.all
-  #   # render json: organizations.as_json(only: [:id, :name, :parent_id])
-  # end
   def org_chart_data
     organizations = Organization.all
     Rails.logger.info(organizations.to_json)
@@ -88,30 +81,32 @@ class OrganizationsController < ApplicationController
   end
 
   def build_employee_hierarchy(employees)
-    # Fetch managers and non-managers using Active Record queries
-    managers = employees.joins(:member).where(members: { role: 'manager' })
-    non_managers = employees.joins(:member).where(members: { role: 'employee' })
-  
-    # Return an empty hierarchy if no managers are found
-    return [] if managers.empty?
-  
-    # Build the hierarchy
-    hierarchy = managers.map do |manager|
-      {
-        id: manager.id,
-        name: "#{manager.first_name} #{manager.last_name}",
-        title: manager.title,
-        subordinates: non_managers.map do |employee|
-          {
-            id: employee.id,
-            name: "#{employee.first_name} #{employee.last_name}",
-            title: employee.title
-          }
-        end
-      }
+    # Create a hash of employees indexed by their ID
+    id_map = employees.index_by(&:id)
+
+    # Create the root array to hold the top-level employees (managers)
+    hierarchy = []
+
+    employees.each do |employee|
+      if employee.manager_id.nil?  # Top-level managers (no manager)
+        hierarchy << build_employee_tree(employee, id_map)
+      end
     end
-  
+
     hierarchy
   end
-  
+
+  def build_employee_tree(employee, id_map)
+    # Create a node for the current employee
+    employee_node = employee.attributes.symbolize_keys
+    employee_node[:children] = []
+
+    # Find subordinates (children) and build their tree
+    employee.subordinates.each do |subordinate|
+      employee_node[:children] << build_employee_tree(subordinate, id_map)
+    end
+
+    employee_node
+  end
+
 end

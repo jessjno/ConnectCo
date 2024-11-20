@@ -1,27 +1,65 @@
-<div id="employee-org-chart"></div>
-<h1><%= @organization.name %> - Employees</h1>
-<p><%= @organization.description %></p>
+<h1><%= @organization.name %> - Employee Hierarchy</h1>
 
-<% if @employee_hierarchy.any? %>
-  <h2>Employee Hierarchy</h2>
+<div id="employee-org-chart"></div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const employeeHierarchy = <%= @employee_hierarchy.to_json.html_safe %>;
+
+  const svgWidth = 1200;
+  const svgHeight = 800;
+
+  const svg = d3.select("#employee-org-chart")
+    .append("svg")
+    .attr("width", svgWidth)
+    .attr("height", svgHeight);
+
+  const treeLayout = d3.tree().size([svgWidth - 200, svgHeight - 200]);
   
-  <ul>
-    <% @employee_hierarchy.each do |manager| %>
-      <li>
-        <strong><%= manager[:name] %> (Manager)</strong>
-        
-        <% if manager[:subordinates].any? %>
-          <ul>
-            <% manager[:subordinates].each do |subordinate| %>
-              <li>
-                <%= subordinate[:name] %> (Employee)
-              </li>
-            <% end %>
-          </ul>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>No employees found for this organization.</p>
-<% end %>
+  // Root is the top-level manager or managers
+  const root = d3.hierarchy(employeeHierarchy[0]); // Assuming the first item is the root
+  treeLayout(root);
+
+  // Links (lines connecting nodes)
+  svg.selectAll("line")
+    .data(root.links())
+    .enter()
+    .append("line")
+    .attr("x1", d => d.source.x)
+    .attr("y1", d => d.source.y)
+    .attr("x2", d => d.target.x)
+    .attr("y2", d => d.target.y)
+    .attr("stroke", "black");
+
+  // Nodes (groups with rectangles and text)
+  const nodeGroups = svg.selectAll(".node-group")
+    .data(root.descendants())
+    .enter()
+    .append("g")
+    .attr("class", "node-group")
+    .attr("transform", d => `translate(${d.x}, ${d.y})`);
+
+  nodeGroups.append("rect")
+    .attr("width", 120)
+    .attr("height", 40)
+    .attr("x", -60) // Center the rectangle around the node
+    .attr("y", -20) // Center the rectangle vertically
+    .attr("fill", "lightblue")
+    .attr("stroke", "black")
+    .style("cursor", "pointer")
+    .on("click", function(event, d) {
+      console.log("node data:", d);
+      if (d && d.data && d.data.id) {
+        window.location.href = `/employees/${d.data.id}`;  // Navigate to the employee's profile
+      }
+    });
+
+  // Labels inside rectangles
+  nodeGroups.append("text")
+    .attr("text-anchor", "middle")
+    .attr("dominant-baseline", "middle")
+    .attr("font-size", "12px")
+    .text(d => d.data.name)
+    .style("pointer-events", "none"); // Prevent text from blocking rectangle clicks
+});
+</script>

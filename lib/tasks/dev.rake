@@ -46,8 +46,9 @@ end
      employee.email = row.fetch("email")
      employee.password = row.fetch("password")
      employee.title = row.fetch("title")
-     employee.member_id = row.fetch("member_id")
      employee.organization_id = row.fetch("organization_id")
+     employee.manager_id = row.fetch("manager_id")
+     employee.member_id = row.fetch("member_id")
      employee.save
    end
  

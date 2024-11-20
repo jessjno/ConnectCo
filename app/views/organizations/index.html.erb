@@ -1,4 +1,4 @@
-<h1>Discovery Partner</h1>
+<h1>Discovery Partner's Institute</h1>
 
 <div id="org-chart-container"></div>
 
@@ -92,58 +92,5 @@ function renderOrgChart(hierarchy) {
 }
 
   console.log("Hierarchy Data:", hierarchy);
-
-</script>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const employeeHierarchy = <%= @employee_hierarchy.to_json.html_safe %>;
-
-  const svgWidth = 1200;
-  const svgHeight = 800;
-
-  const svg = d3.select("#employee-org-chart")
-    .append("svg")
-    .attr("width", svgWidth)
-    .attr("height", svgHeight);
-
-  const treeLayout = d3.tree().size([svgWidth - 200, svgHeight - 200]);
-
-  const root = d3.hierarchy(employeeHierarchy[0]); // Assume first manager is the root
-  treeLayout(root);
-
-  // Render links
-  svg.selectAll("line")
-    .data(root.links())
-    .enter()
-    .append("line")
-    .attr("x1", d => d.source.x)
-    .attr("y1", d => d.source.y)
-    .attr("x2", d => d.target.x)
-    .attr("y2", d => d.target.y)
-    .attr("stroke", "black");
-
-  // Render nodes
-  const nodeGroups = svg.selectAll(".node-group")
-    .data(root.descendants())
-    .enter()
-    .append("g")
-    .attr("class", "node-group")
-    .attr("transform", d => `translate(${d.x}, ${d.y})`);
-
-  nodeGroups.append("rect")
-    .attr("width", 120)
-    .attr("height", 40)
-    .attr("x", -60)
-    .attr("y", -20)
-    .attr("fill", d => (d.data.role === "Manager" ? "lightblue" : "lightgreen"))
-    .attr("stroke", "black");
-
-  nodeGroups.append("text")
-    .attr("text-anchor", "middle")
-    .attr("dominant-baseline", "middle")
-    .attr("font-size", "12px")
-    .text(d => d.data.name);
-});
 
 </script>

@@ -15,13 +15,19 @@
 #  title                  :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  manager_id             :integer
 #  member_id              :integer
 #  organization_id        :integer
 #
 # Indexes
 #
 #  index_employees_on_email                 (email) UNIQUE
+#  index_employees_on_manager_id            (manager_id)
 #  index_employees_on_reset_password_token  (reset_password_token) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_...  (manager_id => employees.id)
 #
 class Employee < ApplicationRecord
   # Include default devise modules. Others available are:
@@ -31,6 +37,9 @@ class Employee < ApplicationRecord
   
   belongs_to :member, optional: true # Assuming an employee may or may not have a role
   belongs_to :organization
+  belongs_to :manager, class_name: "Employee", optional: true
+  
+  has_many :subordinates, class_name: "Employee", foreign_key: "manager_id"
 
   validates :first_name, :last_name, :organization_id, presence: true
 

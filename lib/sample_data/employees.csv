@@ -1,116 +1,99 @@
-id,first_name,last_name,email,password,phone,title,organization_id,member_id
-1,Mark,Harris,markh3@uillinois.edu,password,312-585-9159,Director,15,1
-2,Ruben,Abarca,abarca3@uillinois.edu,password,,Associate Director,13,2
-3,Jaclyn,Carmichael,jaclync@uillinois.edu,password,,Assistant Director,14,2
-4,Gregory,Cleveland,gcleve@uillinois.edu,password,,Program Coordinator,14,3
-5,Stephanie ,DeCicco,decicco@uillinois.edu,password,,Associate Director,15,2
-6,Morgan,Diamond,diamondm@uillinois.edu,password,,Associate Director,12,2
-7,Danna,Dotson,ddotson2@uillinois.edu,password,,Associate Director ,14,2
-8,Gina,Grant,glgrant@uillinois.edu,password,312-575-7926,Associate Director,14,2
-9,Kelsey,Hansen,hansen37@uillinois.edu,password,,Associate Director,12,2
-10,Ian ,Heraty,ihera2@uillinois.edu,password,,"Software Development Educator
-",12,3
-11,Matthew,Klein,mklein46@uillinois.edu,password,,Director,13,2
-12,Karen ,Larson,kplarson@uillinois.edu,password,312-585-9193,Associate Director,15,2
-13,Todd,McFarlin,"tmcfar1@uillinois.edu
-",password,312-413-5700,Assistant Director,14,2
-14,Kay,Monelle,kaym@uillinois.edu,password,,Associate Director,14,2
-15,Gary,Nixon,gnixon1@uillinois.edu,password,,Recruiter and Student Engagement,12,3
-16,Haneen,Omar,Homar4@uillinois.edu,password,,Assistant Director,13,2
-17,Sonia,Pulido,spulido2@uillinois.edu,password,,Assistant Director ,15,2
-18,Kenyanna ,Sanders ,kjs20@uillinois.edu,password,,Program Coordinator,14,3
-19,Tony,Torres,"ttorres3@uillinois.edu
-",password,,"Assistant Director 
-",14,2
-20,Lindsey ,Vetvick ,jsmit97@uillinois.edu,password,,Assistant Director,14,2
-21,Dominique ,Wilson ,dwils5@uillinois.edu,password,,Associate Director ,13,2
-22,Venkat ,Venkatakrishnan ,venkat@uillinois.edu,password,,"Director, Research",6,2
-23,Rukmini ,Avadhanam ,rukminia@uillinois.edu,password,,"Sr. Research Associate
-",16,3
-24,Alvin ,Chin,alvinc@uillinois.edu,password,,Research Scientist,16,3
-25,Laura ,Clements,ljclem@uillinois.edu,password,312-668-9016,Senior Project Manager,16,2
-26,Marco,Colombo,mcolom4@uillinois.edu,password,,Visiting Associate Research Software Development Engineer,16,3
-27,Sugyan,Mani Dixit,sugy@uillinois.edu,password,,Senior Research Associate,16,3
-28,Eva,Durance,,password,,Program Assistant,16,3
-29,Reginald,Gaudino,,password,,"Director, Cannabis Research Institute",18,2
-30,"Anuj
-",Gautam,agautam@uillinois.edu,password,,"Visiting Full Stack Developer
-",18,3
-31,Carolyn,Geck ,carolyng@uillinois.edu,password,,Grants Coordinator,18,3
-32,Rigel,Gjomemo,rgjome1@uic.edu,password,,Research Scientist,18,3
-33,Dolores,Sanchez Gonzalez,dsanch52@uillinois.edu,password,,Visiting Lab Manager,16,3
-34,Adam,Horton,adam47@uillinois.edu,password,,Visiting Lab Manager,16,3
-35,Modou,Jarju,mljarju@uillinois.edu,password,,Visiting Lab Technician,16,3
-36,Chi-Yu,Lin,clin213@uillinois.edu,password,,Visiting Research Scholar,16,3
-37,Sudhansu ,Rath ,sudhansu@illinois.edu,password,,Postdoctoral Research Associate,16,3
-38,Karan ,Jogi ,kjogi2@uillinois.edu,password,,Research Software Dev Engineer,16,3
-39,Saye,Vikram Karthikeyan,,password,,Extra help,16,3
-40,Peiyuan,Li ,peiyuanl@uillinois.edu,password,,"Postdoctoral Research Associate
-",16,3
-41,Yuanye ,Ma ,yuanyem@uillinois.edu,password,,Sr. Research Associate,16,3
-42,Sam ,Miller,,password,,"Corporate Relationship Manager, R&D Industry Program
-",16,2
-43,Karl,Putz,"karlputz@uillinois.edu
-",password,,"Associate Director, R&D Programs
-",17,2
-44,Christina,Sansone ,"csanso2@uillinois.edu
-",password,,"Visiting Community Engagement Manager
-",18,3
-45,Ashish ,Sharma ,sharmaa@uillinois.edu,password,(312) 668-9091,Climate and Urban Sustainability Lead,16,2
-46,Marcia ,Silva,"msilva@ullinois.edu
-",password,,"Associate Director, R&D
-",16,2
-47,Brad,Spirrison ,"jbs50@uillinois.edu
-",password,,"Visiting Corporate Engagement Lead
-",16,3
-48,Anuj,Tiwari ,anujt@uic.edu,password,,Senior Research Associate,16,3
-49,Akshaya,Udayashankar,akshayau@uillinois.edu,password,,Relationship Manager,16,2
-50,Carolina ,Veiga,carolvfs@uillinois.edu,password,,Postdoctoral Research Associate,16,3
-51,Abhinav,Wadhwa,awadhwa@uillinois.edu,password,,Postdoctoral,16,3
-52,Krystal ,White ,kwhite38@uillinois.edu,password,,Visiting Project Manager,16,3
-53,Camryn ,Woodworth,"Grants Coordinator, R&D",password,,"Grants Coordinator, R&D",16,3
-54,Sicheng ,Wu ,sichengw@uillinois.edu,password,,Postdoctoral Reseach Associate,16,3
-55,Cathy ,Ye,zihanye2@uillinois.edu,password,,Business Analyst,16,3
-56,Deba,Dutta,ExecutiveDirectorDPI@uillinois.edu,password,,Interim Executive DPI Director,2,2
-57,Karen ,Colat,kcolat@uillinois.edu,password,,Assistant to the Executive Director,2,2
-58,Meg,Bates,megbates@illinois.edu,password,,Director,9,2
-59,Mariana,Barragan Torres,marianab@uillinois.edu,password,312-668-9026,"Research Specialist, IWERC",9,3
-60,Shereen,Beilstein,beilste2@uillinois.edu,password,312-668-9025,"Research Specialist, IWERC",9,3
-61,Raisa ,Blazquez ,blazquez@uillinois.edu,password,,Visiting Research Associate,9,3
-62,Sarah ,Cashdollar ,secash@uillinois.edu,password,,"Associate Director, IWERC Research",9,2
-63,Ying,Chen,ychen406@uic.edu,password,,"Research Associate, IWERC",9,3
-64,Jasmine ,Collins ,jdcolli2@illinois.edu,password,,Workforce Research Specialist,9,3
-65,Sebastián,Kiguel ,skiguel@uic.edu,password,,"Research Associate, IWERC",9,3
-66,Aisha ,Motlani ,amotlani@uillinois.edu,password,,"Research Associate, IWERC",9,3
-67,Stephanie ,Werner ,swerne3@uillinois.edu,password,312-668-9026,"Research Specialist, IWERC",9,3
-68,Bob,Okabe,rmokabe@uillinois.edu,password,,"Director, New Business Ventures",5,3
-69,Joe,Cheng ,jlcheng@illinois.edu,password,,DPI Partnerships,5,3
-70,Mike,Flavin,mtflavin@uillinois.edu,password,,DPI Corporate Relations,5,3
-71,Nilofar ,Khanbhai ,nilofar@uillinois.edu,password,,Venture Creation Lead,5,2
-72,Jacob,Parrott ,parrott4@uillinois.edu,password,,Venture Creation Lead,5,2
-73,John ,Ramirez,Jpramire@uillinois.edu,password,,Visiting Entrepreneur In Residence,5,3
-74,Larry ,Schor,lschor@uillinois.edu,password,,Visiting Entrepreneur in Residence,5,3
-75,Deepak,Somaya,dsomaya@illinois.edu,password,,Don and Anne Edwards Scholar,5,3
-76,Kumar,Kintala,kintala@uillinois.edu,password,,Innovation Hub Director,3,3
-77,Brent,Brewer,brentb@uillinois.edu,password,,Events Coordinator,11,3
-78,Meghan,Dyer ,msdyer@uillinois.edu,password,,Assistant Director of Innovation Hub,3,2
-79,Marcia,Lampela,mlampela@uillinois.edu,password,217-300-7457,DPI Site Management,10,3
-80,Kassandra,Perez,kgperez@uillinois.edu,password,,Events Manager,11,3
-81,Jen ,Uner,juner@uillinois.edu,password,,"Director, Marketing & Communication",8,2
-82,Jonathon ,Berlin ,jsberlin@uillinois.edu,password,,Visiting Sr. Multimedia Designer,8,3
-83,Jaime ,Chavez ,jchavez6@illinois.edu,password,,Web Specialist,8,3
-84,Jeanie,Chung,jinwonc@uillinois.edu,password,,Content Writer,8,3
-85,Lauryn,Scott,lauryn@uillinois.edu,password,,"Associate Director, Marketing & Communication",8,2
-86,Ranjan,Karri,rkarr2@uis.edu,password,,Director of Academic Affairs & Administrative Operations,7,2
-87,Jason,Bane ,jabane@uillinois.edu,password,,Senior Assistant Director,7,2
-88,Stephanie,Escobar,escobar8@uillinois.edu,password,,Office Support Specialist,7,3
-89,Atif,Hasan,hasana@uillinois.edu,password,,Senior Business Coordinator,7,3
-90,Tula,Kuechenmeister,tula@uillinois.edu,password,,Salesforce Administrator,7,3
-91,Jiaqi ,Li ,jiaqi606@uillinois.edu,password,,Sr. User Experience Designer,7,3
-92,Luis,Navarrete,luisn@uillinois.edu,password,,Business Coordinator,7,3
-93,Sanjuana ,Jaime-Nix,sjaime@uillinois.edu,password,,"Director, Product",7,2
-94,Javier,Pena ,jpena9@uillinois.edu,password,,Program Assistant,7,3
-95,Antaeja,Riley ,ariley20@uillinois.edu ,password,,Program Assistant,7,3
-96,Meenu ,Sharma,meenus@uillinois.edu,password,,Business Coordinator,7,3
-97,Eva,Lozano-Staton,evalozan@uillinois.edu,password,,Administrative Assistant,7,3
-98,Sumit ,Tokkar ,stokkar@uillinois.edu,password,,Software Engineering Lead,7,2
+id,first_name,last_name,email,password,phone,title,organization_id,manager_id,member_id
+1,Mark,Harris,markh3@uillinois.edu,password,312-585-9159,Director,15,56,1
+2,Ruben,Abarca,abarca3@uillinois.edu,password,,Associate Director,13,11,2
+3,Jaclyn,Carmichael,jaclync@uillinois.edu,password,,Assistant Director,14,20,2
+4,Gregory,Cleveland,gcleve@uillinois.edu,password,,Program Coordinator,14,3,3
+5,Stephanie,DeCicco,decicco@uillinois.edu,password,,Associate Director,15,1,2
+6,Morgan,Diamond,diamondm@uillinois.edu,password,,Associate Director,12,56,2
+7,Danna,Dotson,ddotson2@uillinois.edu,password,,Associate Director,14,14,2
+8,Gina,Grant,glgrant@uillinois.edu,password,312-575-7926,Associate Director,14,14,2
+9,Kelsey,Hansen,hansen37@uillinois.edu,password,,Associate Director,12,6,2
+10,Ian,Heraty,ihera2@uillinois.edu,password,,Software Development Educator,12,9,3
+11,Matthew,Klein,mklein46@uillinois.edu,password,,Director,13,1,2
+12,Karen,Larson,kplarson@uillinois.edu,password,312-585-9193,Associate Director,15,1,2
+13,Todd,McFarlin,tmcfar1@uillinois.edu,password,312-413-5700,Assistant Director,14,7,2
+14,Kay,Monelle,kaym@uillinois.edu,password,,Associate Director,14,1,2
+15,Gary,Nixon,gnixon1@uillinois.edu,password,,Recruiter and Student Engagement,12,6,3
+16,Haneen,Omar,Homar4@uillinois.edu,password,,Assistant Director,13,11,2
+17,Sonia,Pulido,spulido2@uillinois.edu,password,,Assistant Director,15,12,2
+18,Kenyanna,Sanders,kjs20@uillinois.edu,password,,Program Coordinator,14,3,3
+19,Tony,Torres,ttorres3@uillinois.edu,password,,Assistant Director,14,14,2
+20,Lindsey,Vetvick,jsmit97@uillinois.edu,password,,Assistant Director,14,14,2
+21,Dominique,Wilson,dwils5@uillinois.edu,password,,Associate Director,13,11,2
+22,Venkat,Venkatakrishnan,venkat@uillinois.edu,password,,"Director, Research",6,56,2
+23,Rukmini,Avadhanam,rukminia@uillinois.edu,password,,Sr. Research Associate,16,22,3
+24,Alvin,Chin,alvinc@uillinois.edu,password,,Research Scientist,16,22,3
+25,Laura,Clements,ljclem@uillinois.edu,password,312-668-9016,Senior Project Manager,16,22,2
+26,Marco,Colombo,mcolom4@uillinois.edu,password,,Visiting Associate Research Software Development Engineer,16,32,3
+27,Sugyan,Mani Dixit,sugy@uillinois.edu,password,,Senior Research Associate,16,22,3
+28,Eva,Durance,,password,,Program Assistant,16,25,3
+29,Reginald,Gaudino,,password,,"Director, Cannabis Research Institute",18,22,2
+30,Anuj,Gautam,agautam@uillinois.edu,password,,Visiting Full Stack Developer,18,22,3
+31,Carolyn,Geck,carolyng@uillinois.edu,password,,Grants Coordinator,18,46,3
+32,Rigel,Gjomemo,rgjome1@uic.edu,password,,Research Scientist,18,22,3
+33,Dolores,Sanchez Gonzalez,dsanch52@uillinois.edu,password,,Visiting Lab Manager,16,25,3
+34,Adam,Horton,adam47@uillinois.edu,password,,Visiting Lab Manager,16,25,3
+35,Modou,Jarju,mljarju@uillinois.edu,password,,Visiting Lab Technician,16,25,3
+36,Chi-Yu,Lin,clin213@uillinois.edu,password,,Visiting Research Scholar,16,25,3
+37,Sudhansu,Rath,sudhansu@illinois.edu,password,,Postdoctoral Research Associate,16,24,3
+38,Karan,Jogi,kjogi2@uillinois.edu,password,,Research Software Dev Engineer,16,32,3
+39,Saye,Vikram Karthikeyan,,password,,Extra help,16,30,3
+40,Peiyuan,Li,peiyuanl@uillinois.edu,password,,Postdoctoral Research Associate,16,45,3
+41,Yuanye,Ma,yuanyem@uillinois.edu,password,,Sr. Research Associate,16,22,3
+42,Sam,Miller,,password,,"Corporate Relationship Manager, R&D Industry Program",16,47,2
+43,Karl,Putz,karlputz@uillinois.edu,password,,"Associate Director, R&D Programs",17,22,2
+44,Christina,Sansone,csanso2@uillinois.edu,password,,Visiting Community Engagement Manager,18,43,3
+45,Ashish,Sharma,sharmaa@uillinois.edu,password,(312) 668-9091,Climate and Urban Sustainability Lead,16,22,2
+46,Marcia,Silva,msilva@ullinois.edu,password,,"Associate Director, R&D",16,22,2
+47,Brad,Spirrison,jbs50@uillinois.edu,password,,Visiting Corporate Engagement Lead,16,22,3
+48,Anuj,Tiwari,anujt@uic.edu,password,,Senior Research Associate,16,32,3
+49,Akshaya,Udayashankar,akshayau@uillinois.edu,password,,Relationship Manager,16,47,2
+50,Carolina,Veiga,carolvfs@uillinois.edu,password,,Postdoctoral Research Associate,16,45,3
+51,Abhinav,Wadhwa,awadhwa@uillinois.edu,password,,Postdoctoral,16,45,3
+52,Krystal,White,kwhite38@uillinois.edu,password,,Visiting Project Manager,16,32,3
+53,Camryn,Woodworth,"Grants Coordinator, R&D",password,,"Grants Coordinator, R&D",16,46,3
+54,Sicheng,Wu,sichengw@uillinois.edu,password,,Postdoctoral Reseach Associate,16,45,3
+55,Cathy,Ye,zihanye2@uillinois.edu,password,,Business Analyst,16,47,3
+56,Deba,Dutta,ExecutiveDirectorDPI@uillinois.edu,password,,Interim Executive DPI Director,2,,2
+57,Karen,Colat,kcolat@uillinois.edu,password,,Assistant to the Executive Director,2,56,2
+58,Meg,Bates,megbates@illinois.edu,password,,Director,9,56,2
+59,Mariana,Barragan Torres,marianab@uillinois.edu,password,312-668-9026,"Research Specialist, IWERC",9,58,3
+60,Shereen,Beilstein,beilste2@uillinois.edu,password,312-668-9025,"Research Specialist, IWERC",9,58,3
+61,Raisa,Blazquez,blazquez@uillinois.edu,password,,Visiting Research Associate,9,67,3
+62,Sarah,Cashdollar,secash@uillinois.edu,password,,"Associate Director, IWERC Research",9,58,2
+63,Ying,Chen,ychen406@uic.edu,password,,"Research Associate, IWERC",9,62,3
+64,Jasmine,Collins,jdcolli2@illinois.edu,password,,Workforce Research Specialist,9,58,3
+65,Sebastián,Kiguel,skiguel@uic.edu,password,,"Research Associate, IWERC",9,62,3
+66,Aisha,Motlani,amotlani@uillinois.edu,password,,"Research Associate, IWERC",9,58,3
+67,Stephanie,Werner,swerne3@uillinois.edu,password,312-668-9026,"Research Specialist, IWERC",9,58,3
+68,Bob,Okabe,rmokabe@uillinois.edu,password,,"Director, New Business Ventures",5,56,3
+69,Joe,Cheng,jlcheng@illinois.edu,password,,DPI Partnerships,5,69,3
+70,Mike,Flavin,mtflavin@uillinois.edu,password,,DPI Corporate Relations,5,69,3
+71,Nilofar,Khanbhai,nilofar@uillinois.edu,password,,Venture Creation Lead,5,69,2
+72,Jacob,Parrott,parrott4@uillinois.edu,password,,Venture Creation Lead,5,69,2
+73,John,Ramirez,Jpramire@uillinois.edu,password,,Visiting Entrepreneur In Residence,5,69,3
+74,Larry,Schor,lschor@uillinois.edu,password,,Visiting Entrepreneur in Residence,5,69,3
+75,Deepak,Somaya,dsomaya@illinois.edu,password,,Don and Anne Edwards Scholar,5,69,3
+76,Kumar,Kintala,kintala@uillinois.edu,password,,Innovation Hub Director,3,56,3
+77,Brent,Brewer,brentb@uillinois.edu,password,,Events Coordinator,11,80,3
+78,Meghan,Dyer,msdyer@uillinois.edu,password,,Assistant Director of Innovation Hub,3,76,2
+79,Marcia,Lampela,mlampela@uillinois.edu,password,217-300-7457,DPI Site Management,10,76,3
+80,Kassandra,Perez,kgperez@uillinois.edu,password,,Events Manager,11,76,3
+81,Jen,Uner,juner@uillinois.edu,password,,"Director, Marketing & Communication",8,56,2
+82,Jonathon,Berlin,jsberlin@uillinois.edu,password,,Visiting Sr. Multimedia Designer,8,81,3
+83,Jaime,Chavez,jchavez6@illinois.edu,password,,Web Specialist,8,85,3
+84,Jeanie,Chung,jinwonc@uillinois.edu,password,,Content Writer,8,81,3
+85,Lauryn,Scott,lauryn@uillinois.edu,password,,"Associate Director, Marketing & Communication",8,81,2
+86,Ranjan,Karri,rkarr2@uis.edu,password,,Director of Academic Affairs & Administrative Operations,7,56,2
+87,Jason,Bane,jabane@uillinois.edu,password,,Senior Assistant Director,7,86,2
+88,Stephanie,Escobar,escobar8@uillinois.edu,password,,Office Support Specialist,7,97,3
+89,Atif,Hasan,hasana@uillinois.edu,password,,Senior Business Coordinator,7,87,3
+90,Tula,Kuechenmeister,tula@uillinois.edu,password,,Salesforce Administrator,7,93,3
+91,Jiaqi,Li,jiaqi606@uillinois.edu,password,,Sr. User Experience Designer,7,93,3
+92,Luis,Navarrete,luisn@uillinois.edu,password,,Business Coordinator,7,89,3
+93,Sanjuana,Jaime-Nix,sjaime@uillinois.edu,password,,"Director, Product",7,86,2
+94,Javier,Pena,jpena9@uillinois.edu,password,,Program Assistant,7,97,3
+95,Antaeja,Riley,ariley20@uillinois.edu,password,,Program Assistant,7,97,3
+96,Meenu,Sharma,meenus@uillinois.edu,password,,Business Coordinator,7,89,3
+97,Eva,Lozano-Staton,evalozan@uillinois.edu,password,,Administrative Assistant,7,86,3
+98,Sumit,Tokkar,stokkar@uillinois.edu,password,,Software Engineering Lead,7,93,2
