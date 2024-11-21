@@ -1,5 +1,5 @@
 class EmployeesController < ApplicationController
-  before_action :authenticate_employee!, only: [:dashboard]
+  #before_action :authenticate_employee!, only: [:dashboard]
 
   def sign_in
     if current_employee
