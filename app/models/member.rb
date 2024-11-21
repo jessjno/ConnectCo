@@ -8,6 +8,7 @@
 #  updated_at :datetime         not null
 #
 class Member < ApplicationRecord
+  belongs_to :employee
   has_many :employees
   validates :role, presence: true
   

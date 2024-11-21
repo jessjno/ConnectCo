@@ -1,65 +1,26 @@
-<h1><%= @organization.name %> - Employee Hierarchy</h1>
+<div class="container">
+<h2><%= @organization.name %></h2>
+<p><%= @organization.description %></p>
 
-<div id="employee-org-chart"></div>
+<h5>Employees:</h5>
+<ul>
+  <% @organization.employees.each do |employee| %>
+    <li><strong><%= employee.title %></strong> : <%= employee.first_name %> <%= employee.last_name %></li>
+  <% end %>
+</ul>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const employeeHierarchy = <%= @employee_hierarchy.to_json.html_safe %>;
+<h5>Sub-organizations:</h5>
+<% @organization.sub_organizations.each do |sub_organization| %>
+  <div class="sub-organization">
+    <h6><%= sub_organization.name %></h6>
+    <p><%= sub_organization.description %></p>
 
-  const svgWidth = 1200;
-  const svgHeight = 800;
-
-  const svg = d3.select("#employee-org-chart")
-    .append("svg")
-    .attr("width", svgWidth)
-    .attr("height", svgHeight);
-
-  const treeLayout = d3.tree().size([svgWidth - 200, svgHeight - 200]);
-  
-  // Root is the top-level manager or managers
-  const root = d3.hierarchy(employeeHierarchy[0]); // Assuming the first item is the root
-  treeLayout(root);
-
-  // Links (lines connecting nodes)
-  svg.selectAll("line")
-    .data(root.links())
-    .enter()
-    .append("line")
-    .attr("x1", d => d.source.x)
-    .attr("y1", d => d.source.y)
-    .attr("x2", d => d.target.x)
-    .attr("y2", d => d.target.y)
-    .attr("stroke", "black");
-
-  // Nodes (groups with rectangles and text)
-  const nodeGroups = svg.selectAll(".node-group")
-    .data(root.descendants())
-    .enter()
-    .append("g")
-    .attr("class", "node-group")
-    .attr("transform", d => `translate(${d.x}, ${d.y})`);
-
-  nodeGroups.append("rect")
-    .attr("width", 120)
-    .attr("height", 40)
-    .attr("x", -60) // Center the rectangle around the node
-    .attr("y", -20) // Center the rectangle vertically
-    .attr("fill", "lightblue")
-    .attr("stroke", "black")
-    .style("cursor", "pointer")
-    .on("click", function(event, d) {
-      console.log("node data:", d);
-      if (d && d.data && d.data.id) {
-        window.location.href = `/employees/${d.data.id}`;  // Navigate to the employee's profile
-      }
-    });
-
-  // Labels inside rectangles
-  nodeGroups.append("text")
-    .attr("text-anchor", "middle")
-    .attr("dominant-baseline", "middle")
-    .attr("font-size", "12px")
-    .text(d => d.data.name)
-    .style("pointer-events", "none"); // Prevent text from blocking rectangle clicks
-});
-</script>
+    <h6>Employees:</h6>
+    <ul>
+      <% sub_organization.employees.each do |employee| %>
+        <li><strong><%= employee.title %></strong> : <%= employee.first_name %> <%= employee.last_name %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+</div>

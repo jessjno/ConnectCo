@@ -1,17 +1,11 @@
 Rails.application.routes.draw do
   devise_for :employees
-  resources :employee, only: [:show, :edit, :update]
+  resources :employees, only: [:show, :edit, :update]
   root "organizations#index"
 
-  
-  # resources :organizations do
-  #   member do
-  #     get :employees # Adds a route for `/organizations/:id/employees`
-  #   end
-  # end
-
-  get '/organizations/org_chart_data', to: 'organizations#org_chart_data', as: 'organizations_org_chart_data'
   resources :organizations
+  resources :employees, only: [:show]
+
   # Routes for the Member resource:
   # CREATE
   post("/insert_member", { :controller => "members", :action => "create" })

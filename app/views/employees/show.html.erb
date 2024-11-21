@@ -2,3 +2,12 @@
   <p>Email: <%= @employee.email %></p>
   <%= link_to 'Edit Profile', edit_employee_path(@employee) %>
  
+ <h1><%= @employee.name %>'s Responsibilities</h1>
+
+<ul>
+  <% @responsibilities.each do |responsibility| %>
+    <li><%= responsibility.description %></li>
+  <% end %>
+</ul>
+
+<%= link_to "Back to Organization", organization_path(@employee.organization), class: "btn btn-secondary" %>

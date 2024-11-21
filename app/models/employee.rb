@@ -35,12 +35,12 @@ class Employee < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
-  belongs_to :member, optional: true # Assuming an employee may or may not have a role
   belongs_to :organization
   belongs_to :manager, class_name: "Employee", optional: true
+  belongs_to :member, optional: true # Assuming an employee may or may not have a role
   
   has_many :subordinates, class_name: "Employee", foreign_key: "manager_id"
-
+  has_many :responsibilities
   validates :first_name, :last_name, :organization_id, presence: true
 
 end

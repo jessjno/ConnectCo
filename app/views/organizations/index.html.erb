@@ -1,96 +1,20 @@
-<h1>Discovery Partner's Institute</h1>
+<div id="accordion">
+  <% @organizations.each_with_index do |organization, index| %>
+    <div class="card">
+      <div class="card-header" id="heading<%= index %>">
+        <h5 class="mb-0">
+          <button class="btn btn-link <%= 'collapsed' unless index == 0 %>" data-toggle="collapse" data-target="#collapse<%= index %>" aria-expanded="<%= index == 0 %>" aria-controls="collapse<%= index %>">
+            <%= organization.name %>
+          </button>
+        </h5>
+      </div>
 
-<div id="org-chart-container"></div>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  fetch('/organizations/org_chart_data')
-    .then(response => response.json())
-    .then(orgData => {
-      console.log("Fetched Data:", orgData); // Debug log
-      const hierarchy = createHierarchy(orgData);
-      console.log("hierarchy data", hierarchy)
-      renderOrgChart(hierarchy);
-    })
-    .catch(error => console.error("Error fetching data:", error));
-});
-
-function createHierarchy(orgData) {
-  console.log(orgData)
-  const hierarchy = d3.stratify()
-    .id(d => d.id)
-    .parentId(d => d.parent_id)(orgData);
-  console.log("created hierarchy", hierarchy)
-  return hierarchy
-}
-
-
-function renderOrgChart(hierarchy) {
-  const svgWidth = 1200;
-  const svgHeight = 800;
-
-  const svg = d3.select("#org-chart-container")
-    .append("svg")
-    .attr("width", svgWidth)
-    .attr("height", svgHeight);
-
-  const treeLayout = d3.tree().size([svgWidth - 200, svgHeight - 200]);
-  <!--const root = d3.hierarchy(hierarchy);-->
-
-  treeLayout(hierarchy);
-
-  // Links (lines connecting nodes)
-  svg.selectAll("line")
-    .data(hierarchy.links())
-    .enter()
-    .append("line")
-    .attr("x1", d => d.source.x)
-    .attr("y1", d => d.source.y)
-    .attr("x2", d => d.target.x)
-    .attr("y2", d => d.target.y)
-    .attr("stroke", "black");
-
-  // Nodes (groups with rectangles and text)
-  const nodeGroups = svg.selectAll(".node-group")
-    .data(hierarchy.descendants())
-    .enter()
-    .append("g")
-    .attr("class", "node-group")
-    .attr("transform", d => `translate(${d.x}, ${d.y})`);
-
-  // Rectangles for organizations
-  nodeGroups.append("rect")
-    .attr("width", 120) // Adjust the width of the rectangle
-    .attr("height", 40) // Adjust the height of the rectangle
-    .attr("x", -60) // Center the rectangle around the node
-    .attr("y", -20) // Center the rectangle vertically
-    .attr("fill", "lightblue")
-    .attr("stroke", "black")
-    .style("cursor", "pointer")
-    .on("click", function(event, d) {  // Note: 'd' is the second argument here
-      console.log("node data:", d);   // Logs the data bound to the node
-       if (d && d.data && d.data.id) {
-      console.log("node id:", d.data.id);
-      window.location.href = `/organizations/${d.data.id}`;
-    } else {
-      console.error("Error: Data is undefined for this node:", d);
-    }
-  });
-
-
-
-  // Labels inside rectangles
-  nodeGroups.append("text")
-    .attr("text-anchor", "middle")
-    .attr("dominant-baseline", "middle")
-    .attr("font-size", "12px")
-    .text(d => {
-      console.log("node name:", d);
-      return d.data.name;
-    })
-    .style("pointer-events", "none"); // Prevent text from blocking rectangle clicks
-}
-
-  console.log("Hierarchy Data:", hierarchy);
-
-</script>
+      <div id="collapse<%= index %>" class="collapse <%= 'show' if index == 0 %>" aria-labelledby="heading<%= index %>" data-parent="#accordion">
+        <div class="card-body">
+          <p><%= organization.description %></p>
+          <%= link_to "View Details", organization_path(organization), class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
