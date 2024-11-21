@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-md">
 <h2><%= @organization.name %></h2>
 <p><%= @organization.description %></p>
 
@@ -18,9 +18,14 @@
     <h6>Employees:</h6>
     <ul>
       <% sub_organization.employees.each do |employee| %>
-        <li><strong><%= employee.title %></strong> : <%= employee.first_name %> <%= employee.last_name %></li>
+    <li>
+      <strong><%= employee.title %></strong> : 
+      <%= link_to "#{employee.first_name} #{employee.last_name}", employee_path(employee) %>
+    </li>
       <% end %>
     </ul>
   </div>
 <% end %>
+
+<%= link_to 'Back to Organizations', organizations_path, class: 'btn btn-secondary' %>
 </div>

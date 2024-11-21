@@ -13,5 +13,4 @@ class Member < ApplicationRecord
   validates :role, presence: true
   
   enum role: { admin: 'admin', manager: 'manager', employee: 'employee', viewer: 'viewer', guest: 'guest' }
-
 end

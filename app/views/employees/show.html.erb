@@ -1,13 +1,14 @@
-<h1>Welcome, <%= @employee.name %>!</h1>
-  <p>Email: <%= @employee.email %></p>
-  <%= link_to 'Edit Profile', edit_employee_path(@employee) %>
- 
- <h1><%= @employee.name %>'s Responsibilities</h1>
+<div class="container">
+<h1><%= @employee.first_name %>'s Profile</h1>
 
+<p><strong>Email:</strong> <%= @employee.email %></p>
+
+<h2>Responsibilities</h2>
 <ul>
   <% @responsibilities.each do |responsibility| %>
     <li><%= responsibility.description %></li>
   <% end %>
 </ul>
 
-<%= link_to "Back to Organization", organization_path(@employee.organization), class: "btn btn-secondary" %>
+<%= link_to 'Back to Organization', organization_path(@employee.organization_id) %>
+</div>
