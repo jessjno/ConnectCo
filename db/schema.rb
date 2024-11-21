@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_18_181828) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_20_051811) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -29,7 +29,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_18_181828) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "member_id"
+    t.integer "manager_id"
     t.index ["email"], name: "index_employees_on_email", unique: true
+    t.index ["manager_id"], name: "index_employees_on_manager_id"
     t.index ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true
   end
 
@@ -57,4 +59,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_18_181828) do
     t.integer "organization_id"
   end
 
+  add_foreign_key "employees", "employees", column: "manager_id"
 end

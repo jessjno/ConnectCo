@@ -1,0 +1,96 @@
+=> [{[33m:organization[0m=>
+   [32m#<Organization:0x00007945208fb180[0m
+    id: [1;34m272[0m,
+    name: [31m[1;31m"[0m[31mDiscovery Partner's Institute[1;31m"[0m[31m[0m,
+    description: [31m[1;31m"[0m[31mThe Discovery Partners Institute empowers people to jumpstart their tech careers or companies in Chicago.[1;35m\r[0m[31m[1;35m\n[0m[31m[1;35m\r[0m[31m[1;35m\n[0m[31m[1;31m"[0m[31m[0m,
+    parent_id: [1;36mnil[0m,
+    employees_count: [1;34m0[0m,
+    created_at: [1;34;4mMon[0m, [1;34m18[0m [1;34;4mNov[0m [1;34m2024[0m [1;34m20[0m:[1;34m46[0m:[1;34m06[0m.[1;37;41m135494000[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m,
+    updated_at: [1;34;4mMon[0m, [1;34m18[0m [1;34;4mNov[0m [1;34m2024[0m [1;34m20[0m:[1;34m46[0m:[1;34m06[0m.[1;37;41m135494000[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m[32m>[0m,
+  [33m:children[0m=>
+   [{[33m:organization[0m=>
+      [32m#<Organization:0x00007945208f9880[0m
+       id: [1;34m273[0m,
+       name: [31m[1;31m"[0m[31mExecutive Director[1;31m"[0m[31m[0m,
+       description:
+        [31m[1;31m"[0m[31mExecutive Director of Discovery Partners Institute and senior advisor to the president of the University of Illinois System[1;31m"[0m[31m[0m,
+       parent_id: [1;34m272[0m,
+       employees_count: [1;34m0[0m,
+       created_at: [1;34;4mMon[0m, [1;34m18[0m [1;34;4mNov[0m [1;34m2024[0m [1;34m20[0m:[1;34m46[0m:[1;34m06[0m.[1;37;41m142671000[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m,
+       updated_at: [1;34;4mMon[0m, [1;34m18[0m [1;34;4mNov[0m [1;34m2024[0m [1;34m20[0m:[1;34m46[0m:[1;34m06[0m.[1;37;41m142671000[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m[32m>[0m,
+     [33m:children[0m=>[]},
+    {[33m:organization[0m=>
+      [32m#<Organization:0x00007945208f9600[0m
+       id: [1;34m274[0m,
+       name: [31m[1;31m"[0m[31mInnovation Hub[1;31m"[0m[31m[0m,
+       description: [31m[1;31m"[0m[31mInnovation Hub staff manage operations of DPI’s headquarters at 200 S. Wacker and affiliated lab space.[1;31m"[0m[31m[0m,
+       parent_id: [1;34m272[0m,
+       employees_count: [1;34m0[0m,
+       created_at: [1;34;4mMon[0m, [1;34m18[0m [1;34;4mNov[0m [1;34m2024[0m [1;34m20[0m:[1;34m46[0m:[1;34m06[0m.[1;37;41m145860000[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m,
+       updated_at: [1;34;4mMon[0m, [1;34m18[0m [1;34;4mNov[0m [1;34m2024[0m [1;34m20[0m:[1;34m46[0m:[1;34m06[0m.[1;37;41m145860000[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m[32m>[0m,
+     [33m:children[0m=>[]},
+    {[33m:organization[0m=>
+      [32m#<Organization:0x00007945208f9380[0m
+       id: [1;34m275[0m,
+       name: [31m[1;31m"[0m[31mPritzker Tech Talent Labs[1;31m"[0m[31m[0m,
+       description:
+        [31m[1;31m"[0m[31mThe staff of Pritzker Tech Talent Labs has educators, program coordinators and administrators, and corporate liaisons. They develop and support PTTL’s programs across the state, from K-12 schools through community colleges, universities, and lifelong learners.[1;31m"[0m[31m[0m,
+       parent_id: [1;34m272[0m,
+       employees_count: [1;34m0[0m,
+       created_at: [1;34;4mMon[0m, [1;34m18[0m [1;34;4mNov[0m [1;34m2024[0m [1;34m20[0m:[1;34m46[0m:[1;34m06[0m.[1;37;41m149281000[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m,
+       updated_at: [1;34;4mMon[0m, [1;34m18[0m [1;34;4mNov[0m [1;34m2024[0m [1;34m20[0m:[1;34m46[0m:[1;34m06[0m.[1;37;41m149281000[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m[32m>[0m,
+     [33m:children[0m=>[]},
+    {[33m:organization[0m=>
+      [32m#<Organization:0x00007945208f9100[0m
+       id: [1;34m276[0m,
+       name: [31m[1;31m"[0m[31mNew Business Ventures[1;31m"[0m[31m[0m,
+       description:
+        [31m[1;31m"[0m[31mThe New Business Ventures Unit supports university technology transfer and commercialization, and also provides deep-tech-focused services to start-ups and mid-sized companies looking to grow. By providing mentorship, access to capital, and other targeted support, the team helps to connect companies to DPI’s global network.[1;31m"[0m[31m[0m,
+       parent_id: [1;34m272[0m,
+       employees_count: [1;34m0[0m,
+       created_at: [1;34;4mMon[0m, [1;34m18[0m [1;34;4mNov[0m [1;34m2024[0m [1;34m20[0m:[1;34m46[0m:[1;34m06[0m.[1;37;41m152774000[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m,
+       updated_at: [1;34;4mMon[0m, [1;34m18[0m [1;34;4mNov[0m [1;34m2024[0m [1;34m20[0m:[1;34m46[0m:[1;34m06[0m.[1;37;41m152774000[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m[32m>[0m,
+     [33m:children[0m=>[]},
+    {[33m:organization[0m=>
+      [32m#<Organization:0x00007945208f8e80[0m
+       id: [1;34m277[0m,
+       name: [31m[1;31m"[0m[31mResearch & Developement[1;31m"[0m[31m[0m,
+       description:
+        [31m[1;31m"[0m[31mDPI’s Applied R&D team consists of faculty researchers, research associates, and administrative support. R&D partners with universities, government labs, and businesses on climate, AI/ML, food, and fintech research to build a stronger future for all of us—in Illinois and around the globe.[1;31m"[0m[31m[0m,
+       parent_id: [1;34m272[0m,
+       employees_count: [1;34m0[0m,
+       created_at: [1;34;4mMon[0m, [1;34m18[0m [1;34;4mNov[0m [1;34m2024[0m [1;34m20[0m:[1;34m46[0m:[1;34m06[0m.[1;37;41m155763000[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m,
+       updated_at: [1;34;4mMon[0m, [1;34m18[0m [1;34;4mNov[0m [1;34m2024[0m [1;34m20[0m:[1;34m46[0m:[1;34m06[0m.[1;37;41m155763000[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m[32m>[0m,
+     [33m:children[0m=>[]},
+    {[33m:organization[0m=>
+      [32m#<Organization:0x00007945208f8c00[0m
+       id: [1;34m278[0m,
+       name: [31m[1;31m"[0m[31mAdministrative Affairs[1;31m"[0m[31m[0m,
+       description: [31m[1;31m"[0m[31mAdministrative Affairs handles the business and day-to-day operations of DPI as an organization.[1;31m"[0m[31m[0m,
+       parent_id: [1;34m272[0m,
+       employees_count: [1;34m0[0m,
+       created_at: [1;34;4mMon[0m, [1;34m18[0m [1;34;4mNov[0m [1;34m2024[0m [1;34m20[0m:[1;34m46[0m:[1;34m06[0m.[1;37;41m159188000[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m,
+       updated_at: [1;34;4mMon[0m, [1;34m18[0m [1;34;4mNov[0m [1;34m2024[0m [1;34m20[0m:[1;34m46[0m:[1;34m06[0m.[1;37;41m159188000[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m[32m>[0m,
+     [33m:children[0m=>[]},
+    {[33m:organization[0m=>
+      [32m#<Organization:0x00007945208f8980[0m
+       id: [1;34m279[0m,
+       name: [31m[1;31m"[0m[31mMarketing & Communications[1;31m"[0m[31m[0m,
+       description:
+        [31m[1;31m"[0m[31mDPI’s marketing and communications team is a primary connection between program staff and the general public. The staff works with DPI researchers and program directors to disseminate their work to a wider audience.[1;31m"[0m[31m[0m,
+       parent_id: [1;34m272[0m,
+       employees_count: [1;34m0[0m,
+       created_at: [1;34;4mMon[0m, [1;34m18[0m [1;34;4mNov[0m [1;34m2024[0m [1;34m20[0m:[1;34m46[0m:[1;34m06[0m.[1;37;41m161833000[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m,
+       updated_at: [1;34;4mMon[0m, [1;34m18[0m [1;34;4mNov[0m [1;34m2024[0m [1;34m20[0m:[1;34m46[0m:[1;34m06[0m.[1;37;41m161833000[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m[32m>[0m,
+     [33m:children[0m=>[]},
+    {[33m:organization[0m=>
+      [32m#<Organization:0x00007945208f8700[0m
+       id: [1;34m280[0m,
+       name: [31m[1;31m"[0m[31mIL Workforce & Education Research Collaborative[1;31m"[0m[31m[0m,
+       description:
+        [31m[1;31m"[0m[31mIWERC’s researchers and research associates collaborate with community partners across the state to study and co-construct solutions to the most pressing issues in the cradle-to-career, education-to-workforce pipeline.[1;31m"[0m[31m[0m,
+       parent_id: [1;34m272[0m,
+       employees_count: [1;34m0[0m,
+       created_at: [1;34;4mMon[0m, [1;34m18[0m [1;34;4mNov[0m [1;34m2024[0m [1;34m20[0m:[1;34m46[0m:[1;34m06[0m.[1;37;41m165151000[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m,
+       updated_at: [1;34;4mMon[0m, [1;34m18[0m [1;34;4mNov[0m [1;34m2024[0m [1;34m20[0m:[1;34m46[0m:[1;34m06[0m.[1;37;41m165151000[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m[32m>[0m,
+     [33m:children[0m=>[]}]}]

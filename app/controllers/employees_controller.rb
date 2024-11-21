@@ -7,15 +7,18 @@ class EmployeesController < ApplicationController
     end
 
   def show
-    @employee = current_employee
+    @current_employee = current_employee
+
+    @employee = Employee.find(params[:id])
+    @responsibilities = @employee.responsibilities
   end
 
   def edit
-    @employee = current_employee
+    @current_employee = current_employee
   end
 
   def update
-    @employee = current_employee
+    @current_employee = current_employee
     if @employee.update(employee_params)
       redirect_to employee_path(@employee), notice: "Profile updated successfully."
     else

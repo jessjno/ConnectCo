@@ -1,19 +1,17 @@
 id,name,description,parent_id
-1,Discovery Partner's Institute,"The Discovery Partners Institute empowers people to jumpstart their tech careers or companies in Chicago.
-
-",
+1,Discovery Partner's Institute,The Discovery Partners Institute empowers people to jumpstart their tech careers or companies in Chicago.,
 2,Executive Director,Executive Director of Discovery Partners Institute and senior advisor to the president of the University of Illinois System,1
 3,Innovation Hub,Innovation Hub staff manage operations of DPI’s headquarters at 200 S. Wacker and affiliated lab space.,1
 4,Pritzker Tech Talent Labs,"The staff of Pritzker Tech Talent Labs has educators, program coordinators and administrators, and corporate liaisons. They develop and support PTTL’s programs across the state, from K-12 schools through community colleges, universities, and lifelong learners.",1
 5,New Business Ventures,"The New Business Ventures Unit supports university technology transfer and commercialization, and also provides deep-tech-focused services to start-ups and mid-sized companies looking to grow. By providing mentorship, access to capital, and other targeted support, the team helps to connect companies to DPI’s global network.",1
 6,Research & Developement,"DPI’s Applied R&D team consists of faculty researchers, research associates, and administrative support. R&D partners with universities, government labs, and businesses on climate, AI/ML, food, and fintech research to build a stronger future for all of us—in Illinois and around the globe.",1
-7,Administrative Affairs,Administrative Affairs handles the business and day-to-day operations of DPI as an organization.,7
+7,Administrative Affairs,Administrative Affairs handles the business and day-to-day operations of DPI as an organization.,1
 8,Marketing & Communications,DPI’s marketing and communications team is a primary connection between program staff and the general public. The staff works with DPI researchers and program directors to disseminate their work to a wider audience.,1
 9,IL Workforce & Education Research Collaborative,"IWERC’s researchers and research associates collaborate with community partners across the state to study and co-construct solutions to the most pressing issues in the cradle-to-career, education-to-workforce pipeline.",1
 10,Facilities Management,Manages Facilities,5
 11,Events Management,Manages Events at DPI,5
 12,Workforce Programs,"DPI’s Workforce Development is upskilling & re-skilling individuals for 21st-century jobs. Our North Star: Increase Chicago’s digital talent supply and drive representative economic growth in the region through innovative, mastery-oriented upskilling programs and student services designed to match student skills and career aspirations with company needs. DPI’s Workforce Development is positioned to accelerate innovation and align the tech talent system to create a more equitable tech ecosystem.",4
-13,Corporate Engagement,DPI’s Pritzker Tech Talent Labs Workforce Development Unit aims to reskill and upskill adult learners that are rethinking their careers. ,4
+13,Corporate Engagement,DPI’s Pritzker Tech Talent Labs Workforce Development Unit aims to reskill and upskill adult learners that are rethinking their careers.,4
 14,High School Programs,"Digital Scholars is an intensive summer program for high school and first-year college students to build computing skills, increase college and career-readiness, and make connections to Chicago’s dynamic tech community.",4
 15,Postsecondary Programs,Discover Computing is a multi-part program series designed to build a deeper and more diverse pool of students pursuing computer science and tech-related fields of study in Illinois.,4
 16,Science Teams,"DPI offers researchers and scientists a suite of resources—from strategic planning and proposal development, to digital tools and industry integrations—to grow your program and expand your impact.",6

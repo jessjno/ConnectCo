@@ -1,20 +1,12 @@
 class OrganizationsController < ApplicationController
   def index
-    matching_organizations = Organization.all
-
-    @list_of_organizations = matching_organizations.order({ :created_at => :desc })
-
+    @organizations = Organization.all.order(:id)
     render({ :template => "organizations/index" })
   end
 
   def show
-    the_id = params.fetch("path_id")
-
-    matching_organizations = Organization.where({ :id => the_id })
-
-    @the_organization = matching_organizations.at(0)
-
-    render({ :template => "organizations/show" })
+    @organization = Organization.includes(:employees, :sub_organizations).find(params[:id])
+    @employees = @organization.employees
   end
 
   def create
@@ -57,4 +49,11 @@ class OrganizationsController < ApplicationController
 
     redirect_to("/organizations", { :notice => "Organization deleted successfully."} )
   end
+
+ 
+
+
+  
+  private
+
 end

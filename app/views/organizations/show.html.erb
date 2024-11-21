@@ -1,116 +1,26 @@
-<div>
-  <div>
-    <h1>
-      Organization #<%= @the_organization.id %> details
-    </h1>
+<div class="container">
+<h2><%= @organization.name %></h2>
+<p><%= @organization.description %></p>
 
-    <div>
-      <div>
-        <a href="/organizations">
-          Go back
-        </a>
-      </div>
+<h5>Employees:</h5>
+<ul>
+  <% @organization.employees.each do |employee| %>
+    <li><strong><%= employee.title %></strong> : <%= employee.first_name %> <%= employee.last_name %></li>
+  <% end %>
+</ul>
 
-      <div>
-        <a href="/delete_organization/<%= @the_organization.id %>">
-          Delete organization
-        </a>
-      </div>
-    </div>
+<h5>Sub-organizations:</h5>
+<% @organization.sub_organizations.each do |sub_organization| %>
+  <div class="sub-organization">
+    <h6><%= sub_organization.name %></h6>
+    <p><%= sub_organization.description %></p>
 
-    <dl>
-      <dt>
-        Name
-      </dt>
-      <dd>
-        <%= @the_organization.name %>
-      </dd>
-
-      <dt>
-        Description
-      </dt>
-      <dd>
-        <%= @the_organization.description %>
-      </dd>
-
-      <dt>
-        Parent
-      </dt>
-      <dd>
-        <%= @the_organization.parent_id %>
-      </dd>
-
-      <dt>
-        Employees count
-      </dt>
-      <dd>
-        <%= @the_organization.employees_count %>
-      </dd>
-
-      <dt>
-        Created at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_organization.created_at) %> ago
-      </dd>
-
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_organization.updated_at) %> ago
-      </dd>
-    </dl>
+    <h6>Employees:</h6>
+    <ul>
+      <% sub_organization.employees.each do |employee| %>
+        <li><strong><%= employee.title %></strong> : <%= employee.first_name %> <%= employee.last_name %></li>
+      <% end %>
+    </ul>
   </div>
+<% end %>
 </div>
-
-<hr>
-
-
-<div>
-  <div>
-    <h2>
-      Edit organization
-    </h2>
-
-    <form action="/modify_organization/<%= @the_organization.id %>"  method="post" >
-      <div>
-        <label for="name_box">
-          Name
-        </label>
-
-        <input type="text" id="name_box" name="query_name" value="<%= @the_organization.name %>">
-      </div>
-
-      <div>
-        <label for="description_box">
-          Description
-        </label>
-
-        <input type="text" id="description_box" name="query_description" value="<%= @the_organization.description %>">
-      </div>
-
-      <div>
-        <label for="parent_id_box">
-          Parent
-        </label>
-
-        <input type="text" id="parent_id_box" name="query_parent_id" value="<%= @the_organization.parent_id %>">
-      </div>
-
-      <div>
-        <label for="employees_count_box">
-          Employees count
-        </label>
-
-        <input type="text" id="employees_count_box" name="query_employees_count" value="<%= @the_organization.employees_count %>">
-      </div>
-
-      <button>
-        Update organization
-      </button>
-    </form>
-  </div>
-</div>
-
-<hr>
