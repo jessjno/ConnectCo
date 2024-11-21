@@ -5,6 +5,7 @@ class EmployeesController < ApplicationController
     if current_employee
       redirect_to root_path
     end
+  end
 
   def show
     @current_employee = current_employee
