@@ -1,0 +1,28 @@
+<%= form_with(model: organization) do |f| %>
+  <% if organization.errors.any? %>
+    <div class="errors">
+      <h2>There were errors with your submission:</h2>
+      <ul>
+        <% organization.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+    <div>
+      <%= f.label :description %>
+      <%= f.text_field :description %>
+    </div>
+ 
+  <div>
+    <%= f.submit "Update Organization" %>
+  </div>
+<% end %>
+
+<%= link_to 'Cancel', organization_path(organization) %>

@@ -43,6 +43,4 @@ class Employee < ApplicationRecord
   has_many :responsibilities
   validates :first_name, :last_name, :organization_id, presence: true
 
-  #scope :non-admin, -> {joins(:member).where.not(members: {role = admin}) }
-
-end
+ end

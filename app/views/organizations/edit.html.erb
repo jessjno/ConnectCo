@@ -1,0 +1,13 @@
+<h1>Edit Organizations</h1>
+
+<%= render partial: "form", locals: { organization: @organization } %>
+
+<br>
+
+<div>
+  <%= link_to "Show this organization", @organization %>
+
+  <%= link_to "Back to organizations", organizations_path %>
+</div>
+
+<%= link_to 'Cancel', organization_path(@organization) %>

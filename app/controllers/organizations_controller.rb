@@ -1,59 +1,55 @@
 class OrganizationsController < ApplicationController
+  include Pundit
+  before_action :set_organization, only: [:edit, :update, :show, :destroy]
   def index
-    @organizations = Organization.all.order(:id)
+    @organizations = Organization.order(:id)
     render({ :template => "organizations/index" })
   end
-
+  
   def show
     @organization = Organization.includes(:employees, :sub_organizations).find(params[:id])
+    authorize @organization
     @employees = @organization.employees
   end
 
   def create
-    the_organization = Organization.new
-    the_organization.name = params.fetch("query_name")
-    the_organization.description = params.fetch("query_description")
-    the_organization.parent_id = params.fetch("query_parent_id")
-    the_organization.employees_count = params.fetch("query_employees_count")
-
-    if the_organization.valid?
-      the_organization.save
+    @organization = Organization.new(organization_params)
+    authorize @organization
+    if @organization.valid?
+      @organization.save
       redirect_to("/organizations", { :notice => "Organization created successfully." })
     else
-      redirect_to("/organizations", { :alert => the_organization.errors.full_messages.to_sentence })
+      redirect_to("/organizations", { :alert => @organization.errors.full_messages.to_sentence })
     end
   end
 
   def update
-    the_id = params.fetch("path_id")
-    the_organization = Organization.where({ :id => the_id }).at(0)
-
-    the_organization.name = params.fetch("query_name")
-    the_organization.description = params.fetch("query_description")
-    the_organization.parent_id = params.fetch("query_parent_id")
-    the_organization.employees_count = params.fetch("query_employees_count")
-
-    if the_organization.valid?
-      the_organization.save
-      redirect_to("/organizations/#{the_organization.id}", { :notice => "Organization updated successfully."} )
+    @organization = Organization.find(params[:id])
+    authorize @organization
+    if @organization.update(organization_params)
+      @organization.save
+      redirect_to("/organizations/#{@organization.id}", { :notice => "Organization updated successfully."} )
     else
-      redirect_to("/organizations/#{the_organization.id}", { :alert => the_organization.errors.full_messages.to_sentence })
+      redirect_to("/organizations/#{@organization.id}", { :alert => @organization.errors.full_messages.to_sentence })
     end
   end
 
   def destroy
-    the_id = params.fetch("path_id")
-    the_organization = Organization.where({ :id => the_id }).at(0)
+    @organization = Organization.find(params[:id])
 
-    the_organization.destroy
+    @organization.destroy
 
     redirect_to("/organizations", { :notice => "Organization deleted successfully."} )
   end
 
- 
-
-
   
   private
 
+  def set_organization  
+    @organization = Organization.find(params[:id])
+  end
+
+  def organization_params
+    params.require(:organization).permit(:name, :description, :parent_id, :employees_count)
+  end
 end
