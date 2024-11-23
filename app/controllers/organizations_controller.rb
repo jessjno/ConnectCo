@@ -1,55 +1,58 @@
 class OrganizationsController < ApplicationController
   include Pundit
   before_action :set_organization, only: [:edit, :update, :show, :destroy]
+
   def index
     @organizations = Organization.order(:id)
     render({ :template => "organizations/index" })
   end
-  
+
   def show
-    @organization = Organization.includes(:employees, :sub_organizations).find(params[:id])
     authorize @organization
     @employees = @organization.employees
+  end
+
+  def new
+    @organization = Organization.new
+    authorize @organization
   end
 
   def create
     @organization = Organization.new(organization_params)
     authorize @organization
-    if @organization.valid?
-      @organization.save
-      redirect_to("/organizations", { :notice => "Organization created successfully." })
+      if @organization.save
+      redirect_to organizations_path, notice: "Organization was successfully created."
     else
-      redirect_to("/organizations", { :alert => @organization.errors.full_messages.to_sentence })
+      render :new, alert: @organization.errors.full_messages.to_sentence
     end
   end
 
-  def update
-    @organization = Organization.find(params[:id])
-    authorize @organization
-    if @organization.update(organization_params)
-      @organization.save
-      redirect_to("/organizations/#{@organization.id}", { :notice => "Organization updated successfully."} )
-    else
-      redirect_to("/organizations/#{@organization.id}", { :alert => @organization.errors.full_messages.to_sentence })
+    def update
+      authorize @organization
+      if @organization.update(organization_params)
+        redirect_to organization_path(@organization), notice: "Organization updated successfully."
+      else
+        render :edit, alert: @organization.errors.full_messages.to_sentence
+      end
     end
-  end
 
-  def destroy
-    @organization = Organization.find(params[:id])
+    def destroy
+      authorize @organization
+      if @organization.destroy
+        redirect_to organizations_path, notice: "Organization was successfully deleted."
+      else
+        redirect_to organizations_path, alert: "Failed to delete organization."
+      end
+    end
 
-    @organization.destroy
+    private
 
-    redirect_to("/organizations", { :notice => "Organization deleted successfully."} )
-  end
+    def set_organization
+      @organization = Organization.find(params[:id])
+      authorize @organization
+    end
 
-  
-  private
-
-  def set_organization  
-    @organization = Organization.find(params[:id])
-  end
-
-  def organization_params
-    params.require(:organization).permit(:name, :description, :parent_id, :employees_count)
-  end
+    def organization_params
+      params.require(:organization).permit(:name, :description)
+   end
 end

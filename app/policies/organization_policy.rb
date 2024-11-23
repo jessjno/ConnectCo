@@ -14,11 +14,23 @@ class OrganizationPolicy
     true 
   end
 
+  def new?
+    employee.admin?
+  end
+
+  def create?
+    employee.admin?
+  end
+
   def edit?
     update?
   end
 
   def update?
-    employee.member_id == 1
+    employee.admin?
+  end
+
+  def destroy?
+    employee.admin?
   end
 end

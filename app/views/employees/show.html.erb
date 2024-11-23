@@ -1,9 +1,9 @@
 <div class="container">
-<h1><%= @employee.first_name %>'s Profile</h1>
+  <h1><%= @employee.first_name %>'s Profile</h1>
 
-<p><strong>Email:</strong> <%= @employee.email %></p>
+  <p><strong>Email:</strong> <%= @employee.email %></p>
 
-<h2>Responsibilities</h2>
+  <h2>Responsibilities</h2>
   <ul>
     <% @responsibilities.each do |responsibility| %>
       <li>
@@ -15,5 +15,9 @@
     <% end %>
   </ul>
 
-<%= link_to 'Back to Organization', organization_path(@employee.organization_id) %>
+  <% if policy(@employee).destroy? %>
+    <%= button_to "Delete Employee", employee_path(@employee), method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure you want to delete this employee?" } %>
+  <% end %>
+
+  <%= link_to 'Back to Organization', organization_path(@employee.organization_id) %>
 </div>

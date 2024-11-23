@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
-  devise_for :employees
-  resources :employees, only: [:show, :edit, :update]
+  devise_for :employees, skip: [:registrations]
+  resources :employees, only: [:show, :edit, :update, :new, :create, :destroy]
   root "organizations#index"
 
-  resources :organizations
-  resources :employees, only: [:show]
+  resources :organizations, only: %i[index show new create edit update destroy]
+  resources :organizations do
+    resources :employees, only: [:create, :destroy]
+  end
 
   resources :employees, only: [:show] do
     member do

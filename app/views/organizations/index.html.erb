@@ -15,6 +15,11 @@
           <%= link_to "View Details", organization_path(organization), class: "btn btn-primary" %>
         </div>
       </div>
+
     </div>
   <% end %>
 </div>
+
+      <% if policy(Organization).create? %>
+        <%= link_to "New Organization", new_organization_path, class: "btn btn-primary" %>
+      <% end %>

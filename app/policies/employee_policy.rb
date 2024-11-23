@@ -10,13 +10,25 @@ class EmployeePolicy
     true
   end
 
+  def new?
+    current_employee.admin?
+  end
+
+  def create?
+    current_employee.admin?
+  end
+
+  def destroy?
+    current_employee.admin?
+  end
+
 
   def edit_responsibility?
-    employee.admin? || employee == record
+    current_employee.admin?|| current_employee == record
   end
 
   def update_responsibility?
-    employee.admin? || employee == record
+    current_employee.admin? || current_employee == record
   end
 
 end
