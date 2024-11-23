@@ -6,6 +6,13 @@ Rails.application.routes.draw do
   resources :organizations
   resources :employees, only: [:show]
 
+  resources :employees, only: [:show] do
+    member do
+      get 'edit_responsibility/:id', to: 'employees#edit_responsibility', as: 'edit_responsibility'
+      patch 'update_responsibility/:id', to: 'employees#update_responsibility', as: 'update_responsibility'
+    end
+  end
+
   # Routes for the Member resource:
   # CREATE
   post("/insert_member", { :controller => "members", :action => "create" })

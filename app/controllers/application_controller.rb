@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_employee
   
-  rescue_from Pundit::NotAuthorizedError, with: :employee_not_authorized
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   private
 
@@ -19,6 +19,6 @@ class ApplicationController < ActionController::Base
 
   def user_not_authorized
     flash[:alert] = "You are not authorized to perform this action."
-    redirect_back fallback_location: root_url
+    redirect_to(request.referrer || root_path)
   end
 end

@@ -4,11 +4,16 @@
 <p><strong>Email:</strong> <%= @employee.email %></p>
 
 <h2>Responsibilities</h2>
-<ul>
-  <% @responsibilities.each do |responsibility| %>
-    <li><%= responsibility.description %></li>
-  <% end %>
-</ul>
+  <ul>
+    <% @responsibilities.each do |responsibility| %>
+      <li>
+        <%= responsibility.description %>
+        <% if policy(responsibility).edit? %>
+          <%= link_to 'Edit', edit_responsibility_employee_path(@employee, responsibility), class: 'btn btn-sm btn-secondary' %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
 
 <%= link_to 'Back to Organization', organization_path(@employee.organization_id) %>
 </div>
