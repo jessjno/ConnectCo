@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   devise_for :employees, skip: [:registrations]
+  as :employee do
+    get 'employees/sign_up', to: redirect('/'), as: :new_employee_registration
+  end
   resources :employees, only: [:show, :edit, :update, :new, :create, :destroy]
   root "organizations#index"
 

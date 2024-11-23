@@ -19,6 +19,8 @@ class EmployeesController < ApplicationController
     @employee = Employee.new(employee_params)
     authorize @employee
 
+    @employee.skip_confirmation_notification! if @employee.respond_to?(:skip_confirmation_notification!)
+
     if @employee.save
       redirect_to organization_path(@employee.organization_id), notice: "Employee created successfully."
     else
