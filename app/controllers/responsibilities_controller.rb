@@ -1,4 +1,5 @@
 class ResponsibilitiesController < ApplicationController
+  before_action :ensure_employee_is_authorized, only: [:edit]
   def index
     matching_responsibilities = Responsibility.all
 
@@ -32,19 +33,7 @@ class ResponsibilitiesController < ApplicationController
   end
 
   def update
-    the_id = params.fetch("path_id")
-    the_responsibility = Responsibility.where({ :id => the_id }).at(0)
-
-    the_responsibility.name = params.fetch("query_name")
-    the_responsibility.description = params.fetch("query_description")
-    the_responsibility.employee_id = params.fetch("query_employee_id")
-
-    if the_responsibility.valid?
-      the_responsibility.save
-      redirect_to("/responsibilities/#{the_responsibility.id}", { :notice => "Responsibility updated successfully."} )
-    else
-      redirect_to("/responsibilities/#{the_responsibility.id}", { :alert => the_responsibility.errors.full_messages.to_sentence })
-    end
+    authorize @responsibility
   end
 
   def destroy
@@ -54,5 +43,13 @@ class ResponsibilitiesController < ApplicationController
     the_responsibility.destroy
 
     redirect_to("/responsibilities", { :notice => "Responsibility deleted successfully."} )
+  end
+
+  private
+
+  def ensure_employee_is_authorized
+    if !EmployeePolicy.new(current_employee, @responsibility).show?
+      raise Pundit::NotAuthorizedError, "not allowed"
+    end
   end
 end

@@ -42,7 +42,9 @@ class Employee < ApplicationRecord
   has_many :subordinates, class_name: "Employee", foreign_key: "manager_id"
   has_many :responsibilities
   validates :first_name, :last_name, :organization_id, presence: true
-
-  #scope :non-admin, -> {joins(:member).where.not(members: {role = admin}) }
-
-end
+  validates :organization_id, presence: true
+  
+  def admin?
+    member_id == 1
+  end
+ end

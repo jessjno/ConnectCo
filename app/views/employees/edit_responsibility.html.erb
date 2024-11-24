@@ -1,0 +1,27 @@
+<h1>Edit Responsibility</h1>
+
+<%= form_with model: @responsibility, url: update_responsibility_employee_path(@responsibility.employee, @responsibility), method: :patch do |form| %>
+
+  <% if flash[:notice].present? %>
+    <div class="alert alert-info" role="alert">
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+
+  <% if flash[:alert].present? %>
+    <div class="alert alert-danger" role="alert">
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :description %>
+    <%= form.text_area :description, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.submit 'Update Responsibility', class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', employee_path(@responsibility.employee), class: 'btn btn-secondary' %>

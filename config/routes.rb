@@ -1,10 +1,22 @@
 Rails.application.routes.draw do
-  devise_for :employees
-  resources :employees, only: [:show, :edit, :update]
+  devise_for :employees, skip: [:registrations]
+  as :employee do
+    get 'employees/sign_up', to: redirect('/'), as: :new_employee_registration
+  end
+  resources :employees, only: [:show, :edit, :update, :new, :create, :destroy]
   root "organizations#index"
 
-  resources :organizations
-  resources :employees, only: [:show]
+  resources :organizations, only: %i[index show new create edit update destroy]
+  resources :organizations do
+    resources :employees, only: [:create, :destroy]
+  end
+
+  resources :employees, only: [:show] do
+    member do
+      get 'edit_responsibility/:id', to: 'employees#edit_responsibility', as: 'edit_responsibility'
+      patch 'update_responsibility/:id', to: 'employees#update_responsibility', as: 'update_responsibility'
+    end
+  end
 
   # Routes for the Member resource:
   # CREATE
