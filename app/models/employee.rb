@@ -43,8 +43,16 @@ class Employee < ApplicationRecord
   has_many :responsibilities
   validates :first_name, :last_name, :organization_id, presence: true
   validates :organization_id, presence: true
-  
+ 
   def admin?
     member_id == 1
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["first_name", "last_name", "title"]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["organization", "responsibilities"]
   end
  end

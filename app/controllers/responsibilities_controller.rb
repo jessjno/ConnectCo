@@ -1,55 +1,71 @@
 class ResponsibilitiesController < ApplicationController
-  before_action :ensure_employee_is_authorized, only: [:edit]
+  before_action :set_responsibility, only: [:edit, :update, :destroy]
+  before_action :authorize_responsibility, only: [:edit, :update, :destroy]
+  before_action :ensure_employee_is_authorized, only: [:edit, :update, :destroy]
+
   def index
-    matching_responsibilities = Responsibility.all
-
-    @list_of_responsibilities = matching_responsibilities.order({ :created_at => :desc })
-
+    @list_of_responsibilities = Responsibility.order(created_at: :desc)
+    @responsibility = Responsibility.new
     render({ :template => "responsibilities/index" })
   end
 
   def show
-    the_id = params.fetch("path_id")
-
-    matching_responsibilities = Responsibility.where({ :id => the_id })
-
-    @the_responsibility = matching_responsibilities.at(0)
-
+    @responsibility = Responsibility.find(params[:id])
     render({ :template => "responsibilities/show" })
   end
 
   def create
-    the_responsibility = Responsibility.new
-    the_responsibility.name = params.fetch("query_name")
-    the_responsibility.description = params.fetch("query_description")
-    the_responsibility.employee_id = params.fetch("query_employee_id")
+    @responsibility = Responsibility.new(responsibility_params)
+    @responsibility.employee_id = current_employee.id
 
-    if the_responsibility.valid?
-      the_responsibility.save
-      redirect_to("/responsibilities", { :notice => "Responsibility created successfully." })
+    if @responsibility.save
+      authorize @responsibility
+      redirect_to employee_path(@responsibility.employee), notice: "Responsibility created successfully."
     else
-      redirect_to("/responsibilities", { :alert => the_responsibility.errors.full_messages.to_sentence })
+      redirect_to employee_path(@responsibility.employee), alert: @responsibility.errors.full_messages.to_sentence
     end
   end
 
+  def edit
+    @responsibility
+  end
+
   def update
+    @responsibility = Responsibility.find(params[:id])
     authorize @responsibility
+
+    if @responsibility.update(responsibility_params)
+      redirect_to employee_path(@responsibility.employee), notice: "Responsibility updated successfully."
+    else
+      render :edit, alert: "Failed to update responsibility."
+    end
   end
 
   def destroy
-    the_id = params.fetch("path_id")
-    the_responsibility = Responsibility.where({ :id => the_id }).at(0)
-
-    the_responsibility.destroy
-
-    redirect_to("/responsibilities", { :notice => "Responsibility deleted successfully."} )
+    if @responsibility.destroy
+      redirect_to responsibilities_path, notice: "Responsibility deleted successfully."
+    else
+      redirect_to responsibilities_path, alert: "Failed to delete responsibility."
+    end
   end
 
   private
 
+  def responsibility_params
+    params.require(:responsibility).permit(:description, :employee_id)
+  end
+
+  def set_responsibility
+    @responsibility = Responsibility.find(params[:id])
+  end
+
+  def authorize_responsibility
+    authorize @responsibility
+  end
+
   def ensure_employee_is_authorized
-    if !EmployeePolicy.new(current_employee, @responsibility).show?
-      raise Pundit::NotAuthorizedError, "not allowed"
+    if @responsibility.nil? || !ResponsibilityPolicy.new(current_employee, @responsibility).show?
+      raise Pundit::NotAuthorizedError, "Not allowed"
     end
   end
 end

@@ -1,17 +1,17 @@
-class OrganizationPolicy 
+class OrganizationPolicy
   attr_reader :employee, :organization
 
   def initialize(employee, organization)
     @employee = employee
     @organization = organization
   end
-  
+
   def index?
-    true 
+    true
   end
-  
+
   def show?
-    true 
+    true
   end
 
   def new?

@@ -6,6 +6,10 @@ class EmployeePolicy
     @employee = employee
   end
 
+  def index?
+    true
+  end
+
   def show?
     true
   end
@@ -22,13 +26,7 @@ class EmployeePolicy
     current_employee.admin?
   end
 
-
-  def edit_responsibility?
-    current_employee.admin?|| current_employee == record
+  def can_manage_responsibilities?
+    current_employee.admin? || current_employee == employee
   end
-
-  def update_responsibility?
-    current_employee.admin? || current_employee == record
-  end
-
 end

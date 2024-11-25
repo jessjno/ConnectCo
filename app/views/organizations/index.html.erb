@@ -20,6 +20,6 @@
   <% end %>
 </div>
 
-      <% if policy(Organization).create? %>
-        <%= link_to "New Organization", new_organization_path, class: "btn btn-primary" %>
-      <% end %>
+<% if policy(Organization).create? %>
+  <%= link_to "New Organization", new_organization_path, class: "btn btn-primary" %>
+<% end %>

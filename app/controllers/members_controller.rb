@@ -39,7 +39,7 @@ class MembersController < ApplicationController
 
     if the_member.valid?
       the_member.save
-      redirect_to("/members/#{the_member.id}", { :notice => "Member updated successfully."} )
+      redirect_to("/members/#{the_member.id}", { :notice => "Member updated successfully." })
     else
       redirect_to("/members/#{the_member.id}", { :alert => the_member.errors.full_messages.to_sentence })
     end
@@ -51,6 +51,6 @@ class MembersController < ApplicationController
 
     the_member.destroy
 
-    redirect_to("/members", { :notice => "Member deleted successfully."} )
+    redirect_to("/members", { :notice => "Member deleted successfully." })
   end
 end
