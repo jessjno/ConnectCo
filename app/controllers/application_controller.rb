@@ -6,9 +6,8 @@ class ApplicationController < ActionController::Base
   before_action :initialize_search
   skip_forgery_protection
 
-
   helper_method :current_employee
-  
+
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   private

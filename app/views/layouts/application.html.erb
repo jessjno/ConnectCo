@@ -31,9 +31,9 @@
     </div>
 
     <nav>
-    <% unless devise_controller? && %w[new create].include?(action_name) %>
-      <%= render 'layouts/navbar' %>
-    <% end %>
+      <% unless devise_controller? && %w[new create].include?(action_name) %>
+        <%= render 'layouts/navbar' %>
+      <% end %>
 
       <%= yield %>
     </body>

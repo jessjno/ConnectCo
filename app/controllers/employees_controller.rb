@@ -29,22 +29,15 @@ class EmployeesController < ApplicationController
   end
 
   def index
-    authorize Employee 
-    @q = Employee.ransack(params[:q]) 
+    authorize Employee
+    @q = Employee.ransack(params[:q])
     @employees = @q.result.includes(:organization).order(:last_name)
   end
-
 
   def show
     @employee = Employee.find(params[:id])
     @responsibilities = @employee.responsibilities
     authorize @employee
-    # @current_employee = current_employee
-
-    # @employee = Employee.find(params[:id])
-    # @organization = @employee.organization
-    # @responsibility = Responsibility.new
-    # @responsibilities = @employee.responsibilities
   end
 
   def edit
@@ -71,9 +64,9 @@ class EmployeesController < ApplicationController
 
     if @responsibility.update(responsibility_params)
       @responsibility.save
-      redirect_to employee_path(@responsibility.employee), notice: 'Responsibility updated successfully.'
+      redirect_to employee_path(@responsibility.employee), notice: "Responsibility updated successfully."
     else
-      render :edit_responsibility, alert: 'Failed to update responsibility.'
+      render :edit_responsibility, alert: "Failed to update responsibility."
     end
   end
 

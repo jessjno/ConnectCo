@@ -10,7 +10,6 @@ class ResponsibilityPolicy
     true
   end
 
-
   def edit?
     update?
   end

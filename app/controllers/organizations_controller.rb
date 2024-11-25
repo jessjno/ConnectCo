@@ -20,39 +20,39 @@ class OrganizationsController < ApplicationController
   def create
     @organization = Organization.new(organization_params)
     authorize @organization
-      if @organization.save
+    if @organization.save
       redirect_to organizations_path, notice: "Organization was successfully created."
     else
       render :new, alert: @organization.errors.full_messages.to_sentence
     end
   end
 
-    def update
-      authorize @organization
-      if @organization.update(organization_params)
-        redirect_to organization_path(@organization), notice: "Organization updated successfully."
-      else
-        render :edit, alert: @organization.errors.full_messages.to_sentence
-      end
+  def update
+    authorize @organization
+    if @organization.update(organization_params)
+      redirect_to organization_path(@organization), notice: "Organization updated successfully."
+    else
+      render :edit, alert: @organization.errors.full_messages.to_sentence
     end
+  end
 
-    def destroy
-      authorize @organization
-      if @organization.destroy
-        redirect_to organizations_path, notice: "Organization was successfully deleted."
-      else
-        redirect_to organizations_path, alert: "Failed to delete organization."
-      end
+  def destroy
+    authorize @organization
+    if @organization.destroy
+      redirect_to organizations_path, notice: "Organization was successfully deleted."
+    else
+      redirect_to organizations_path, alert: "Failed to delete organization."
     end
+  end
 
-    private
+  private
 
-    def set_organization
-      @organization = Organization.find(params[:id])
-      authorize @organization
-    end
+  def set_organization
+    @organization = Organization.find(params[:id])
+    authorize @organization
+  end
 
-    def organization_params
-      params.require(:organization).permit(:name, :description)
-   end
+  def organization_params
+    params.require(:organization).permit(:name, :description)
+  end
 end

@@ -29,6 +29,4 @@ class EmployeePolicy
   def can_manage_responsibilities?
     current_employee.admin? || current_employee == employee
   end
-
 end
-

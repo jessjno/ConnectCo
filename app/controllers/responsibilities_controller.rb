@@ -2,7 +2,7 @@ class ResponsibilitiesController < ApplicationController
   before_action :set_responsibility, only: [:edit, :update, :destroy]
   before_action :authorize_responsibility, only: [:edit, :update, :destroy]
   before_action :ensure_employee_is_authorized, only: [:edit, :update, :destroy]
-  
+
   def index
     @list_of_responsibilities = Responsibility.order(created_at: :desc)
     @responsibility = Responsibility.new
@@ -13,12 +13,11 @@ class ResponsibilitiesController < ApplicationController
     @responsibility = Responsibility.find(params[:id])
     render({ :template => "responsibilities/show" })
   end
- 
 
   def create
     @responsibility = Responsibility.new(responsibility_params)
     @responsibility.employee_id = current_employee.id
-    
+
     if @responsibility.save
       authorize @responsibility
       redirect_to employee_path(@responsibility.employee), notice: "Responsibility created successfully."
@@ -38,7 +37,7 @@ class ResponsibilitiesController < ApplicationController
     if @responsibility.update(responsibility_params)
       redirect_to employee_path(@responsibility.employee), notice: "Responsibility updated successfully."
     else
-      render :edit, alert: 'Failed to update responsibility.'
+      render :edit, alert: "Failed to update responsibility."
     end
   end
 
