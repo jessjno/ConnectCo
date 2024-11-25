@@ -8,16 +8,28 @@
     <% @responsibilities.each do |responsibility| %>
       <li>
         <%= responsibility.description %>
-        <% if policy(responsibility).edit? %>
+         <% if policy(responsibility).edit? %>
           <%= link_to 'Edit', edit_responsibility_employee_path(@employee, responsibility), class: 'btn btn-sm btn-secondary' %>
         <% end %>
       </li>
     <% end %>
   </ul>
+ <% if policy(@employee).can_manage_responsibilities? %>
+    <h3>Add Responsibility</h3>
+    <%= form_with model: Responsibility.new, url: responsibilities_path, method: :post, local: true do |f| %>
+      <div class="form-group">
+        <%= f.hidden_field :employee_id, value: @employee.id %>
+        <%= f.label :description, "Responsibility Description" %>
+        <%= f.text_area :description, class: "form-control", required: true %>
+      </div>
+      <%= f.submit "Add Responsibility", class: "btn btn-primary mt-2" %>
+    <% end %>
+  <% end %>
+
 
   <% if policy(@employee).destroy? %>
     <%= button_to "Delete Employee", employee_path(@employee), method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure you want to delete this employee?" } %>
   <% end %>
 
-  <%= link_to 'Back to Organization', organization_path(@employee.organization_id) %>
+<%= link_to 'Back to Organization', organization_path(@employee.organization_id) %>
 </div>

@@ -13,5 +13,6 @@
 class Responsibility < ApplicationRecord
   
   belongs_to :employee, required: true, class_name: "Employee", foreign_key: "employee_id", counter_cache: true
+  validates :description, presence: true
 
 end
