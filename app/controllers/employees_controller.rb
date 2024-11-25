@@ -28,13 +28,23 @@ class EmployeesController < ApplicationController
     end
   end
 
+  def index
+    authorize Employee 
+    @q = Employee.ransack(params[:q]) 
+    @employees = @q.result.includes(:organization).order(:last_name)
+  end
+
 
   def show
-    @current_employee = current_employee
-
     @employee = Employee.find(params[:id])
-    @organization = @employee.organization
     @responsibilities = @employee.responsibilities
+    authorize @employee
+    # @current_employee = current_employee
+
+    # @employee = Employee.find(params[:id])
+    # @organization = @employee.organization
+    # @responsibility = Responsibility.new
+    # @responsibilities = @employee.responsibilities
   end
 
   def edit

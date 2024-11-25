@@ -3,12 +3,12 @@ Rails.application.routes.draw do
   as :employee do
     get 'employees/sign_up', to: redirect('/'), as: :new_employee_registration
   end
-  resources :employees, only: [:show, :edit, :update, :new, :create, :destroy]
+  resources :employees, only: [:show, :index, :edit, :update, :new, :create, :destroy]
   root "organizations#index"
 
   resources :organizations, only: %i[index show new create edit update destroy]
   resources :organizations do
-    resources :employees, only: [:create, :destroy]
+    resources :employees, only: [:index, :show, :create, :edit, :update, :destroy]
   end
 
   resources :employees, only: [:show] do
@@ -17,6 +17,10 @@ Rails.application.routes.draw do
       patch 'update_responsibility/:id', to: 'employees#update_responsibility', as: 'update_responsibility'
     end
   end
+
+  get 'search_results', to: 'search#results'
+
+  resources :responsibilities, only: [:create, :edit, :update, :destroy]
 
   # Routes for the Member resource:
   # CREATE
