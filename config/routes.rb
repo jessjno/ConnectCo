@@ -11,6 +11,19 @@ Rails.application.routes.draw do
     resources :employees, only: [:index, :show, :create, :edit, :update, :destroy]
   end
 
+  resources :organizations do
+    collection do
+      post :upload_csv
+    end
+  end
+
+  resources :employees do
+    collection do
+      post :upload_csv
+    end
+  end
+  
+
   resources :employees, only: [:show] do
     member do
       get 'edit_responsibility/:id', to: 'employees#edit_responsibility', as: 'edit_responsibility'
