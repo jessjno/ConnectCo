@@ -6,17 +6,6 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-Member.destroy_all
-
-Member.create!([
-  { id: 1, role: 'admin' },
-  { id: 2, role: 'manager' },
-  { id: 3, role: 'employee' },
-  { id: 4, role: 'guest' }
-])
-
-puts "Seeded #{Member.count} member roles successfully."
-
 admin_organization = Organization.find_or_create_by!(
   name: "Admin Organization",
   description: "Default organization for the admin user."
