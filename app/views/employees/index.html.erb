@@ -27,4 +27,13 @@
       <% end %>
     </tbody>
   </table>
+
+<%= form_with url: upload_csv_employees_path, method: :post, multipart: true, local: true do |f| %>
+  <div class="form-group">
+    <%= f.label :file, "Upload Employees CSV" %>
+    <%= f.file_field :file, class: "form-control" %>
+  </div>
+  <%= f.submit "Upload Employees", class: "btn btn-primary mt-2" %>
+<% end %>
+
 </div>

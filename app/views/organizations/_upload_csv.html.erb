@@ -1,0 +1,7 @@
+<%= form_with url: upload_csv_organizations_path, method: :post, multipart: true, local: true do |f| %>
+  <div class="form-group">
+    <%= f.label :file, "Upload CSV File" %>
+    <%= f.file_field :file, class: "form-control" %>
+  </div>
+  <%= f.submit "Upload", class: "btn btn-primary mt-2" %>
+<% end %>

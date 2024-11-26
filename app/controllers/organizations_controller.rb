@@ -36,6 +36,30 @@ class OrganizationsController < ApplicationController
     end
   end
 
+  def upload_csv
+    if params[:file].present?
+      file = params[:file]
+      
+      begin
+        CSV.foreach(file.path, headers: true) do |row|
+          organization_data = row.to_hash
+  
+          # Use find_or_create_by to handle existing IDs gracefully
+          Organization.find_or_create_by(id: organization_data["id"]) do |organization|
+            organization.name = organization_data["name"]
+            organization.description = organization_data["description"]
+          end
+        end
+  
+        redirect_to organizations_path, notice: "CSV data uploaded successfully."
+      rescue StandardError => e
+        redirect_to organizations_path, alert: "Error processing CSV: #{e.message}"
+      end
+    else
+      redirect_to organizations_path, alert: "Please upload a valid CSV file."
+    end
+  end
+    
   def destroy
     authorize @organization
     if @organization.destroy
