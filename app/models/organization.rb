@@ -16,4 +16,15 @@ class Organization < ApplicationRecord
   has_many :employees, class_name: "Employee", foreign_key: "organization_id", dependent: :nullify
   has_many :responsibilities, through: :employees
   
+  def all_employees
+    Employee.where(organization_id: all_organization_ids)
+  end
+
+  def all_organization_ids
+    [id] + sub_organizations.flat_map(&:all_organization_ids)
+  end
+
+  def all_sub_organizations
+    sub_organizations + sub_organizations.flat_map(&:all_sub_organizations)
+  end
 end
