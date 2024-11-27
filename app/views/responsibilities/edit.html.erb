@@ -1,0 +1,7 @@
+<div class="container">
+  <h1>Edit Responsibility for <%= @responsibility.employee.first_name %> <%= @responsibility.employee.last_name %></h1>
+
+  <%= render 'form', employee: @responsibility.employee, responsibility: @responsibility %>
+
+  <%= link_to 'Back to Employee', employee_path(@responsibility.employee), class: "btn btn-secondary mt-3" %>
+</div>

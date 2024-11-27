@@ -1,0 +1,7 @@
+<%= form_with model: [employee, responsibility], local: true do |f| %>
+  <div class="form-group">
+    <%= f.label :description, "Responsibility Description" %>
+    <%= f.text_area :description, class: "form-control", required: true %>
+  </div>
+  <%= f.submit responsibility.persisted? ? "Update Responsibility" : "Add Responsibility", class: "btn btn-primary mt-2" %>
+<% end %>

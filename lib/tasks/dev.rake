@@ -48,7 +48,7 @@ end
      employee.title = row.fetch("title")
      employee.organization_id = row.fetch("organization_id")
      employee.manager_id = row.fetch("manager_id")
-     employee.member_id = row.fetch("member_id")
+     employee.image_url = row.fetch('image_url')
      employee.save
    end
  

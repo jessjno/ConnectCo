@@ -10,13 +10,15 @@ class ResponsibilitiesController < ApplicationController
   end
 
   def show
-    @responsibility = Responsibility.find(params[:id])
-    render({ :template => "responsibilities/show" })
+    @employee = Employee.find(params[:id])
+    @responsibilities = @employee.responsibilities
+    @responsibility = Responsibility.new 
+    authorize @employee
   end
 
   def create
     @responsibility = Responsibility.new(responsibility_params)
-    @responsibility.employee_id = current_employee.id
+    @responsibility.employee_id = params[:employee_id]
 
     if @responsibility.save
       authorize @responsibility
@@ -27,25 +29,23 @@ class ResponsibilitiesController < ApplicationController
   end
 
   def edit
-    @responsibility
+    @employee = @responsibility.employee
+    render "responsibilities/edit"
   end
 
   def update
-    @responsibility = Responsibility.find(params[:id])
-    authorize @responsibility
-
     if @responsibility.update(responsibility_params)
       redirect_to employee_path(@responsibility.employee), notice: "Responsibility updated successfully."
     else
-      render :edit, alert: "Failed to update responsibility."
+      redirect_to employee_path(@responsibility.employee), alert: "Failed to update responsibility."
     end
   end
 
   def destroy
     if @responsibility.destroy
-      redirect_to responsibilities_path, notice: "Responsibility deleted successfully."
+      redirect_to employee_path(@responsibility.employee), notice: "Responsibility deleted successfully."
     else
-      redirect_to responsibilities_path, alert: "Failed to delete responsibility."
+      redirect_to employee_path(@responsibility.employee), alert: "Failed to delete responsibility."
     end
   end
 
