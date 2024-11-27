@@ -2,6 +2,9 @@
   <h1><%= @employee.first_name %>'s Profile</h1>
 
   <p><strong>Email:</strong> <%= @employee.email %></p>
+  <img src="<%= @employee.profile_image || asset_path('default_profile.png') %>" 
+       alt="<%= @employee.first_name %>'s Profile Photo" 
+       class="profile-photo">
 
   <h2>Responsibilities</h2>
   <ul>
