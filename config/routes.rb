@@ -35,17 +35,6 @@ Rails.application.routes.draw do
 
   resources :responsibilities, only: [:create, :edit, :update, :destroy]
 
-  # Routes for the Member resource:
-  # CREATE
-  post("/insert_member", { :controller => "members", :action => "create" })
-  # READ
-  get("/members", { :controller => "members", :action => "index" })
-  get("/members/:path_id", { :controller => "members", :action => "show" })
-  # UPDATE
-  post("/modify_member/:path_id", { :controller => "members", :action => "update" })
-  # DELETE
-  get("/delete_member/:path_id", { :controller => "members", :action => "destroy" })
-
   #------------------------------
 
   # Routes for the Responsibility resource:
