@@ -6,13 +6,6 @@ Rails.application.routes.draw do
 
   root "organizations#index"
 
-  resources :organizations do
-    resources :employees, only: [:index, :create, :edit, :update, :destroy]
-    collection do
-      post :upload_csv
-    end
-  end
-
   resources :employees do
     resources :responsibilities, only: [:create, :edit, :update, :destroy]
     collection do
@@ -21,6 +14,13 @@ Rails.application.routes.draw do
     member do
       get :edit_organization
       patch :update_organization
+    end
+  end
+
+  resources :organizations do
+    resources :employees, only: [:index, :create]
+    collection do
+      post :upload_csv
     end
   end
 

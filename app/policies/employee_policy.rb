@@ -33,4 +33,12 @@ class EmployeePolicy
   def upload_csv?
     current_employee.admin? 
   end
+
+  def edit_organization?
+    current_employee.admin?
+  end
+
+  def update_organization?
+    current_employee.admin?
+  end
 end

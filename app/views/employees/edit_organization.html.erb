@@ -1,0 +1,17 @@
+<div class="container">
+  <h1>Reassign Organization for <%= @employee.first_name %> <%= @employee.last_name %></h1>
+
+<% if policy(@employee).edit_organization? %>
+  <%= form_with url: update_organization_employee_path(@employee), method: :patch, local: true do |f| %>
+    <div class="form-group">
+      <%= f.label :organization_id, "Select Organization" %>
+      <%= f.collection_select :organization_id, @organizations, :id, :name, prompt: "Select Organization", class: "form-control" %>
+    </div>
+    <%= f.submit "Update Organization", class: "btn btn-primary mt-2" %>
+  <% end %>
+<% end %>
+
+
+
+  <%= link_to 'Back to Employee', employee_path(@employee), class: 'btn btn-secondary mt-3' %>
+</div>
