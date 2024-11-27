@@ -7,6 +7,7 @@
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  first_name             :string
+#  image_url              :string
 #  last_name              :string
 #  memberships_count      :integer
 #  remember_created_at    :datetime
@@ -45,7 +46,7 @@ class Employee < ApplicationRecord
   validates :organization_id, presence: true
  
   def admin?
-    member_id == 1
+    self.admin
   end
 
   def self.ransackable_attributes(auth_object = nil)
@@ -54,5 +55,9 @@ class Employee < ApplicationRecord
 
   def self.ransackable_associations(auth_object = nil)
     ["organization", "responsibilities"]
+  end
+
+  def profile_image
+    image_url.presence || ActionController::Base.helpers.asset_path('default_profile.png')
   end
  end

@@ -84,21 +84,21 @@ class EmployeesController < ApplicationController
   def upload_csv
     if params[:file].present?
       file = params[:file]
-
+  
       begin
         CSV.foreach(file.path, headers: true) do |row|
           employee_data = row.to_hash
-
+  
           Employee.find_or_create_by(email: employee_data["email"]) do |employee|
             employee.first_name = employee_data["first_name"]
             employee.last_name = employee_data["last_name"]
             employee.title = employee_data["title"]
             employee.organization_id = employee_data["organization_id"]
-            employee.member_id = employee_data["member_id"]
             employee.password = employee_data["password"]
+            employee.image_url = employee_data["image_url"] # Assign the image_url
           end
         end
-
+  
         redirect_to employees_path, notice: "Employees uploaded successfully."
       rescue StandardError => e
         redirect_to employees_path, alert: "Error processing CSV: #{e.message}"
@@ -107,6 +107,8 @@ class EmployeesController < ApplicationController
       redirect_to employees_path, alert: "Please upload a valid CSV file."
     end
   end
+  
+  
 
   private
 

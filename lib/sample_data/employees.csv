@@ -1,100 +1,99 @@
-id,first_name,last_name,email,password,phone,title,organization_id,manager_id,member_id
-1,Admin,Role,admin@example.com,password,,System Admin,,,1
-2,Deba,Dutta,ExecutiveDirectorDPI@uillinois.edu,password,,Interim Executive DPI Director,2,,2
-3,Kumar,Kintala,kintala@uillinois.edu,password,,Innovation Hub Director,3,2,3
-4,Mark,Harris,markh3@uillinois.edu,password,312-585-9159,Director,15,2,1
-5,Bob,Okabe,rmokabe@uillinois.edu,password,,"Director, New Business Ventures",5,2,3
-6,Venkat,Venkatakrishnan,venkat@uillinois.edu,password,,"Director, Research",6,2,2
-7,Ranjan,Karri,rkarr2@uis.edu,password,,Director of Academic Affairs & Administrative Operations,7,2,2
-8,Jen,Uner,juner@uillinois.edu,password,,"Director, Marketing & Communication",8,2,2
-9,Meg,Bates,megbates@illinois.edu,password,,Director,9,2,2
-10,Karen,Colat,kcolat@uillinois.edu,password,,Assistant to the Executive Director,2,2,2
-11,Morgan,Diamond,diamondm@uillinois.edu,password,,Associate Director,12,4,2
-12,Kay,Monelle,kaym@uillinois.edu,password,,Associate Director,14,4,2
-13,Matthew,Klein,mklein46@uillinois.edu,password,,Director,13,4,2
-14,Karen,Larson,kplarson@uillinois.edu,password,312-585-9193,Associate Director,15,4,2
-15,Kelsey,Hansen,hansen37@uillinois.edu,password,,Associate Director,12,11,2
-16,Nilofar,Khanbhai,nilofar@uillinois.edu,password,,Venture Creation Lead,5,5,2
-17,Jacob,Parrott,parrott4@uillinois.edu,password,,Venture Creation Lead,5,5,2
-18,Yuanye,Ma,yuanyem@uillinois.edu,password,,Sr. Research Associate,16,6,3
-19,Rukmini,Avadhanam,rukminia@uillinois.edu,password,,Sr. Research Associate,16,6,3
-20,Sugyan,Mani Dixit,sugy@uillinois.edu,password,,Senior Research Associate,16,6,3
-21,Anuj,Gautam,agautam@uillinois.edu,password,,Visiting Full Stack Developer,18,6,3
-22,Ashish,Sharma,sharmaa@uillinois.edu,password,(312) 668-9091,Climate and Urban Sustainability Lead,16,6,2
-23,Alvin,Chin,alvinc@uillinois.edu,password,,Research Scientist,16,6,3
-24,Rigel,Gjomemo,rgjome1@uic.edu,password,,Research Scientist,18,6,3
-25,Brad,Spirrison,jbs50@uillinois.edu,password,,Visiting Corporate Engagement Lead,16,6,3
-26,Laura,Clements,ljclem@uillinois.edu,password,312-668-9016,Senior Project Manager,16,6,2
-27,Karl,Putz,karlputz@uillinois.edu,password,,"Associate Director, R&D Programs",17,6,2
-28,Marcia,Silva,msilva@ullinois.edu,password,,"Associate Director, R&D",16,6,2
-29,Reginald,Gaudino,,password,,"Director, Cannabis Research Institute",18,6,2
-30,Jason,Bane,jabane@uillinois.edu,password,,Senior Assistant Director,7,7,2
-31,Eva,Lozano-Staton,evalozan@uillinois.edu,password,,Administrative Assistant,7,7,3
-32,Sanjuana,Jaime-Nix,sjaime@uillinois.edu,password,,"Director, Product",7,7,2
-33,Lauryn,Scott,lauryn@uillinois.edu,password,,"Associate Director, Marketing & Communication",8,8,2
-34,Sarah,Cashdollar,secash@uillinois.edu,password,,"Associate Director, IWERC Research",9,9,2
-35,Stephanie,Werner,swerne3@uillinois.edu,password,312-668-9026,"Research Specialist, IWERC",9,9,3
-36,Shereen,Beilstein,beilste2@uillinois.edu,password,312-668-9025,"Research Specialist, IWERC",9,9,3
-37,Mariana,Barragan Torres,marianab@uillinois.edu,password,312-668-9026,"Research Specialist, IWERC",9,9,3
-38,Jasmine,Collins,jdcolli2@illinois.edu,password,,Workforce Research Specialist,9,9,3
-39,Aisha,Motlani,amotlani@uillinois.edu,password,,"Research Associate, IWERC",9,9,3
-40,Stephanie,DeCicco,decicco@uillinois.edu,password,,Associate Director,15,4,2
-41,Lindsey,Vetvick,jsmit97@uillinois.edu,password,,Assistant Director,14,12,2
-42,Danna,Dotson,ddotson2@uillinois.edu,password,,Associate Director,14,12,2
-43,Jaclyn,Carmichael,jaclync@uillinois.edu,password,,Assistant Director,14,41,2
-44,Gregory,Cleveland,gcleve@uillinois.edu,password,,Program Coordinator,14,43,3
-45,Kenyanna,Sanders,kjs20@uillinois.edu,password,,Program Coordinator,14,43,3
-46,Gary,Nixon,gnixon1@uillinois.edu,password,,Recruiter and Student Engagement,12,11,3
-47,Todd,McFarlin,tmcfar1@uillinois.edu,password,312-413-5700,Assistant Director,14,42,2
-48,Ian,Heraty,ihera2@uillinois.edu,password,,Software Development Educator,12,15,3
-49,Ruben,Abarca,abarca3@uillinois.edu,password,,Associate Director,13,13,2
-50,Haneen,Omar,Homar4@uillinois.edu,password,,Assistant Director,13,13,2
-51,Dominique,Wilson,dwils5@uillinois.edu,password,,Associate Director,13,13,2
-52,Sonia,Pulido,spulido2@uillinois.edu,password,,Assistant Director,15,14,2
-53,Tony,Torres,ttorres3@uillinois.edu,password,,Assistant Director,14,12,2
-54,Gina,Grant,glgrant@uillinois.edu,password,312-575-7926,Associate Director,14,12,2
-55,Sudhansu,Rath,sudhansu@illinois.edu,password,,Postdoctoral Research Associate,16,23,3
-56,Dolores,Sanchez Gonzalez,dsanch52@uillinois.edu,password,,Visiting Lab Manager,16,26,3
-57,Adam,Horton,adam47@uillinois.edu,password,,Visiting Lab Manager,16,26,3
-58,Modou,Jarju,mljarju@uillinois.edu,password,,Visiting Lab Technician,16,26,3
-59,Chi-Yu,Lin,clin213@uillinois.edu,password,,Visiting Research Scholar,16,26,3
-60,Saye,Vikram Karthikeyan,,password,,Extra help,16,21,3
-61,Marco,Colombo,mcolom4@uillinois.edu,password,,Visiting Associate Research Software Development Engineer,16,24,3
-62,Anuj,Tiwari,anujt@uic.edu,password,,Senior Research Associate,16,24,3
-63,Krystal,White,kwhite38@uillinois.edu,password,,Visiting Project Manager,16,24,3
-64,Karan,Jogi,kjogi2@uillinois.edu,password,,Research Software Dev Engineer,16,24,3
-65,Christina,Sansone,csanso2@uillinois.edu,password,,Visiting Community Engagement Manager,18,27,3
-66,Peiyuan,Li,peiyuanl@uillinois.edu,password,,Postdoctoral Research Associate,16,22,3
-67,Carolina,Veiga,carolvfs@uillinois.edu,password,,Postdoctoral Research Associate,16,22,3
-68,Abhinav,Wadhwa,awadhwa@uillinois.edu,password,,Postdoctoral,16,22,3
-69,Sicheng,Wu,sichengw@uillinois.edu,password,,Postdoctoral Reseach Associate,16,22,3
-70,Carolyn,Geck,carolyng@uillinois.edu,password,,Grants Coordinator,18,28,3
-71,Camryn,Woodworth,"Grants Coordinator, R&D",password,,"Grants Coordinator, R&D",16,28,3
-72,Cathy,Ye,zihanye2@uillinois.edu,password,,Business Analyst,16,25,3
-73,Sam,Miller,,password,,"Corporate Relationship Manager, R&D Industry Program",16,25,2
-74,Akshaya,Udayashankar,akshayau@uillinois.edu,password,,Relationship Manager,16,25,2
-75,Ying,Chen,ychen406@uic.edu,password,,"Research Associate, IWERC",9,34,3
-76,Sebastián,Kiguel,skiguel@uic.edu,password,,"Research Associate, IWERC",9,34,3
-77,Raisa,Blazquez,blazquez@uillinois.edu,password,,Visiting Research Associate,9,35,3
-78,Joe,Cheng,jlcheng@illinois.edu,password,,DPI Partnerships,5,78,3
-79,Mike,Flavin,mtflavin@uillinois.edu,password,,DPI Corporate Relations,5,78,3
-80,John,Ramirez,Jpramire@uillinois.edu,password,,Visiting Entrepreneur In Residence,5,78,3
-81,Larry,Schor,lschor@uillinois.edu,password,,Visiting Entrepreneur in Residence,5,78,3
-82,Deepak,Somaya,dsomaya@illinois.edu,password,,Don and Anne Edwards Scholar,5,78,3
-83,Meghan,Dyer,msdyer@uillinois.edu,password,,Assistant Director of Innovation Hub,3,3,2
-84,Marcia,Lampela,mlampela@uillinois.edu,password,217-300-7457,DPI Site Management,10,3,3
-85,Kassandra,Perez,kgperez@uillinois.edu,password,,Events Manager,11,3,3
-86,Brent,Brewer,brentb@uillinois.edu,password,,Events Coordinator,11,85,3
-87,Jonathon,Berlin,jsberlin@uillinois.edu,password,,Visiting Sr. Multimedia Designer,8,8,3
-88,Jeanie,Chung,jinwonc@uillinois.edu,password,,Content Writer,8,8,3
-89,Jaime,Chavez,jchavez6@illinois.edu,password,,Web Specialist,8,33,3
-90,Atif,Hasan,hasana@uillinois.edu,password,,Senior Business Coordinator,7,30,3
-91,Meenu,Sharma,meenus@uillinois.edu,password,,Business Coordinator,7,90,3
-92,Luis,Navarrete,luisn@uillinois.edu,password,,Business Coordinator,7,90,3
-93,Sumit,Tokkar,stokkar@uillinois.edu,password,,Software Engineering Lead,7,32,2
-94,Tula,Kuechenmeister,tula@uillinois.edu,password,,Salesforce Administrator,7,32,3
-95,Jiaqi,Li,jiaqi606@uillinois.edu,password,,Sr. User Experience Designer,7,32,3
-96,Stephanie,Escobar,escobar8@uillinois.edu,password,,Office Support Specialist,7,31,3
-97,Javier,Pena,jpena9@uillinois.edu,password,,Program Assistant,7,31,3
-98,Antaeja,Riley,ariley20@uillinois.edu,password,,Program Assistant,7,31,3
-99,Eva,Durance,,password,,Program Assistant,16,26,3
+id,admin,first_name,last_name,email,password,phone,title,organization_id,manager_id,image_url
+2,FALSE,Deba,Dutta,ExecutiveDirectorDPI@uillinois.edu,password,,Interim Executive DPI Director,3,,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2024/02/DebaDutta-v1.jpg
+3,FALSE,Kumar,Kintala,kintala@uillinois.edu,password,,Innovation Hub Director,4,2,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2020/12/DPI-Portraits-Finals-003.jpg
+4,FALSE,Mark,Harris,markh3@uillinois.edu,password,312-585-9159,Director,16,2,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2020/12/DPI-Portraits-Finals-029--500x366.jpg
+5,FALSE,Bob,Okabe,rmokabe@uillinois.edu,password,,"Director, New Business Ventures",6,2,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2020/12/DPI-Portraits-Finals-005-.jpg
+6,FALSE,Venkat,Venkatakrishnan,venkat@uillinois.edu,password,,"Director, Research",7,2,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2020/12/DPI-Portraits-Finals-024-.jpg
+7,FALSE,Ranjan,Karri,rkarr2@uis.edu,password,,Director of Academic Affairs & Administrative Operations,8,2,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2021/04/Ranjan2-e1726072248680-1300x954.jpg
+8,FALSE,Jen,Uner,juner@uillinois.edu,password,,"Director, Marketing & Communication",9,2,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2023/08/JenUnerv1.jpg
+9,FALSE,Meg,Bates,megbates@illinois.edu,password,,Director,10,2,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2020/12/DPI-Portraits-Finals-009-.jpg
+10,FALSE,Karen,Colat,kcolat@uillinois.edu,password,,Assistant to the Executive Director,3,2,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2020/12/DPI-Portraits-Finals-007-.jpg
+11,FALSE,Morgan,Diamond,diamondm@uillinois.edu,password,,Associate Director,13,4,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2020/12/DPI-Portraits-Finals-020--500x366.jpg
+12,FALSE,Kay,Monelle,kaym@uillinois.edu,password,,Associate Director,15,4,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2022/03/kay2-500x366.jpg
+13,FALSE,Matthew,Klein,mklein46@uillinois.edu,password,,Director,14,4,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2022/09/Matthew-1-500x366.jpg
+14,FALSE,Karen,Larson,kplarson@uillinois.edu,password,312-585-9193,Associate Director,16,4,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2020/12/DPI-Portraits-Finals-011--500x366.jpg
+15,FALSE,Kelsey,Hansen,hansen37@uillinois.edu,password,,Associate Director,13,11,
+16,FALSE,Nilofar,Khanbhai,nilofar@uillinois.edu,password,,Venture Creation Lead,6,5,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2023/12/NilofarKhanbhai3v1.jpg
+17,FALSE,Jacob,Parrott,parrott4@uillinois.edu,password,,Venture Creation Lead,6,5,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2023/05/Jacob.jpg
+18,FALSE,Yuanye,Ma,yuanyem@uillinois.edu,password,,Sr. Research Associate,17,6,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2022/08/yuanye0401.jpg
+19,FALSE,Rukmini,Avadhanam,rukminia@uillinois.edu,password,,Sr. Research Associate,17,6,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2023/12/Rukminiv1.jpg
+20,FALSE,Sugyan,Mani Dixit,sugy@uillinois.edu,password,,Senior Research Associate,17,6,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2023/12/Sugyan.jpg
+21,FALSE,Anuj,Gautam,agautam@uillinois.edu,password,,Visiting Full Stack Developer,19,6,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2024/10/anujg.jpg
+22,FALSE,Ashish,Sharma,sharmaa@uillinois.edu,password,(312) 668-9091,Climate and Urban Sustainability Lead,17,6,https://climas.illinois.edu/sites/default/files/styles/directory_profile/public/profile-photo/Ashish-Sharma-ISWS-profile.jpg?itok=7bf5DmdZ
+23,FALSE,Alvin,Chin,alvinc@uillinois.edu,password,,Research Scientist,17,6,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2023/12/AlvinChinv1.jpg
+24,FALSE,Rigel,Gjomemo,rgjome1@uic.edu,password,,Research Scientist,19,6,
+25,FALSE,Brad,Spirrison,jbs50@uillinois.edu,password,,Visiting Corporate Engagement Lead,17,6,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2024/10/brad.jpg
+26,FALSE,Laura,Clements,ljclem@uillinois.edu,password,312-668-9016,Senior Project Manager,17,6,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2020/12/DPI-Portraits-Finals-036-.jpg
+27,FALSE,Karl,Putz,karlputz@uillinois.edu,password,,"Associate Director, R&D Programs",18,6,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2022/01/Karl_Putz.jpg
+28,FALSE,Marcia,Silva,msilva@ullinois.edu,password,,"Associate Director, R&D",17,6,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2023/05/Marcia.jpg
+29,FALSE,Reginald,Gaudino,RGaudino@ullinois.edu,password,,"Director, Cannabis Research Institute",19,6,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2024/04/ReggieGaudinov1-500x366.jpg
+30,FALSE,Jason,Bane,jabane@uillinois.edu,password,,Senior Assistant Director,8,7,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2024/10/jason.jpg
+31,FALSE,Eva,Lozano-Staton,evalozan@uillinois.edu,password,,Administrative Assistant,8,7,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2020/12/eva0132v2.jpg
+32,FALSE,Sanjuana,Jaime-Nix,sjaime@uillinois.edu,password,,"Director, Product",8,7,
+33,FALSE,Lauryn,Scott,lauryn@uillinois.edu,password,,"Associate Director, Marketing & Communication",9,8,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2020/12/lauryn0043v.jpg
+34,FALSE,Sarah,Cashdollar,secash@uillinois.edu,password,,"Associate Director, IWERC Research",10,9,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2020/12/DPI-Portraits-Finals-031-.jpg
+35,FALSE,Stephanie,Werner,swerne3@uillinois.edu,password,312-668-9026,"Research Specialist, IWERC",10,9,
+36,FALSE,Shereen,Beilstein,beilste2@uillinois.edu,password,312-668-9025,"Research Specialist, IWERC",10,9,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2021/07/Shereen.jpg
+37,FALSE,Mariana,Barragan Torres,marianab@uillinois.edu,password,312-668-9026,"Research Specialist, IWERC",10,9,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2020/12/DPI-Portraits-Finals-033-.jpg
+38,FALSE,Jasmine,Collins,jdcolli2@illinois.edu,password,,Workforce Research Specialist,10,9,
+39,FALSE,Aisha,Motlani,amotlani@uillinois.edu,password,,"Research Associate, IWERC",10,9,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2023/11/Aisha.jpg
+40,FALSE,Stephanie,DeCicco,decicco@uillinois.edu,password,,Associate Director,16,4,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2020/12/DPI-Portraits-Finals-037--500x366.jpg
+41,FALSE,Lindsey,Vetvick,jsmit97@uillinois.edu,password,,Assistant Director,15,12,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2022/06/lindsey0126v-500x366.jpg
+42,FALSE,Danna,Dotson,ddotson2@uillinois.edu,password,,Associate Director,15,12,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2023/12/Danna-500x361.jpg
+43,FALSE,Jaclyn,Carmichael,jaclync@uillinois.edu,password,,Assistant Director,15,41,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2023/08/Jaclyn-500x366.jpg
+44,FALSE,Gregory,Cleveland,gcleve@uillinois.edu,password,,Program Coordinator,15,43,
+45,FALSE,Kenyanna,Sanders,kjs20@uillinois.edu,password,,Program Coordinator,15,43,
+46,FALSE,Gary,Nixon,gnixon1@uillinois.edu,password,,Recruiter and Student Engagement,13,11,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2022/01/gary0517-500x366.jpg
+47,FALSE,Todd,McFarlin,tmcfar1@uillinois.edu,password,312-413-5700,Assistant Director,15,42,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2020/12/DPI-Portraits-Finals-028--500x366.jpg
+48,FALSE,Ian,Heraty,ihera2@uillinois.edu,password,,Software Development Educator,13,15,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2024/04/ian1-500x366.jpg
+49,FALSE,Ruben,Abarca,abarca3@uillinois.edu,password,,Associate Director,14,13,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2023/12/RubenAbarcav1-500x366.jpg
+50,FALSE,Haneen,Omar,Homar4@uillinois.edu,password,,Assistant Director,14,13,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2022/01/Haneen_Omar-500x366.jpg
+51,FALSE,Dominique,Wilson,dwils5@uillinois.edu,password,,Associate Director,14,13,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2022/01/Dominique_Wilson-500x366.jpg
+52,FALSE,Sonia,Pulido,spulido2@uillinois.edu,password,,Assistant Director,16,14,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2024/10/sonia-500x366.jpg
+53,FALSE,Tony,Torres,ttorres3@uillinois.edu,password,,Assistant Director,15,12,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2022/08/tony0356v-500x366.jpg
+54,FALSE,Gina,Grant,glgrant@uillinois.edu,password,312-575-7926,Associate Director,15,12,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2020/12/DPI-Portraits-Finals-027--500x366.jpg
+55,FALSE,Sudhansu,Rath,sudhansu@illinois.edu,password,,Postdoctoral Research Associate,17,23,
+56,FALSE,Dolores,Sanchez Gonzalez,dsanch52@uillinois.edu,password,,Visiting Lab Manager,17,26,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2022/09/DoloresSanchezv1.jpg
+57,FALSE,Adam,Horton,adam47@uillinois.edu,password,,Visiting Lab Manager,17,26,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2022/01/AdamHortonv1.jpg
+58,FALSE,Modou,Jarju,mljarju@uillinois.edu,password,,Visiting Lab Technician,17,26,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2022/01/ModouLaminJarjuv1.jpg
+59,FALSE,Chi-Yu,Lin,clin213@uillinois.edu,password,,Visiting Research Scholar,17,26,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2022/01/ChiYuLinv1.jpg
+60,FALSE,Saye,Vikram Karthikeyan,SVKarthikeyan@uillinois.edu,password,,Extra help,17,21,
+61,FALSE,Marco,Colombo,mcolom4@uillinois.edu,password,,Visiting Associate Research Software Development Engineer,17,24,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2024/10/marco.jpg
+62,FALSE,Anuj,Tiwari,anujt@uic.edu,password,,Senior Research Associate,17,24,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2021/08/Anuj.jpg
+63,FALSE,Krystal,White,kwhite38@uillinois.edu,password,,Visiting Project Manager,17,24,
+64,FALSE,Karan,Jogi,kjogi2@uillinois.edu,password,,Research Software Dev Engineer,17,24,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2023/12/KaranJogi2v1.jpg
+65,FALSE,Christina,Sansone,csanso2@uillinois.edu,password,,Visiting Community Engagement Manager,19,27,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2023/12/ChristinaSansonev1.jpg
+66,FALSE,Peiyuan,Li,peiyuanl@uillinois.edu,password,,Postdoctoral Research Associate,17,22,
+67,FALSE,Carolina,Veiga,carolvfs@uillinois.edu,password,,Postdoctoral Research Associate,17,22,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2023/12/Carolina.jpg
+68,FALSE,Abhinav,Wadhwa,awadhwa@uillinois.edu,password,,Postdoctoral,17,22,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2023/12/Abhinav-1.jpg
+69,FALSE,Sicheng,Wu,sichengw@uillinois.edu,password,,Postdoctoral Reseach Associate,17,22,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2023/12/Sicheng.jpg
+70,FALSE,Carolyn,Geck,carolyng@uillinois.edu,password,,Grants Coordinator,19,28,
+71,FALSE,Camryn,Woodworth,"Grants Coordinator, R&D",password,,"Grants Coordinator, R&D",17,28,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2023/02/Camryn.jpg
+72,FALSE,Cathy,Ye,zihanye2@uillinois.edu,password,,Business Analyst,17,25,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2024/10/cathy1.jpg
+73,FALSE,Sam,Miller,smiller@uillinois.edu,password,,"Corporate Relationship Manager, R&D Industry Program",17,25,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2023/02/Sam.jpg
+74,FALSE,Akshaya,Udayashankar,akshayau@uillinois.edu,password,,Relationship Manager,17,25,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2024/10/akshaya.jpg
+75,FALSE,Ying,Chen,ychen406@uic.edu,password,,"Research Associate, IWERC",10,34,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2023/06/Ying.jpg
+76,FALSE,Sebastián,Kiguel,skiguel@uic.edu,password,,"Research Associate, IWERC",10,34,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2023/06/Sebastian.jpg
+77,FALSE,Raisa,Blazquez,blazquez@uillinois.edu,password,,Visiting Research Associate,10,35,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2023/12/raisa.jpg
+78,FALSE,Joe,Cheng,jlcheng@illinois.edu,password,,DPI Partnerships,6,78,
+79,FALSE,Mike,Flavin,mtflavin@uillinois.edu,password,,DPI Corporate Relations,6,78,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2020/12/DPI-Portraits-Finals-040-.jpg
+80,FALSE,John,Ramirez,Jpramire@uillinois.edu,password,,Visiting Entrepreneur In Residence,6,78,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2023/12/John-Ramirez.jpg
+81,FALSE,Larry,Schor,lschor@uillinois.edu,password,,Visiting Entrepreneur in Residence,6,78,
+82,FALSE,Deepak,Somaya,dsomaya@illinois.edu,password,,Don and Anne Edwards Scholar,6,78,
+83,FALSE,Meghan,Dyer,msdyer@uillinois.edu,password,,Assistant Director of Innovation Hub,4,3,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2024/10/meghan.jpg
+84,FALSE,Marcia,Lampela,mlampela@uillinois.edu,password,217-300-7457,DPI Site Management,11,3,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2020/12/DPI-Portraits-Finals-014-.jpg
+85,FALSE,Kassandra,Perez,kgperez@uillinois.edu,password,,Events Manager,12,3,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2023/06/Kassandra.jpg
+86,FALSE,Brent,Brewer,brentb@uillinois.edu,password,,Events Coordinator,12,85,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2024/03/BrentBrewerv1.jpg
+87,FALSE,Jonathon,Berlin,jsberlin@uillinois.edu,password,,Visiting Sr. Multimedia Designer,9,8,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2022/01/Jonathon_Berlin.jpg
+88,FALSE,Jeanie,Chung,jinwonc@uillinois.edu,password,,Content Writer,9,8,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2024/07/jeanie700.jpg
+89,FALSE,Jaime,Chavez,jchavez6@illinois.edu,password,,Web Specialist,9,33,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2022/08/jaime0376.jpg
+90,FALSE,Atif,Hasan,hasana@uillinois.edu,password,,Senior Business Coordinator,8,30,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2024/04/AtifHasanv1.jpg
+91,FALSE,Meenu,Sharma,meenus@uillinois.edu,password,,Business Coordinator,8,90,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2024/04/Meenuv1.jpg
+92,FALSE,Luis,Navarrete,luisn@uillinois.edu,password,,Business Coordinator,8,90,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2020/12/DPI-Portraits-Finals-001.jpg
+93,FALSE,Sumit,Tokkar,stokkar@uillinois.edu,password,,Software Engineering Lead,8,32,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2023/12/SumitTokkarv1.jpg
+94,FALSE,Tula,Kuechenmeister,tula@uillinois.edu,password,,Salesforce Administrator,8,32,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2022/09/Tula.jpg
+95,FALSE,Jiaqi,Li,jiaqi606@uillinois.edu,password,,Sr. User Experience Designer,8,32,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2023/06/JiaqiLiv1.jpg
+96,FALSE,Stephanie,Escobar,escobar8@uillinois.edu,password,,Office Support Specialist,8,31,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2024/04/StephanieEscobarv1.jpg
+97,FALSE,Javier,Pena,jpena9@uillinois.edu,password,,Program Assistant,8,31,
+98,FALSE,Antaeja,Riley,ariley20@uillinois.edu,password,,Program Assistant,8,31,https://omsdpiprod.wpenginepowered.com/wp-content/uploads/2024/04/AntaejaRileyv1.jpg
+99,FALSE,Eva,Durance,EDurance@uillinois.edu,password,,Program Assistant,17,26,
