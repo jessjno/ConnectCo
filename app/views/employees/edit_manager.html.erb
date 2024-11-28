@@ -1,0 +1,16 @@
+<div class="container">
+  <h1>Assign Manager for <%= @employee.first_name %> <%= @employee.last_name %></h1>
+
+  <% if policy(@employee).edit_manager? %>
+    <%= form_with url: update_manager_employee_path(@employee), method: :patch, local: true do |f| %>
+      <div class="form-group">
+        <%= f.label :manager_id, "Select Manager", class: "form-label" %>
+        <%= f.collection_select :manager_id, @employees, :id, :full_name, 
+              prompt: "Select Manager", class: "form-control" %>
+      </div>
+      <%= f.submit "Update Manager", class: "btn btn-primary mt-2" %>
+    <% end %>
+  <% end %>
+
+  <%= link_to 'Back to Employee', employee_path(@employee), class: 'btn btn-secondary mt-3' %>
+</div>

@@ -41,4 +41,12 @@ class EmployeePolicy
   def update_organization?
     current_employee.admin?
   end
+
+  def edit_manager?
+    current_employee.admin? 
+  end
+
+  def update_manager?
+    current_employee.admin? 
+  end
 end

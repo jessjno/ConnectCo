@@ -39,7 +39,6 @@ class Employee < ApplicationRecord
   belongs_to :organization
   belongs_to :manager, class_name: "Employee", optional: true
   belongs_to :member, optional: true 
-  
   has_many :subordinates, class_name: "Employee", foreign_key: "manager_id"
   has_many :responsibilities
   validates :first_name, :last_name, :organization_id, presence: true
@@ -59,5 +58,9 @@ class Employee < ApplicationRecord
 
   def profile_image
     image_url.presence || ActionController::Base.helpers.asset_path('default_profile.png')
+  end
+
+  def full_name
+    "#{first_name} #{last_name} (#{title || 'No Title'})"
   end
  end
