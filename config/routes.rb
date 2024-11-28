@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   end
 
   resources :organizations do
-    resources :employees, only: [:index, :create]
+    resources :employees, only: [:index, :new, :create]
     collection do
       post :upload_csv
     end
