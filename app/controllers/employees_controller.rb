@@ -2,7 +2,7 @@ class EmployeesController < ApplicationController
   before_action :set_employee, only: [:show, :edit, :update, :destroy, :edit_responsibility, :update_responsibility, :edit_organization, :update_organization]
   before_action :authorize_employee, only: [:index, :show, :edit, :update, :destroy, :upload_csv]
   before_action :authenticate_admin!, only: [:new, :create]
-  before_action :set_responsibility, only: [:edit_responsibility, :update_responsibility, :destroy]
+  before_action :set_responsibility, only: [:edit_responsibility, :update_responsibility]
   after_action :verify_authorized, except: [:show]
 
   def sign_in
