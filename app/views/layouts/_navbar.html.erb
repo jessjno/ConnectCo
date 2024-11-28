@@ -1,27 +1,46 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/">ConnectCo</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+  <div class="container">
+    <a class="navbar-brand fw-bold text-primary" href="/">ConnectCo</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav me-auto">
-        <a class="nav-link active" aria-current="page" href="/">Organizations</a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <%= link_to 'Organizations', root_path, class: 'nav-link text-secondary' %>
+        </li>
         <% if employee_signed_in? %>
-          <%= link_to 'Employee Directory', employees_path, class: 'nav-link' %> <!-- Link to Employee Index -->
-          <%= button_to 'Sign Out', destroy_employee_session_path, method: :delete, class: 'btn btn-link nav-link', data: { turbo: false } %>
-        <% else %>
-          <%= link_to 'Sign In', new_employee_session_path, class: 'nav-link' %>
+          <li class="nav-item">
+            <%= link_to 'Employee Directory', employees_path, class: 'nav-link text-secondary' %>
+          </li>
         <% end %>
-      </div>
+      </ul>
 
-      <!-- Search Form for Employees -->
-      <%= search_form_for @employee_q, url: employees_path, method: :get, class: "d-flex" do |f| %>
-        <%= f.search_field :first_name_or_last_name_or_title_cont, 
-                           placeholder: "Search employees...", 
-                           class: "form-control me-2" %>
-        <%= f.submit "Search", class: "btn btn-outline-primary" %>
+      <% if employee_signed_in? %>
+        <%= search_form_for @employee_q, url: employees_path, method: :get, class: "d-flex mx-auto" do |f| %>
+          <%= f.search_field :first_name_or_last_name_or_title_cont, 
+                             placeholder: "Search employees...", 
+                             class: "form-control me-2 rounded-pill border-0 shadow-sm" %>
+          <%= f.submit "Search", class: "btn btn-outline-primary rounded-pill" %>
+        <% end %>
       <% end %>
+
+      <ul class="navbar-nav ms-auto">
+        <% if employee_signed_in? %>
+          <li class="nav-item">
+            <%= link_to employee_path(current_employee), class: "nav-link text-secondary d-flex align-items-center" do %>
+              <i class="bi bi-person-circle me-2"></i> My responsibilities
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= button_to 'Sign Out', destroy_employee_session_path, method: :delete, class: 'btn btn-danger btn-sm rounded-pill ms-2', data: { turbo: false } %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to 'Sign In', new_employee_session_path, class: 'btn btn-primary btn-sm rounded-pill' %>
+          </li>
+        <% end %>
+      </ul>
     </div>
   </div>
 </nav>

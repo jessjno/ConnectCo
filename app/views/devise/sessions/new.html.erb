@@ -1,70 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ConnectCo - Sign In</title>
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
-</head>
-<body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-      <a class="navbar-brand" href="/">ConnectCo</a>
-    </div>
-  </nav>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConnectCo - Sign In</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
+  </head>
+  <body>
 
-  <!-- Hero Section -->
-  <div class="container mt-5">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <h1 class="text-center">Welcome to ConnectCo</h1>
-        <p class="text-center text-muted">Sign in to manage your team and responsibilities.</p>
+    <div class="container mt-5">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <h1 class="text-center">Welcome to ConnectCo</h1>
+          <p class="text-center text-muted">Sign in to manage your team and responsibilities.</p>
 
-        <div class="card shadow-sm">
-          <div class="card-body">
-            <%= form_with model: resource, as: resource_name, url: session_path(resource_name), html: { class: "form-signin" } do |f| %>
-              <% if flash[:alert] %>
-                <div class="alert alert-danger"><%= flash[:alert] %></div>
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <%= form_with model: resource, as: resource_name, url: session_path(resource_name), html: { class: "form-signin" } do |f| %>
+                <% if flash[:alert] %>
+                  <div class="alert alert-danger"><%= flash[:alert] %></div>
+                <% end %>
+                <% if flash[:notice] %>
+                  <div class="alert alert-success"><%= flash[:notice] %></div>
+                <% end %>
+
+                <div class="form-group">
+                  <%= f.label :email %>
+                  <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+                </div>
+
+                <div class="form-group">
+                  <%= f.label :password %>
+                  <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
+                </div>
+
+                <div class="form-check mb-3">
+                  <%= f.check_box :remember_me, class: "form-check-input" if devise_mapping.rememberable? %>
+                  <%= f.label :remember_me, class: "form-check-label" if devise_mapping.rememberable? %>
+                </div>
+
+                <%= f.submit "Sign In", class: "btn btn-primary btn-block" %>
               <% end %>
-              <% if flash[:notice] %>
-                <div class="alert alert-success"><%= flash[:notice] %></div>
-              <% end %>
 
-              <div class="form-group">
-                <%= f.label :email %>
-                <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
-              </div>
-
-              <div class="form-group">
-                <%= f.label :password %>
-                <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
-              </div>
-
-              <div class="form-check mb-3">
-                <%= f.check_box :remember_me, class: "form-check-input" if devise_mapping.rememberable? %>
-                <%= f.label :remember_me, class: "form-check-label" if devise_mapping.rememberable? %>
-              </div>
-
-              <%= f.submit "Sign In", class: "btn btn-primary btn-block" %>
-            <% end %>
-
-            <hr>
-            <p class="text-center">
-              <small>
-                Having trouble? Contact your admin for help.
-              </small>
-            </p>
+              <hr>
+              <p class="text-center">
+                <small>
+                  Having trouble? Contact your admin for help.
+                </small>
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <footer class="text-center mt-5">
-    <p>&copy; 2024 ConnectCo. All Rights Reserved.</p>
-  </footer>
-</body>
+    <footer class="text-center mt-5">
+      <p>&copy; 2024 ConnectCo. All Rights Reserved.</p>
+    </footer>
+  </body>
 </html>
