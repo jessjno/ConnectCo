@@ -23,7 +23,6 @@
 
       <%= search_form_for @q, url: employees_path, method: :get, class: "mb-4" do |f| %>
         <div class="row g-2 align-items-center">
-          <!-- Filter by Organization -->
           <div class="col-md-4">
             <div class="input-group">
               <span class="input-group-text"><i class="bi bi-building"></i></span>
@@ -60,23 +59,28 @@
     </div>
   </div>
 
-  <div class="row">
-    <% @employees.each do |employee| %>
-      <div class="col-md-4 mb-4">
-        <div class="card rounded-3" style="width: 18rem;">
-          <img class="card-img-top" src="<%= employee.image_url.presence || asset_path('default_profile.png') %>" alt="<%= employee.first_name %>'s profile photo">
-          <div class="card-body">
-            <h5 class="card-title"><%= employee.first_name %> <%= employee.last_name %></h5>
-            <p class="card-text">
-              <strong>Title:</strong> <%= employee.title %><br>
-              <strong>Organization:</strong> <%= employee.organization&.name || "No Organization Assigned" %>
-            </p>
-            <%= link_to 'View Profile', employee_path(employee), class: 'btn btn-primary btn-sm' %>
-          </div>
+<div class="row justify-content-center mx-auto">
+  <% @employees.each do |employee| %>
+    <div class="col-lg-3 col-md-4 col-sm-6 mb-4 d-flex align-items-stretch">
+      <div class="card rounded-3 shadow-sm w-100">
+        <img 
+          class="card-img-top" 
+          src="<%= employee.image_url.presence || asset_path('default_profile.png') %>" 
+          alt="<%= employee.first_name %> <%= employee.last_name %>'s profile photo" 
+          style="height: 180px; object-fit: cover;"
+        >
+        <div class="card-body">
+          <h5 class="card-title"><%= employee.first_name %> <%= employee.last_name %></h5>
+          <p class="card-text">
+            <strong>Title:</strong> <%= employee.title %><br>
+            <strong>Organization:</strong> <%= employee.organization&.name || "No Organization Assigned" %>
+          </p>
+          <%= link_to 'View Profile', employee_path(employee), class: 'btn btn-primary btn-sm' %>
         </div>
       </div>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
+</div>
 
   <div class="mt-4 d-flex justify-content-center">
     <%= paginate @employees %>
