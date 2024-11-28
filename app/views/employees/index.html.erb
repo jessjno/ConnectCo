@@ -26,18 +26,22 @@
   <div class="row">
     <% @employees.each do |employee| %>
       <div class="col-md-4 mb-4">
-        <div class="card h-100">
+        <div class="card rounded-3" style="width: 18rem;">
           <img class="card-img-top" src="<%= employee.image_url.presence || asset_path('default_profile.png') %>" alt="<%= employee.first_name %>'s profile photo">
-          <div class="card-body d-flex flex-column">
+          <div class="card-body">
             <h5 class="card-title"><%= employee.first_name %> <%= employee.last_name %></h5>
             <p class="card-text">
               <strong>Title:</strong> <%= employee.title %><br>
               <strong>Organization:</strong> <%= employee.organization&.name || "No Organization Assigned" %>
             </p>
-            <%= link_to 'View Profile', employee_path(employee), class: 'btn btn-primary btn-sm mt-auto' %>
+            <%= link_to 'View Profile', employee_path(employee), class: 'btn btn-primary btn-sm' %>
           </div>
         </div>
       </div>
     <% end %>
+  </div>
+
+  <div class="mt-4">
+    <%= paginate @employees %>
   </div>
 </div>

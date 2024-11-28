@@ -30,9 +30,9 @@ class EmployeesController < ApplicationController
   def index
     if params[:organization_id]
       @organization = Organization.find(params[:organization_id])
-      @employees = @organization.employees
+      @employees = @organization.employees.page(params[:page]).per(20)
     else
-      @employees = Employee.includes(:organization).order(:last_name)
+      @employees = Employee.includes(:organization).order(:last_name).page(params[:page]).per(20)
     end
     authorize Employee
   end
