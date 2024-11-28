@@ -27,4 +27,12 @@ class Organization < ApplicationRecord
   def all_sub_organizations
     sub_organizations + sub_organizations.flat_map(&:all_sub_organizations)
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["created_at", "description", "employees_count", "id", "name", "parent_id", "updated_at"]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["employees", "parent"]
+  end
 end

@@ -1,15 +1,14 @@
 <div class="container">
-  <div class="card mb-4">
-    <div class="card-body">
-      <h1 class="card-title">Employee List</h1>
-      <% if current_employee&.admin? %>
+  <% if current_employee&.admin? %>
+    <div class="card mb-4">
+      <div class="card-body">
         <div class="d-flex flex-wrap justify-content-between align-items-center">
+          <!-- New Employee Button -->
           <div class="mb-2">
             <%= link_to new_employee_path, class: 'btn btn-primary' do %>
               <i class="bi bi-person-plus-fill me-1"></i> New Employee
             <% end %>
           </div>
-
           <div class="mb-2">
             <%= form_with url: upload_csv_employees_path, method: :post, multipart: true, local: true, html: { class: 'd-flex align-items-center' } do |f| %>
               <div class="me-2">
@@ -19,7 +18,39 @@
             <% end %>
           </div>
         </div>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <h1 class="card-title">Employee List</h1>
+
+      <%= search_form_for @q, url: employees_path, method: :get, class: "mb-4" do |f| %>
+        <div class="row g-2">
+          <!-- Filter by Organization -->
+          <div class="col-md-3">
+            <%= f.collection_select :organization_id_eq, Organization.all, :id, :name, 
+                  { prompt: "Filter by Organization" }, 
+                  { class: "form-select" } %>
+          </div>
+          <div class="col-md-3">
+            <%= f.text_field :title_cont, placeholder: "Filter by Title", class: "form-control" %>
+          </div>
+          <div class="col-md-3">
+            <%= f.text_field :first_name_cont, placeholder: "Filter by First Name", class: "form-control" %>
+          </div>
+          <div class="col-md-3">
+            <%= f.submit "Filter", class: "btn btn-primary w-100" %>
+          </div>
+        </div>
       <% end %>
+
+      <div class="mb-3">
+        <%= link_to "Sort by Last Name", employees_path(q: { s: 'last_name asc' }), class: "btn btn-link" %>
+        <%= link_to "Sort by First Name", employees_path(q: { s: 'first_name asc' }), class: "btn btn-link" %>
+        <%= link_to "Sort by Title", employees_path(q: { s: 'title asc' }), class: "btn btn-link" %>
+      </div>
     </div>
   </div>
 
