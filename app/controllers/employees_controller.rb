@@ -1,9 +1,7 @@
 class EmployeesController < ApplicationController
   before_action :set_employee, only: [:show, :edit, :update, :destroy, :edit_responsibility, :update_responsibility, :edit_organization, :update_organization]
   before_action :authorize_employee, only: [:index, :show, :edit, :update, :destroy, :upload_csv]
-
-
-  before_action :authorize_employee, only: [:index, :show, :edit, :update, :destroy, :upload_csv]
+  before_action :authenticate_admin!, only: [:new, :create]
   before_action :set_responsibility, only: [:edit_responsibility, :update_responsibility, :destroy]
   after_action :verify_authorized, except: [:show]
 
@@ -15,27 +13,28 @@ class EmployeesController < ApplicationController
 
   def new
     @employee = Employee.new
-    @organization = Organization.find(params[:organization_id])
     authorize @employee
   end
 
   def create
     @employee = Employee.new(employee_params)
     authorize @employee
-
-    @employee.skip_confirmation_notification! if @employee.respond_to?(:skip_confirmation_notification!)
-
+  
     if @employee.save
-      redirect_to organization_path(@employee.organization_id), notice: "Employee created successfully."
+      redirect_to employees_path, notice: "Employee created successfully."
     else
       render :new, alert: "Failed to create employee."
     end
   end
 
   def index
+    if params[:organization_id]
+      @organization = Organization.find(params[:organization_id])
+      @employees = @organization.employees
+    else
+      @employees = Employee.includes(:organization).order(:last_name)
+    end
     authorize Employee
-    @q = Employee.ransack(params[:q])
-    @employees = @q.result.includes(:organization).order(:last_name)
   end
 
   def show
@@ -155,5 +154,11 @@ class EmployeesController < ApplicationController
 
   def authorize_employee
     authorize Employee
+  end
+
+  def authenticate_admin!
+    unless current_employee&.admin?
+      redirect_to root_path, alert: "You are not authorized to perform this action."
+    end
   end
 end
