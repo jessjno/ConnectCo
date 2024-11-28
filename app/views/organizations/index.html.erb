@@ -1,9 +1,10 @@
 <div class="container">
   <div class="card mb-4">
     <div class="card-body">
-      <div class="d-flex flex-wrap justify-content-between align-items-center">
-        <h1 class="card-title text-primary mb-0">Organizations</h1>
-
+      <div class="d-flex justify-content-between align-items-center">
+        <h1 class="card-title mb-0 text-primary d-flex align-items-center">
+          <i class="bi bi-building me-2"></i> Organizations
+        </h1>
         <% if current_employee&.admin? %>
           <div class="d-flex align-items-center">
             <%= form_with url: upload_csv_organizations_path, method: :post, multipart: true, local: true, html: { class: 'd-flex align-items-center me-3' } do |f| %>
@@ -21,26 +22,31 @@
 
   <div class="row">
     <% @organizations.each_with_index do |organization, index| %>
-      <div class="col-md-6 mb-4">
-        <div class="card shadow-sm h-100">
-          <div class="card-header custom-bg text-light d-flex justify-content-between align-items-center" id="heading<%= index %>">
-            <h5 class="mb-0 fw-bold">
-              <button class="btn btn-link fw-bold text-decoration-none text-light p-0" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%= index %>" aria-expanded="false" aria-controls="collapse<%= index %>">
-                <%= organization.name %>
-              </button>
-            </h5>
-          </div>
+      <% if current_employee&.admin? || organization.name != "Admin Org" %>
+        <div class="col-md-6 mb-4">
+          <div class="card shadow-sm h-100">
+            <div class="card-header custom-bg text-light d-flex justify-content-between align-items-center" id="heading<%= index %>">
+              <h5 class="mb-0 fw-bold">
+                <button class="btn btn-link fw-bold text-decoration-none text-light p-0" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%= index %>" aria-expanded="false" aria-controls="collapse<%= index %>">
+                  <%= organization.name %>
+                </button>
+              </h5>
+            </div>
 
-          <div id="collapse<%= index %>" class="collapse" aria-labelledby="heading<%= index %>">
-            <div class="card-body">
-              <p class="card-text text-muted"><%= organization.description.presence || "No description available." %></p>
-              <div class="d-flex justify-content-end">
-                <%= link_to "View Details", organization_path(organization), class: "btn btn-outline-primary btn-sm" %>
+            <div id="collapse<%= index %>" class="collapse" aria-labelledby="heading<%= index %>">
+              <div class="card-body">
+                <p class="card-text text-muted"><%= organization.description.presence || "No description available." %></p>
+                <div class="d-flex justify-content-between">
+                  <%= link_to "View Details", organization_path(organization), class: "btn btn-outline-primary btn-sm" %>
+                  <% if current_employee&.admin? %>
+                    <%= link_to "Edit", edit_organization_path(organization), class: "btn btn-outline-secondary btn-sm" %>
+                  <% end %>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
   </div>
 </div>

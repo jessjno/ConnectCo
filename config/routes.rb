@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :employees, skip: [:registrations]
   as :employee do
-    get 'employees/sign_up', to: redirect('/'), as: :new_employee_registration
+    get "employees/sign_up", to: redirect("/"), as: :new_employee_registration
   end
 
   root "organizations#index"
@@ -26,5 +26,6 @@ Rails.application.routes.draw do
 
   resources :responsibilities, only: [:create, :edit, :update, :destroy]
 
-  get 'search_results', to: 'search#results'
+  get "search/results", to: "search#results", as: :search_results
+
 end

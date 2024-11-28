@@ -2,7 +2,7 @@ class EmployeesController < ApplicationController
   before_action :set_employee, only: [:show, :edit, :update, :destroy, :edit_responsibility, :update_responsibility, :edit_organization, :update_organization]
   before_action :authorize_employee, only: [:index, :show, :edit, :update, :destroy, :upload_csv]
   before_action :authenticate_admin!, only: [:new, :create]
-  before_action :set_responsibility, only: [:edit_responsibility, :update_responsibility, :destroy]
+  before_action :set_responsibility, only: [:edit_responsibility, :update_responsibility]
   after_action :verify_authorized, except: [:show]
 
   def sign_in
@@ -19,7 +19,7 @@ class EmployeesController < ApplicationController
   def create
     @employee = Employee.new(employee_params)
     authorize @employee
-  
+
     if @employee.save
       redirect_to employees_path, notice: "Employee created successfully."
     else
@@ -28,16 +28,17 @@ class EmployeesController < ApplicationController
   end
 
   def index
-    if params[:organization_id]
-      @organization = Organization.find(params[:organization_id])
-      @employees = @organization.employees.page(params[:page]).per(20)
-    else
-      @employees = Employee.includes(:organization).order(:last_name).page(params[:page]).per(20)
+    @q = Employee.ransack(params[:q])
+    @employees = @q.result.includes(:organization).order(:last_name).page(params[:page]).per(20)
+
+    respond_to do |format|
+      format.html
+      format.js
     end
-    authorize Employee
   end
 
   def show
+    @q = Employee.ransack(params[:q])
     @employee = Employee.find(params[:id])
     @responsibilities = @employee.responsibilities
     @responsibility = Responsibility.new
@@ -84,11 +85,11 @@ class EmployeesController < ApplicationController
   def upload_csv
     if params[:file].present?
       file = params[:file]
-  
+
       begin
         CSV.foreach(file.path, headers: true) do |row|
           employee_data = row.to_hash
-  
+
           Employee.find_or_create_by(email: employee_data["email"]) do |employee|
             employee.first_name = employee_data["first_name"]
             employee.last_name = employee_data["last_name"]
@@ -98,7 +99,7 @@ class EmployeesController < ApplicationController
             employee.image_url = employee_data["image_url"] # Assign the image_url
           end
         end
-  
+
         redirect_to employees_path, notice: "Employees uploaded successfully."
       rescue StandardError => e
         redirect_to employees_path, alert: "Error processing CSV: #{e.message}"
@@ -107,18 +108,18 @@ class EmployeesController < ApplicationController
       redirect_to employees_path, alert: "Please upload a valid CSV file."
     end
   end
-  
+
   def edit_organization
     @employee = Employee.find(params[:id])
     @organizations = Organization.all
     authorize @employee, :edit_organization?
-    end
+  end
 
   def update_organization
-    @employee = Employee.find(params[:id]) 
+    @employee = Employee.find(params[:id])
     authorize @employee, :update_organization?
     new_organization_id = params[:organization_id]
-  
+
     if @employee.update(organization_id: new_organization_id)
       redirect_to employee_path(@employee), notice: "Organization updated successfully."
     else
@@ -126,8 +127,6 @@ class EmployeesController < ApplicationController
       redirect_to edit_organization_employee_path(@employee)
     end
   end
-  
-
 
   private
 

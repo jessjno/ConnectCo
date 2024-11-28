@@ -22,6 +22,6 @@ class ApplicationController < ActionController::Base
   end
 
   def initialize_search
-    @employee_q = Employee.ransack(params[:q])
+    @q = Employee.ransack(params[:q])
   end
 end

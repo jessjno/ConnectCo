@@ -1,45 +1,86 @@
 <div class="container">
-  <div class="card mb-4">
+  <div class="card shadow-sm mb-4">
     <div class="card-body">
-      <h1 class="card-title">Employee List</h1>
-      <% if current_employee&.admin? %>
-        <div class="d-flex flex-wrap justify-content-between align-items-center">
-          <div class="mb-2">
-            <%= link_to new_employee_path, class: 'btn btn-primary' do %>
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="card-title mb-0 text-primary d-flex align-items-center">
+          <i class="bi bi-people me-2"></i> Employee List
+        </h1>
+
+        <% if current_employee&.admin? %>
+          <div class="d-flex gap-2">
+            <%= link_to new_employee_path, class: "btn btn-success btn-sm d-flex align-items-center" do %>
               <i class="bi bi-person-plus-fill me-1"></i> New Employee
             <% end %>
-          </div>
-
-          <div class="mb-2">
             <%= form_with url: upload_csv_employees_path, method: :post, multipart: true, local: true, html: { class: 'd-flex align-items-center' } do |f| %>
               <div class="me-2">
-                <%= f.file_field :file, class: 'form-control' %>
+                <%= f.file_field :file, class: "form-control form-control-sm" %>
               </div>
-              <%= f.submit "Upload CSV", class: "btn btn-secondary" %>
+              <%= f.submit "Upload CSV", class: "btn btn-secondary btn-sm" %>
             <% end %>
+          </div>
+        <% end %>
+      </div>
+
+      <%= search_form_for @q, url: employees_path, method: :get, class: "mb-4" do |f| %>
+        <div class="row g-2 align-items-center">
+          <div class="col-md-4">
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-building"></i></span>
+              <%= f.collection_select :organization_id_eq, Organization.all, :id, :name, 
+                    { prompt: "Organization" }, 
+                    { class: "form-select" } %>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-briefcase"></i></span>
+              <%= f.text_field :title_cont, placeholder: "Title", class: "form-control" %>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <%= f.submit "Filter", class: "btn btn-primary w-100 d-flex align-items-center justify-content-center" %>
           </div>
         </div>
       <% end %>
+
+      <div class="d-flex justify-content-start align-items-center gap-3">
+        <%= link_to employees_path(q: { s: params.dig(:q, :s) == 'last_name desc' ? 'last_name asc' : 'last_name desc' }), class: "btn btn-outline-secondary btn-sm d-flex align-items-center" do %>
+          <i class="bi bi-sort-alpha-<%= params.dig(:q, :s) == 'last_name desc' ? 'up' : 'down' %> me-1"></i> Sort by Last Name
+        <% end %>
+        <%= link_to employees_path(q: { s: params.dig(:q, :s) == 'first_name desc' ? 'first_name asc' : 'first_name desc' }), class: "btn btn-outline-secondary btn-sm d-flex align-items-center" do %>
+          <i class="bi bi-sort-alpha-<%= params.dig(:q, :s) == 'first_name desc' ? 'up' : 'down' %> me-1"></i> Sort by First Name
+        <% end %>
+        <%= link_to employees_path(q: { s: params.dig(:q, :s) == 'title desc' ? 'title asc' : 'title desc' }), class: "btn btn-outline-secondary btn-sm d-flex align-items-center" do %>
+          <i class="bi bi-sort-alpha-<%= params.dig(:q, :s) == 'title desc' ? 'up' : 'down' %> me-1"></i> Sort by Title
+        <% end %>
+      </div>
     </div>
   </div>
 
-  <div class="row">
-    <% @employees.each do |employee| %>
-      <div class="col-md-4 mb-4">
-        <div class="card rounded-3" style="width: 18rem;">
-          <img class="card-img-top" src="<%= employee.image_url.presence || asset_path('default_profile.png') %>" alt="<%= employee.first_name %>'s profile photo">
-          <div class="card-body">
-            <h5 class="card-title"><%= employee.first_name %> <%= employee.last_name %></h5>
-            <p class="card-text">
-              <strong>Title:</strong> <%= employee.title %><br>
-              <strong>Organization:</strong> <%= employee.organization&.name || "No Organization Assigned" %>
-            </p>
-            <%= link_to 'View Profile', employee_path(employee), class: 'btn btn-primary btn-sm' %>
-          </div>
+<div class="row justify-content-center mx-auto">
+  <% @employees.each do |employee| %>
+    <div class="col-lg-3 col-md-4 col-sm-6 mb-4 d-flex align-items-stretch">
+      <div class="card rounded-3 shadow-sm w-100">
+        <img 
+          class="card-img-top" 
+          src="<%= employee.image_url.presence || asset_path('default_profile.png') %>" 
+          alt="<%= employee.first_name %> <%= employee.last_name %>'s profile photo" 
+          style="height: 180px; object-fit: cover;"
+        >
+        <div class="card-body">
+          <h5 class="card-title"><%= employee.first_name %> <%= employee.last_name %></h5>
+          <p class="card-text">
+            <strong>Title:</strong> <%= employee.title %><br>
+            <strong>Organization:</strong> <%= employee.organization&.name || "No Organization Assigned" %>
+          </p>
+          <%= link_to 'View Profile', employee_path(employee), class: 'btn btn-primary btn-sm' %>
         </div>
       </div>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
+</div>
 
   <div class="mt-4 d-flex justify-content-center">
     <%= paginate @employees %>
