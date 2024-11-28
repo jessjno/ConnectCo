@@ -1,55 +1,61 @@
 <div class="container">
-  <% if current_employee&.admin? %>
-    <div class="card mb-4">
-      <div class="card-body">
-        <div class="d-flex flex-wrap justify-content-between align-items-center">
-          <!-- New Employee Button -->
-          <div class="mb-2">
-            <%= link_to new_employee_path, class: 'btn btn-primary' do %>
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="card-title mb-0 text-primary d-flex align-items-center">
+          <i class="bi bi-people me-2"></i> Employee List
+        </h1>
+
+        <% if current_employee&.admin? %>
+          <div class="d-flex gap-2">
+            <%= link_to new_employee_path, class: "btn btn-success btn-sm d-flex align-items-center" do %>
               <i class="bi bi-person-plus-fill me-1"></i> New Employee
             <% end %>
-          </div>
-          <div class="mb-2">
             <%= form_with url: upload_csv_employees_path, method: :post, multipart: true, local: true, html: { class: 'd-flex align-items-center' } do |f| %>
               <div class="me-2">
-                <%= f.file_field :file, class: 'form-control' %>
+                <%= f.file_field :file, class: "form-control form-control-sm" %>
               </div>
-              <%= f.submit "Upload CSV", class: "btn btn-secondary" %>
+              <%= f.submit "Upload CSV", class: "btn btn-secondary btn-sm" %>
             <% end %>
           </div>
-        </div>
+        <% end %>
       </div>
-    </div>
-  <% end %>
-
-  <div class="card mb-4">
-    <div class="card-body">
-      <h1 class="card-title">Employee List</h1>
 
       <%= search_form_for @q, url: employees_path, method: :get, class: "mb-4" do |f| %>
-        <div class="row g-2">
+        <div class="row g-2 align-items-center">
           <!-- Filter by Organization -->
-          <div class="col-md-3">
-            <%= f.collection_select :organization_id_eq, Organization.all, :id, :name, 
-                  { prompt: "Filter by Organization" }, 
-                  { class: "form-select" } %>
+          <div class="col-md-4">
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-building"></i></span>
+              <%= f.collection_select :organization_id_eq, Organization.all, :id, :name, 
+                    { prompt: "Organization" }, 
+                    { class: "form-select" } %>
+            </div>
           </div>
-          <div class="col-md-3">
-            <%= f.text_field :title_cont, placeholder: "Filter by Title", class: "form-control" %>
+
+          <div class="col-md-4">
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-briefcase"></i></span>
+              <%= f.text_field :title_cont, placeholder: "Title", class: "form-control" %>
+            </div>
           </div>
-          <div class="col-md-3">
-            <%= f.text_field :first_name_cont, placeholder: "Filter by First Name", class: "form-control" %>
-          </div>
-          <div class="col-md-3">
-            <%= f.submit "Filter", class: "btn btn-primary w-100" %>
+
+          <div class="col-md-4">
+            <%= f.submit "Filter", class: "btn btn-primary w-100 d-flex align-items-center justify-content-center" %>
           </div>
         </div>
       <% end %>
 
-      <div class="mb-3">
-        <%= link_to "Sort by Last Name", employees_path(q: { s: 'last_name asc' }), class: "btn btn-link" %>
-        <%= link_to "Sort by First Name", employees_path(q: { s: 'first_name asc' }), class: "btn btn-link" %>
-        <%= link_to "Sort by Title", employees_path(q: { s: 'title asc' }), class: "btn btn-link" %>
+      <div class="d-flex justify-content-start align-items-center gap-3">
+        <%= link_to employees_path(q: { s: params.dig(:q, :s) == 'last_name desc' ? 'last_name asc' : 'last_name desc' }), class: "btn btn-outline-secondary btn-sm d-flex align-items-center" do %>
+          <i class="bi bi-sort-alpha-<%= params.dig(:q, :s) == 'last_name desc' ? 'up' : 'down' %> me-1"></i> Sort by Last Name
+        <% end %>
+        <%= link_to employees_path(q: { s: params.dig(:q, :s) == 'first_name desc' ? 'first_name asc' : 'first_name desc' }), class: "btn btn-outline-secondary btn-sm d-flex align-items-center" do %>
+          <i class="bi bi-sort-alpha-<%= params.dig(:q, :s) == 'first_name desc' ? 'up' : 'down' %> me-1"></i> Sort by First Name
+        <% end %>
+        <%= link_to employees_path(q: { s: params.dig(:q, :s) == 'title desc' ? 'title asc' : 'title desc' }), class: "btn btn-outline-secondary btn-sm d-flex align-items-center" do %>
+          <i class="bi bi-sort-alpha-<%= params.dig(:q, :s) == 'title desc' ? 'up' : 'down' %> me-1"></i> Sort by Title
+        <% end %>
       </div>
     </div>
   </div>
