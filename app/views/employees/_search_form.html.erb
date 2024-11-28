@@ -1,6 +1,0 @@
-<%= search_form_for @q, url: employees_path, method: :get, class: "d-flex" do |f| %>
-  <%= f.search_field :first_name_or_last_name_or_title_cont, 
-                     placeholder: "Search employees...", 
-                     class: "form-control me-2" %>
-  <%= f.submit "Search", class: "btn btn-outline-primary" %>
-<% end %>

@@ -9,3 +9,7 @@ window.jQuery = jquery;
 window.$ = jquery;
 import Rails from "@rails/ujs"
 Rails.start();
+//= require rails-ujs
+//= require turbolinks
+//= require_tree .
+
