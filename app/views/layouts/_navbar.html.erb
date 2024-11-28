@@ -27,9 +27,9 @@
 
       <ul class="navbar-nav ms-auto">
         <% if employee_signed_in? %>
-          <li class="nav-item">
-            <%= link_to employee_path(current_employee), class: "nav-link text-secondary d-flex align-items-center" do %>
-              <i class="bi bi-person-circle me-2"></i> My responsibilities
+          <li class="nav-item me-3">
+            <%= link_to employee_path(current_employee), class: "nav-link text-secondary d-flex align-items-center px-3 py-2 rounded-pill bg-light shadow-sm" do %>
+              <i class="bi bi-list-task me-2"></i> My Responsibilities
             <% end %>
           </li>
           <li class="nav-item">
