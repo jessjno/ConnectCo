@@ -1,11 +1,11 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
   <div class="container">
-    <a class="navbar-brand fw-bold text-primary" href="/">ConnectCo</a>
+    <a class="navbar-brand fw-bold" href="/">ConnectCo</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav me-auto">
+      <ul class="navbar-nav me-auto align-items-center">
         <li class="nav-item">
           <%= link_to 'Organizations', root_path, class: 'nav-link text-secondary' %>
         </li>
@@ -17,15 +17,15 @@
       </ul>
 
       <% if employee_signed_in? %>
-<%= search_form_for @q, url: employees_path, method: :get, remote: true, html: { id: "employee-search-form", class: "d-flex mb-3" } do |f| %>
-  <%= f.search_field :first_name_or_last_name_or_title_cont, 
+        <%= search_form_for @q, url: employees_path, method: :get, remote: true, html: { id: "employee-search-form", class: "d-flex align-items-center mx-3" } do |f| %>
+          <%= f.search_field :first_name_or_last_name_or_title_cont, 
                      placeholder: "Search employees...", 
                      class: "form-control me-2" %>
-  <%= f.submit "Search", class: "btn btn-primary" %>
-<% end %>
+          <%= f.submit "Search", class: "btn btn-primary" %>
+        <% end %>
       <% end %>
 
-      <ul class="navbar-nav ms-auto">
+      <ul class="navbar-nav ms-auto align-items-center">
         <% if employee_signed_in? %>
           <li class="nav-item me-3">
             <%= link_to employee_path(current_employee), class: "nav-link text-secondary d-flex align-items-center px-3 py-2 rounded-pill bg-light shadow-sm" do %>
@@ -33,10 +33,10 @@
             <% end %>
           </li>
           <li class="nav-item">
-            <%= button_to 'Sign Out', destroy_employee_session_path, method: :delete, class: 'btn btn-danger btn-sm rounded-pill ms-2', data: { turbo: false } %>
+            <%= button_to 'Sign Out', destroy_employee_session_path, method: :delete, class: 'btn btn-primary btn-sm rounded-pill ms-2', data: { turbo: false } %>
           </li>
         <% else %>
-          <li class="nav-item">
+          <li class="nav-item d-flex align-items-center">
             <%= link_to 'Sign In', new_employee_session_path, class: 'btn btn-primary btn-sm rounded-pill' %>
           </li>
         <% end %>

@@ -7,10 +7,6 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <!-- Application Styles -->
-    <%= stylesheet_link_tag 'my_styles', media: 'all', 'data-turbo-track': 'reload' %>
-    <%= javascript_include_tag "application", defer: true %>
-
 
     <!-- Bootstrap CSS -->
     <link 
@@ -25,6 +21,12 @@
       rel="stylesheet" 
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
     >
+
+  
+    <!-- Application Styles -->
+    <%= stylesheet_link_tag 'my_styles', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= javascript_include_tag "application", defer: true %>
+ 
   </head>
 
   <body>
