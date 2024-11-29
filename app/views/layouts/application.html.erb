@@ -7,7 +7,6 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-
     <!-- Bootstrap CSS -->
     <link 
       rel="stylesheet" 
@@ -22,11 +21,10 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
     >
 
-  
     <!-- Application Styles -->
     <%= stylesheet_link_tag 'my_styles', media: 'all', 'data-turbo-track': 'reload' %>
     <%= javascript_include_tag "application", defer: true %>
- 
+
   </head>
 
   <body>
@@ -34,11 +32,15 @@
     <div class="container">
       <div class="row mb-4">
         <div class="col-md-6 offset-md-3">
-          <% if notice.present? %>
-            <%= render partial: "shared/flash", locals: { message: notice, css_class: "success" } %>
-          <% end %>
-          <% if alert.present? %>
-            <%= render partial: "shared/flash", locals: { message: alert, css_class: "danger" } %>
+          <% unless devise_controller? && controller_name == "sessions" %>
+            <div class="container">
+              <% flash.each do |key, message| %>
+                <div class="alert alert-<%= key == "notice" ? "success" : "danger" %> alert-dismissible fade show" role="alert">
+                  <%= message %>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+              <% end %>
+            </div>
           <% end %>
         </div>
       </div>
