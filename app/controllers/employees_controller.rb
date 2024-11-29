@@ -1,5 +1,5 @@
 class EmployeesController < ApplicationController
-  before_action :set_employee, only: [:show, :edit, :update, :destroy, :edit_responsibility, :update_responsibility, :edit_organization, :update_organization]
+  before_action :set_employee, only: [:show, :edit, :update, :destroy, :edit_responsibility, :update_responsibility, :edit_organization, :update_organization, :edit_manager, :update_manager]
   before_action :authorize_employee, only: [:index, :show, :edit, :update, :destroy, :upload_csv]
   before_action :authenticate_admin!, only: [:new, :create]
   before_action :set_responsibility, only: [:edit_responsibility, :update_responsibility]
@@ -128,6 +128,21 @@ class EmployeesController < ApplicationController
     end
   end
 
+  def edit_manager
+    authorize @employee
+    @employees = Employee.where.not(id: @employee.id) # Exclude the employee being edited
+  end
+  
+  def update_manager
+    authorize @employee
+    if @employee.update(manager_id: params[:manager_id])
+      redirect_to employee_path(@employee), notice: "Manager updated successfully."
+    else
+      flash[:alert] = @employee.errors.full_messages.to_sentence
+      redirect_to edit_manager_employee_path(@employee)
+    end
+  end
+
   private
 
   def employee_params
@@ -160,4 +175,5 @@ class EmployeesController < ApplicationController
       redirect_to root_path, alert: "You are not authorized to perform this action."
     end
   end
+
 end

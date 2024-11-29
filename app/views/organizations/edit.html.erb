@@ -1,9 +1,38 @@
-<h1>Edit Organizations</h1>
+<div class="container mt-5">
+  <div class="card shadow-sm">
+    <div class="card-header mb-4 text-light custom-header-dark">
+      <h4 class="mb-0 d-flex align-items-center text-light">
+        <i class="bi bi-pencil-square me-2"></i> Edit Organization
+      </h4>
+    </div>
+    <div class="card-body">
+      <%= form_with model: @organization, local: true do |f| %>
+        <% if @organization.errors.any? %>
+          <div class="alert alert-danger">
+            <h5 class="fw-bold">There were errors with your submission:</h5>
+            <ul>
+              <% @organization.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
 
-<%= render partial: "form", locals: { organization: @organization } %>
+        <div class="mb-3">
+          <%= f.label :name, "Organization Name", class: "form-label fw-bold" %>
+          <%= f.text_field :name, class: "form-control", placeholder: "Enter organization name" %>
+        </div>
 
-<br>
+        <div class="mb-3">
+          <%= f.label :description, "Description", class: "form-label fw-bold" %>
+          <%= f.text_area :description, class: "form-control", placeholder: "Enter organization description" %>
+        </div>
 
-<div>
-  <%= link_to "Back", @organization %>
+        <div class="mt-4 d-flex justify-content-between">
+          <%= link_to 'Cancel', organization_path(@organization), class: "btn btn-secondary px-4" %>
+          <%= f.submit "Update Organization", class: "btn btn-primary px-4" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>

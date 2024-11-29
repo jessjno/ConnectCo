@@ -1,74 +1,85 @@
-<div class="container-md">
-  <h2><%= @organization.name %></h2>
-  <p><%= @organization.description %></p>
+<div class="container-md bg-white p-4 shadow-sm rounded">
+  <div class="mb-p-4 shadow-sm rounded card-title">
+    <h2 class="text-prime fw-bold"><%= @organization.name %></h2>
+    <p class="text-muted"><%= @organization.description %></p>
+  </div>
 
-  <h5>Employees:</h5>
-  <% non_sub_employees = @organization.employees.where.not(id: @organization.sub_organizations.includes(:employees).map { |sub| sub.employees.pluck(:id) }.flatten) %>
-  <% if non_sub_employees.any? %>
-    <ul class="list-group">
-      <% non_sub_employees.each do |employee| %>
-        <li class="list-group-item d-flex align-items-center">
-          <img src="<%= employee.image_url.presence || asset_path('default_profile.png') %>" 
-               alt="<%= employee.first_name %> <%= employee.last_name %>'s photo"
-               class="rounded-circle me-3"
-               style="width: 50px; height: 50px; object-fit: cover;">
+  <div class="mb-4">
+    <h5 class="text-prime fw-bold"><i class="bi bi-people-fill me-2"></i> Employees:</h5>
+    <% non_sub_employees = @organization.employees.where.not(id: @organization.sub_organizations.includes(:employees).map { |sub| sub.employees.pluck(:id) }.flatten) %>
+    <% if non_sub_employees.any? %>
+      <ul class="list-group list-group-flush">
+        <% non_sub_employees.each do |employee| %>
+          <li class="list-group-item d-flex align-items-center bg-light">
+            <img src="<%= employee.image_url.presence || asset_path('default_profile.png') %>" 
+                 alt="<%= employee.first_name %> <%= employee.last_name %>'s photo"
+                 class="rounded-circle me-3"
+                 style="width: 50px; height: 50px; object-fit: cover;">
 
-          <div class="flex-grow-1">
-            <strong><%= employee.title %></strong>: 
-            <%= link_to "#{employee.first_name} #{employee.last_name}", employee_path(employee), class: "text-primary" %>
-          </div>
-        </li>
-      <% end %>
-    </ul>
-  <% else %>
-    <p>No employees directly in this organization.</p>
-  <% end %>
+            <div>
+              <strong class="text-prime"><%= employee.title %>: 
+              <%= link_to "#{employee.first_name} #{employee.last_name}", employee_path(employee), class: "text-prime" %>
+              </strong>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="text-muted">No employees directly in this organization.</p>
+    <% end %>
+  </div>
 
-  <h5 class="mt-4">Sub-organizations:</h5>
-  <% if @sub_organizations.any? %>
-    <ul class="list-group">
-      <% @sub_organizations.each do |sub_organization| %>
-        <li class="list-group-item">
-          <h6><%= link_to sub_organization.name, organization_path(sub_organization), class: "text-primary" %></h6>
-          <p><%= sub_organization.description %></p>
+  <div>
+    <h5 class="text-prime fw-bold"><i class="bi bi-diagram-2-fill me-2"></i> Sub-organizations:</h5>
+    <% if @sub_organizations.any? %>
+      <ul class="list-group list-group-flush">
+        <% @sub_organizations.each do |sub_organization| %>
+          <li class="list-group-item bg-light">
+            <h6 class="mb-1">
+              <%= link_to sub_organization.name, organization_path(sub_organization), class: "text-prime fw-bold" %>
+            </h6>
+            <p class="text-muted"><%= sub_organization.description %></p>
 
-          <h6>Employees:</h6>
-          <% if sub_organization.employees.any? %>
-            <ul class="list-group">
-              <% sub_organization.employees.each do |employee| %>
-                <li class="list-group-item d-flex align-items-center">
-                  <img src="<%= employee.image_url.presence || asset_path('default_profile.png') %>" 
-                       alt="<%= employee.first_name %> <%= employee.last_name %>'s photo"
-                       class="rounded-circle me-3"
-                       style="width: 50px; height: 50px; object-fit: cover;">
+            <h6 class="text-prime fw-bold">Employees:</h6>
+            <% if sub_organization.employees.any? %>
+              <ul class="list-group list-group-flush">
+                <% sub_organization.employees.each do |employee| %>
+                  <li class="list-group-item d-flex align-items-center bg-light">
+                    <img src="<%= employee.image_url.presence || asset_path('default_profile.png') %>" 
+                         alt="<%= employee.first_name %> <%= employee.last_name %>'s photo"
+                         class="rounded-circle me-3"
+                         style="width: 50px; height: 50px; object-fit: cover;">
 
-                  <div class="flex-grow-1">
-                    <strong><%= employee.title %></strong>: 
-                    <%= link_to "#{employee.first_name} #{employee.last_name}", employee_path(employee), class: "text-primary" %>
-                  </div>
-                </li>
-              <% end %>
-            </ul>
-          <% else %>
-            <p>No employees in this sub-organization.</p>
-          <% end %>
-        </li>
-      <% end %>
-    </ul>
-  <% else %>
-    <p>No sub-organizations found.</p>
-  <% end %>
+                    <div>
+                      <strong class="text-prime"><%= employee.title %></strong>: 
+                      <%= link_to "#{employee.first_name} #{employee.last_name}", employee_path(employee), class: "text-dark font-weight-bold" %>
+                    </div>
+                  </li>
+                <% end %>
+              </ul>
+            <% else %>
+              <p class="text-muted">No employees in this sub-organization.</p>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="text-muted">No sub-organizations found.</p>
+    <% end %>
+  </div>
 
-  <%= link_to 'Back to Organizations', organizations_path, class: 'btn btn-secondary mt-3' %>
+  <div class="mt-4">
+    <%= link_to 'Back to Organizations', organizations_path, class: 'btn btn-secondary me-2' %>
 
-  <% if policy(@organization).edit? %>
-    <%= link_to 'Edit Organization', edit_organization_path(@organization), class: 'btn btn-sm btn-secondary mt-3' %>
-  <% end %>
+    <% if policy(@organization).edit? %>
+      <%= link_to 'Edit Organization', edit_organization_path(@organization), class: 'btn btn-outline-primary btn-sm' %>
+    <% end %>
 
-  <% if policy(@organization).destroy? %>
-    <%= button_to "Delete Organization", organization_path(@organization), 
-        method: :delete, 
-        data: { confirm: "Are you sure?" }, 
-        class: "btn btn-danger mt-3" %>
-  <% end %>
+    <% if policy(@organization).destroy? %>
+      <%= button_to "Delete Organization", organization_path(@organization), 
+          method: :delete, 
+          data: { confirm: "Are you sure?" }, 
+          class: "btn btn-danger btn-sm" %>
+    <% end %>
+  </div>
 </div>
