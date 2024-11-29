@@ -1,17 +1,30 @@
-<div class="container">
-  <h1>Reassign Organization for <%= @employee.first_name %> <%= @employee.last_name %></h1>
-
-<% if policy(@employee).edit_organization? %>
-  <%= form_with url: update_organization_employee_path(@employee), method: :patch, local: true do |f| %>
-    <div class="form-group">
-      <%= f.label :organization_id, "Select Organization" %>
-      <%= f.collection_select :organization_id, @organizations, :id, :name, prompt: "Select Organization", class: "form-control" %>
+<div class="container mt-5">
+  <div class="card shadow-sm">
+    <div class="card-header mb-4 text-light custom-header-dark">
+      <h4 class="mb-0 d-flex align-items-center text-light">
+        <i class="bi bi-building me-2"></i> Reassign Organization
+      </h4>
     </div>
-    <%= f.submit "Update Organization", class: "btn btn-primary mt-2" %>
-  <% end %>
-<% end %>
-
-
-
-  <%= link_to 'Back to Employee', employee_path(@employee), class: 'btn btn-secondary mt-3' %>
+    <div class="card-body">
+      <h5 class="mb-4">Reassign Organization for <strong><%= @employee.first_name %> <%= @employee.last_name %></strong></h5>
+      
+      <% if policy(@employee).edit_organization? %>
+        <%= form_with url: update_organization_employee_path(@employee), method: :patch, local: true do |f| %>
+          <div class="mb-3">
+            <%= f.label :organization_id, "Select Organization", class: "form-label fw-bold" %>
+            <%= f.collection_select :organization_id, @organizations, :id, :name, 
+                  prompt: "Select Organization", 
+                  class: "form-select" %>
+          </div>
+          
+          <div class="mt-4 d-flex justify-content-end">
+            <%= f.submit "Update Organization", class: "btn btn-primary px-4" %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="card-footer d-flex justify-content-start">
+      <%= link_to 'Back to Employee', employee_path(@employee), class: 'btn btn-secondary px-4' %>
+    </div>
+  </div>
 </div>
