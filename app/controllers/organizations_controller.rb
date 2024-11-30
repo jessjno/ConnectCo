@@ -48,7 +48,6 @@ class OrganizationsController < ApplicationController
         CSV.foreach(file.path, headers: true) do |row|
           organization_data = row.to_hash
   
-          # Use find_or_create_by to handle existing IDs gracefully
           Organization.find_or_create_by(id: organization_data["id"]) do |organization|
             organization.name = organization_data["name"]
             organization.description = organization_data["description"]
@@ -66,12 +65,13 @@ class OrganizationsController < ApplicationController
   end
     
   def destroy
-    authorize @organization
+    @organization = Organization.find(params[:id])
     if @organization.destroy
-      redirect_to organizations_path, notice: "Organization was successfully deleted."
+      flash[:success] = "Organization successfully deleted."
     else
-      redirect_to organizations_path, alert: "Failed to delete organization."
+      flash[:error] = @organization.errors.full_messages.to_sentence
     end
+    redirect_to organizations_path
   end
 
   private

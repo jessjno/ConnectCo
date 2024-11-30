@@ -132,7 +132,7 @@ class EmployeesController < ApplicationController
     authorize @employee
     @employees = Employee.where.not(id: @employee.id) # Exclude the employee being edited
   end
-  
+
   def update_manager
     authorize @employee
     if @employee.update(manager_id: params[:manager_id])
@@ -146,7 +146,7 @@ class EmployeesController < ApplicationController
   private
 
   def employee_params
-    params.require(:employee).permit(:first_name, :last_name, :email, :password, :password_confirmation, :title, :organization_id, :member_id, :manager_id)
+    params.require(:employee).permit(:first_name, :last_name, :email, :password, :password_confirmation, :title, :organization_id, :manager_id)
   end
 
   def responsibility_params
