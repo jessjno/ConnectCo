@@ -28,6 +28,9 @@ class OrganizationsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
   def update
     authorize @organization
     if @organization.update(organization_params)
@@ -79,6 +82,6 @@ class OrganizationsController < ApplicationController
   end
 
   def organization_params
-    params.require(:organization).permit(:name, :description)
+    params.require(:organization).permit(:name, :description, :parent_id)
   end
 end
