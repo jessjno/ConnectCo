@@ -1,6 +1,6 @@
 <div class="container-md bg-white p-4 shadow-sm rounded">
-  <div class="mb-p-4 shadow-sm rounded card-title">
-    <h2 class="text-prime fw-bold"><%= @organization.name %></h2>
+  <div class="mb-4">
+    <h2 class="text-prime fw-bold mb-3"><%= @organization.name %></h2>
     <p class="text-muted"><%= @organization.description %></p>
   </div>
 
@@ -10,18 +10,17 @@
     <% if non_sub_employees.any? %>
       <ul class="list-group list-group-flush">
         <% non_sub_employees.each do |employee| %>
-          <li class="list-group-item d-flex align-items-center bg-light">
+          <%= link_to employee_path(employee), class: "list-group-item list-group-item-action d-flex align-items-center bg-light text-decoration-none text-dark shadow-sm rounded" do %>
             <img src="<%= employee.image_url.presence || asset_path('default_profile.png') %>" 
-                 alt="<%= employee.first_name %> <%= employee.last_name %>'s photo"
-                 class="rounded-circle me-3"
-                 style="width: 50px; height: 50px; object-fit: cover;">
+               alt="<%= employee.first_name %> <%= employee.last_name %>'s photo"
+               class="rounded-circle me-3 shadow-sm"
+               style="width: 50px; height: 50px; object-fit: cover; border: 2px solid var(--secondary);">
 
             <div>
-              <strong class="text-prime"><%= employee.title %>: 
-              <%= link_to "#{employee.first_name} #{employee.last_name}", employee_path(employee), class: "text-prime" %>
-              </strong>
+              <strong class="employee-title text-dark fw-bold"><%= employee.title %></strong><br>
+              <span class="employee-name text-muted fw-bold"><%= employee.first_name %> <%= employee.last_name %></span>
             </div>
-          </li>
+          <% end %>
         <% end %>
       </ul>
     <% else %>
@@ -29,14 +28,14 @@
     <% end %>
   </div>
 
-  <div>
+  <div class="mb-4">
     <h5 class="text-prime fw-bold"><i class="bi bi-diagram-2-fill me-2"></i> Sub-organizations:</h5>
     <% if @sub_organizations.any? %>
       <ul class="list-group list-group-flush">
         <% @sub_organizations.each do |sub_organization| %>
           <li class="list-group-item bg-light">
             <h6 class="mb-1">
-              <%= link_to sub_organization.name, organization_path(sub_organization), class: "text-prime fw-bold" %>
+              <%= link_to sub_organization.name, organization_path(sub_organization), class: "text-prime fw-bold text-decoration-none" %>
             </h6>
             <p class="text-muted"><%= sub_organization.description %></p>
 
@@ -44,17 +43,17 @@
             <% if sub_organization.employees.any? %>
               <ul class="list-group list-group-flush">
                 <% sub_organization.employees.each do |employee| %>
-                  <li class="list-group-item d-flex align-items-center bg-light">
+                  <%= link_to employee_path(employee), class: "list-group-item list-group-item-action d-flex align-items-center bg-light text-decoration-none text-dark" do %>
                     <img src="<%= employee.image_url.presence || asset_path('default_profile.png') %>" 
                          alt="<%= employee.first_name %> <%= employee.last_name %>'s photo"
-                         class="rounded-circle me-3"
+                         class="rounded-circle me-3 shadow-sm"
                          style="width: 50px; height: 50px; object-fit: cover;">
 
                     <div>
-                      <strong class="text-prime"><%= employee.title %></strong>: 
-                      <%= link_to "#{employee.first_name} #{employee.last_name}", employee_path(employee), class: "text-dark font-weight-bold" %>
+                      <strong class="text-dark"><%= employee.title %></strong><br>
+                      <span class="text-muted"><%= employee.first_name %> <%= employee.last_name %></span>
                     </div>
-                  </li>
+                  <% end %>
                 <% end %>
               </ul>
             <% else %>
@@ -68,18 +67,20 @@
     <% end %>
   </div>
 
-  <div class="mt-4">
-    <%= link_to 'Back to Organizations', organizations_path, class: 'btn btn-secondary me-2' %>
+  <div class="mt-4 d-flex justify-content-between align-items-center">
+    <%= link_to 'Back to Organizations', organizations_path, class: 'btn btn-secondary' %>
 
-    <% if policy(@organization).edit? %>
-      <%= link_to 'Edit Organization', edit_organization_path(@organization), class: 'btn btn-outline-primary btn-sm' %>
-    <% end %>
+    <div>
+      <% if policy(@organization).edit? %>
+        <%= link_to 'Edit Organization', edit_organization_path(@organization), class: 'btn btn-outline-primary btn-sm me-2' %>
+      <% end %>
 
-    <% if policy(@organization).destroy? %>
-      <%= button_to "Delete Organization", organization_path(@organization), 
-          method: :delete, 
-          data: { confirm: "Are you sure?" }, 
-          class: "btn btn-danger btn-sm" %>
-    <% end %>
+      <% if policy(@organization).destroy? %>
+        <%= button_to "Delete Organization", organization_path(@organization), 
+            method: :delete, 
+            data: { confirm: "Are you sure?" }, 
+            class: "btn btn-danger btn-sm" %>
+      <% end %>
+    </div>
   </div>
 </div>

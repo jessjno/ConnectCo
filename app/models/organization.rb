@@ -15,6 +15,7 @@ class Organization < ApplicationRecord
   has_many :sub_organizations, class_name: "Organization", foreign_key: "parent_id"
   has_many :employees, class_name: "Employee", foreign_key: "organization_id", dependent: :nullify
   has_many :responsibilities, through: :employees
+  before_destroy :check_dependencies
   
   def all_employees
     Employee.where(organization_id: all_organization_ids)
@@ -34,5 +35,15 @@ class Organization < ApplicationRecord
 
   def self.ransackable_associations(auth_object = nil)
     ["employees", "parent"]
+  end
+
+  def check_dependencies
+    if employees.exists?
+      errors.add(:base, "Cannot delete organization with employees assigned to it.")
+      throw(:abort)
+    elsif sub_organizations.exists?
+      errors.add(:base, "Cannot delete organization with sub-organizations assigned to it.")
+      throw(:abort) 
+    end
   end
 end

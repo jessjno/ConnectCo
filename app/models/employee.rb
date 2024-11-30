@@ -41,6 +41,7 @@ class Employee < ApplicationRecord
   belongs_to :member, optional: true 
   has_many :subordinates, class_name: "Employee", foreign_key: "manager_id"
   has_many :responsibilities
+  before_destroy :check_dependencies
   validates :first_name, :last_name, :organization_id, presence: true
   validates :organization_id, presence: true
  
@@ -62,5 +63,14 @@ class Employee < ApplicationRecord
 
   def full_name
     "#{first_name} #{last_name} (#{title || 'No Title'})"
+  end
+
+  private
+
+  def check_dependencies
+    if subordinates.any?
+      errors.add(:base, "Cannot delete employee with subordinates. Reassign or remove subordinates first.")
+      throw(:abort) # Prevents the destroy action
+    end
   end
  end

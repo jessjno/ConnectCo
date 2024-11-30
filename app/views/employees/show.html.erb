@@ -11,7 +11,16 @@
         </h2>
         <p class="mb-0 text-muted"><i class="bi bi-envelope me-1"></i><%= @employee.email %></p>
         <p class="mb-0 text-muted"><i class="bi bi-briefcase me-1"></i><%= @employee.title %></p>
-        <p class="mb-0 text-muted"><i class="bi bi-building me-1"></i><%= @employee.organization.name %></p>
+        <% if @employee.organization.present? %>
+          <p class="mb-0 text-muted">
+            <i class="bi bi-building me-1"></i>
+            <%= link_to @employee.organization.name, organization_path(@employee.organization) %>
+          </p>
+        <% else %>
+          <p class="mb-0 text-muted">
+            <i class="bi bi-building me-1"></i> No Organization Assigned
+          </p>
+        <% end %>
       </div>
     </div>
   </div>
@@ -128,6 +137,11 @@
 
   <div class="mt-4 d-flex justify-content-between">
     <%= link_to 'Back to Employee List', employees_path, class: 'btn btn-primary' %>
-    <%= link_to 'Back to Organization', organization_path(@employee.organization_id), class: "btn btn-primary" %>
+
+    <% if @employee.organization.present? %>
+      <%= link_to 'Back to Organization', organization_path(@employee.organization_id), class: "btn btn-primary" %>
+    <% else %>
+      <span class="text-muted">No associated organization</span>
+    <% end %>
   </div>
 </div>
