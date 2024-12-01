@@ -35,7 +35,8 @@
 
             <div id="collapse<%= index %>" class="collapse" aria-labelledby="heading<%= index %>">
               <div class="card-body">
-                <p class="card-text text-muted"><%= organization.description.presence || "No description available." %></p>
+                <p class="card-text text-muted">
+                  <%= truncate_description(organization.description, 50, organization_path(organization)) %></p>
                 <div class="d-flex justify-content-between">
                   <%= link_to "View Details", organization_path(organization), class: "btn btn-primary btn-sm" %>
                   <% if current_employee&.admin? %>
