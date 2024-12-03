@@ -1,147 +1,123 @@
-<div class="container py-4">
-  <div class="card shadow-sm mb-4">
-    <div class="card-body d-flex align-items-center">
-      <img src="<%= @employee.profile_image || asset_path('default_profile.png') %>"
-           alt="<%= @employee.first_name %>'s Profile Photo"
-           class="rounded-circle me-3"
-           style="width: 100px; height: 100px; object-fit: cover;">
-      <div>
-        <h2 class="card-title mb-1">
-          <%= @employee.first_name %> <%= @employee.last_name %>
-        </h2>
-        <p class="mb-0 text-muted"><i class="bi bi-envelope me-1"></i><%= @employee.email %></p>
-        <p class="mb-0 text-muted"><i class="bi bi-briefcase me-1"></i><%= @employee.title %></p>
-        <% if @employee.organization.present? %>
-          <p class="mb-0 text-muted">
-            <i class="bi bi-building me-1"></i>
-            <%= link_to @employee.organization.name, organization_path(@employee.organization) %>
-          </p>
-        <% else %>
-          <p class="mb-0 text-muted">
-            <i class="bi bi-building me-1"></i> No Organization Assigned
-          </p>
-        <% end %>
-      </div>
+<div class="container-md bg-white p-4 shadow-sm rounded">
+  <!-- Employee Details -->
+  <div class="mb-4 d-flex align-items-center">
+    <img src="<%= @employee.profile_image || asset_path('default_profile.png') %>"
+         alt="<%= @employee.first_name %>'s Profile Photo"
+         class="rounded-circle me-3 shadow-sm"
+         style="width: 100px; height: 100px; object-fit: cover;">
+    <div>
+      <h2 class="text-dark fw-bold"><%= @employee.first_name %> <%= @employee.last_name %></h2>
+      <p class="text-dark mb-1"><i class="bi bi-envelope me-1"></i><%= @employee.email %></p>
+      <p class="text-dark mb-1"><i class="bi bi-briefcase me-1"></i><%= @employee.title %></p>
+      <% if @employee.organization.present? %>
+        <p class="text-dark mb-0">
+          <i class="bi bi-building me-1"></i>
+          <%= link_to @employee.organization.name, organization_path(@employee.organization), class: "text-decoration-none text-dark fw-bold" %>
+        </p>
+      <% else %>
+        <p class="text-dark mb-0"><i class="bi bi-building me-1"></i> No Organization Assigned</p>
+      <% end %>
     </div>
   </div>
 
-  <div class="card shadow-sm mb-4">
-    <div class="card-header custom-header-dark">
-      <h5 class="mb-0 text-light">
-        <i class="bi bi-list-task me-2"></i> Responsibilities
-      </h5>
-    </div>
-    <div class="card-body">
+  <!-- Responsibilities Section -->
+  <div class="mb-4">
+    <h5 class="text-dark fw-bold"><i class="bi bi-list-task me-2"></i> Responsibilities</h5>
+    <div class="bg-light p-3 rounded shadow-sm">
       <% if @responsibilities.any? %>
         <ul class="list-group list-group-flush">
-          <% @responsibilities.each_with_index do |responsibility, index| %>
-            <li class="list-group-item d-flex align-items-start py-3 position-relative">
+          <% @responsibilities.each do |responsibility| %>
+            <li class="list-group-item d-flex align-items-start bg-light border-0">
               <div class="me-3" style="font-size: 1.2rem; color: var(--primary);">
                 <i class="bi bi-dot"></i>
               </div>
               <div class="flex-grow-1">
-                <p class="mb-0" style="font-size: 1rem; color: var(--dark);">
-                  <%= responsibility.description %>
-                </p>
+                <p class="text-dark fw-bold mb-0"><%= responsibility.description %></p>
               </div>
               <div class="d-flex gap-2">
                 <% if policy(responsibility).edit? %>
-                  <%= link_to 'Edit', edit_employee_responsibility_path(@employee, responsibility), 
-                            class: 'btn btn-sm btn-outline-primary' %>
+                  <%= link_to 'Edit', edit_employee_responsibility_path(@employee, responsibility), class: 'btn btn-sm btn-outline-primary' %>
                 <% end %>
                 <% if policy(responsibility).destroy? %>
-                  <%= button_to 'Delete', employee_responsibility_path(@employee, responsibility), 
-                                method: :delete, 
-                                data: { confirm: "Are you sure you want to delete this responsibility?" }, 
-                                class: 'btn btn-sm btn-outline-danger' %>
+                  <%= button_to 'Delete', employee_responsibility_path(@employee, responsibility), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-sm btn-outline-danger' %>
                 <% end %>
               </div>
-              <% unless index == @responsibilities.size - 1 %>
-                <hr class="position-absolute w-100" style="bottom: 0; left: 0; margin: 0; border-color: var(--bg-light);" />
-              <% end %>
             </li>
           <% end %>
         </ul>
       <% else %>
-        <p class="mb-0 text-muted">No responsibilities assigned.</p>
+        <p class="text-dark">No responsibilities assigned.</p>
       <% end %>
     </div>
     <% if policy(@employee).can_manage_responsibilities? %>
-      <div class="card-footer bg-light">
+      <div class="card-footer bg-light mt-3">
         <%= render 'responsibilities/form', employee: @employee, responsibility: Responsibility.new %>
       </div>
     <% end %>
   </div>
 
-  <div class="card shadow-sm mb-4">
-    <div class="card-header custom-header-dark">
-      <h5 class="mb-0 text-light"><i class="bi bi-person-badge me-2"></i> Reports To</h5>
-    </div>
-    <div class="card-body">
+  <!-- Reports To Section -->
+  <div class="mb-4">
+    <h5 class="text-dark fw-bold"><i class="bi bi-person-badge me-2"></i> Reports To</h5>
+    <div class="bg-light p-3 rounded shadow-sm">
       <% if @employee.manager.present? %>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item d-flex align-items-center">
-            <img src="<%= @employee.manager.image_url.presence || asset_path('default_profile.png') %>" 
+        <div class="d-flex align-items-center">
+          <img src="<%= @employee.manager.image_url.presence || asset_path('default_profile.png') %>"
                alt="<%= @employee.manager.first_name %> <%= @employee.manager.last_name %>'s photo"
-               class="rounded-circle me-3"
-               style="width: 50px; height: 50px; object-fit: cover;">
-            <div>
-              <strong><%= link_to "#{@employee.manager.first_name} #{@employee.manager.last_name}",
-                                employee_path(@employee.manager),
-                                class: "text-light" %></strong><br>
-              <span class="text-light"><%= @employee.manager.title || "N/A" %></span>
-            </div>
-          </li>
-        </ul>
+               class="rounded-circle me-3 shadow-sm"
+               style="width: 50px; height: 50px; object-fit: cover; border: 2px solid var(--secondary);">
+          <div>
+            <strong class="text-dark fw-bold"><%= @employee.manager.title || "N/A" %></strong><br>
+            <%= link_to "#{@employee.manager.first_name} #{@employee.manager.last_name}", employee_path(@employee.manager), class: "text-decoration-none text-dark" %>
+          </div>
+        </div>
       <% else %>
-        <p class="text-muted mb-0">This employee does not report to anyone.</p>
+        <p class="text-dark">This employee does not report to anyone.</p>
       <% end %>
     </div>
   </div>
 
-  <div class="card shadow-sm mb-4">
-    <div class="card-header custom-header-dark">
-      <h5 class="mb-0 text-light"><i class="bi bi-people-fill me-2"></i> Direct Reports</h5>
-    </div>
-    <div class="card-body">
+  <!-- Direct Reports Section -->
+  <div class="mb-4">
+    <h5 class="text-dark fw-bold"><i class="bi bi-people-fill me-2"></i> Direct Reports</h5>
+    <div class="bg-light p-3 rounded shadow-sm">
       <% if @employee.subordinates.any? %>
         <ul class="list-group list-group-flush">
           <% @employee.subordinates.each do |subordinate| %>
-            <li class="list-group-item d-flex align-items-center">
-              <img src="<%= subordinate.image_url.presence || asset_path('default_profile.png') %>" 
-                 alt="<%= subordinate.first_name %> <%= subordinate.last_name %>'s photo"
-                 class="rounded-circle me-3"
-                 style="width: 50px; height: 50px; object-fit: cover;">
+            <%= link_to employee_path(subordinate), class: "list-group-item list-group-item-action d-flex align-items-center bg-light text-decoration-none text-dark shadow-sm rounded" do %>
+              <img src="<%= subordinate.image_url.presence || asset_path('default_profile.png') %>"
+                   alt="<%= subordinate.first_name %> <%= subordinate.last_name %>'s photo"
+                   class="rounded-circle me-3 shadow-sm"
+                   style="width: 50px; height: 50px; object-fit: cover; border: 2px solid var(--secondary);">
               <div>
-                <strong><%= link_to "#{subordinate.first_name} #{subordinate.last_name}",
-                                  employee_path(subordinate),
-                                  class: "text-light" %></strong><br>
-                <span class="text-light"><%= subordinate.title || "N/A" %></span>
+                <strong class="text-dark fw-bold"><%= subordinate.title %></strong><br>
+                <span class="text-dark"><%= subordinate.first_name %> <%= subordinate.last_name %></span>
               </div>
-            </li>
+            <% end %>
           <% end %>
         </ul>
       <% else %>
-        <p class="text-muted mb-0">No direct reports.</p>
+        <p class="text-dark">No direct reports.</p>
       <% end %>
     </div>
   </div>
 
+  <!-- Admin Actions -->
   <% if current_employee.admin? %>
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between mb-4">
       <%= link_to "Reassign Organization", edit_organization_employee_path(@employee), class: "btn btn-secondary btn-sm" %>
       <%= link_to "Update Manager", edit_manager_employee_path(@employee), class: "btn btn-primary btn-sm" %>
-      <%= button_to "Delete Employee", employee_path(@employee), method: :delete, class: "btn btn-danger btn-sm", data: { confirm: "Are you sure you want to delete this employee?" } %>
+      <%= button_to "Delete Employee", employee_path(@employee), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %>
     </div>
   <% end %>
 
+  <!-- Navigation Buttons -->
   <div class="mt-4 d-flex justify-content-between">
-    <%= link_to 'Back to Employee List', employees_path, class: 'btn btn-primary' %>
-
+    <%= link_to 'Back to Employee List', employees_path, class: 'btn btn-secondary' %>
     <% if @employee.organization.present? %>
-      <%= link_to 'Back to Organization', organization_path(@employee.organization_id), class: "btn btn-primary" %>
+      <%= link_to 'Back to Organization', organization_path(@employee.organization_id), class: "btn btn-secondary" %>
     <% else %>
-      <span class="text-muted">No associated organization</span>
+      <span class="text-dark">No associated organization</span>
     <% end %>
   </div>
 </div>

@@ -78,7 +78,7 @@
       <% if policy(@organization).destroy? %>
         <%= button_to "Delete Organization", organization_path(@organization), 
             method: :delete, 
-            data: { confirm: "Are you sure?" }, 
+            data: { confirm: "Are you sure you want to delete this organization?" }, 
             class: "btn btn-danger btn-sm" %>
       <% end %>
     </div>
