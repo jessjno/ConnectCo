@@ -106,7 +106,7 @@ a:hover {
 }
 
 .text-dark {
-  color: var(--dark);
+  color: var(--dark) !important;
 }
 
 .text-prime {
@@ -326,8 +326,12 @@ h2,
 h3,
 h4,
 h5,
-h6 {
-  color: var(--dark);
+h6,
+p,
+.list-group-item p, 
+.list-group-item strong, 
+li {
+  color: var(--dark) !important;
   font-weight: bold;
 }
 
