@@ -1,0 +1,16 @@
+<div class="card rounded-3 shadow-sm w-100">
+  <img 
+    class="card-img-top" 
+    src="<%= employee.image_url.presence || asset_path('default_profile.png') %>" 
+    alt="<%= employee.first_name %> <%= employee.last_name %>'s profile photo" 
+    style="height: 180px; object-fit: cover;"
+  >
+  <div class="card-body">
+    <h5 class="card-title"><%= employee.first_name %> <%= employee.last_name %></h5>
+    <p class="card-text">
+      <strong>Title:</strong> <%= employee.title %><br>
+      <strong>Organization:</strong> <%= employee.organization&.name || "No Organization Assigned" %>
+    </p>
+    <%= link_to 'View Profile', employee_path(employee), class: 'btn btn-primary btn-sm' %>
+  </div>
+</div>
