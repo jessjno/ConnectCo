@@ -1,6 +1,8 @@
 class ResponsibilitiesController < ApplicationController
+  include ResponsibilitiesManagement
   before_action :set_responsibility, only: [:edit, :update, :destroy]
   before_action :authorize_responsibility, only: [:edit, :update, :destroy]
+  before_action :set_employee
   before_action :ensure_employee_is_authorized, only: [:edit, :update, :destroy]
 
   def index
@@ -17,14 +19,15 @@ class ResponsibilitiesController < ApplicationController
   end
 
   def create
-    @responsibility = Responsibility.new(responsibility_params)
-    @responsibility.employee_id = params[:employee_id]
-
-    if @responsibility.save
-      authorize @responsibility
-      redirect_to employee_path(@responsibility.employee), notice: "Responsibility created successfully."
+    @employee = Employee.find(params[:employee_id])
+    responsibility_params = params.require(:responsibility).permit(:description)
+  
+    responsibility = create_responsibility(@employee, responsibility_params)
+  
+    if responsibility
+      redirect_to employee_path(@employee), notice: "Responsibility created successfully."
     else
-      redirect_to employee_path(@responsibility.employee), alert: @responsibility.errors.full_messages.to_sentence
+      redirect_to employee_path(@employee), alert: "Failed to create responsibility."
     end
   end
 
@@ -34,7 +37,7 @@ class ResponsibilitiesController < ApplicationController
   end
 
   def update
-    if @responsibility.update(responsibility_params)
+    if update_responsibility(@responsibility, responsibility_params)
       redirect_to employee_path(@responsibility.employee), notice: "Responsibility updated successfully."
     else
       redirect_to employee_path(@responsibility.employee), alert: "Failed to update responsibility."
@@ -42,10 +45,11 @@ class ResponsibilitiesController < ApplicationController
   end
 
   def destroy
-    if @responsibility.destroy
-      redirect_to employee_path(@responsibility.employee), notice: "Responsibility deleted successfully."
+    employee = @responsibility.employee
+    if destroy_responsibility(@responsibility)
+      redirect_to employee_path(employee), notice: "Responsibility deleted successfully."
     else
-      redirect_to employee_path(@responsibility.employee), alert: "Failed to delete responsibility."
+      redirect_to employee_path(employee), alert: "Failed to delete responsibility."
     end
   end
 
@@ -57,6 +61,10 @@ class ResponsibilitiesController < ApplicationController
 
   def set_responsibility
     @responsibility = Responsibility.find(params[:id])
+  end
+
+  def set_employee
+    @employee = Employee.find_by(id: params[:employee_id])
   end
 
   def authorize_responsibility

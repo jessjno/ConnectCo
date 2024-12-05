@@ -15,7 +15,7 @@ class ResponsibilityPolicy
   end
 
   def update?
-    employee == responsibility.employee
+    employee.admin? || responsibility.employee == employee
   end
 
   def create?
