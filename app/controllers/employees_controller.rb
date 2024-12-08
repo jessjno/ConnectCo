@@ -91,12 +91,7 @@ class EmployeesController < ApplicationController
           employee_data = row.to_hash
 
           Employee.find_or_create_by(email: employee_data["email"]) do |employee|
-            employee.first_name = employee_data["first_name"]
-            employee.last_name = employee_data["last_name"]
-            employee.title = employee_data["title"]
-            employee.organization_id = employee_data["organization_id"]
-            employee.password = employee_data["password"]
-            employee.image_url = employee_data["image_url"] # Assign the image_url
+              employee.update(employee_data.slice("first_name", "last_name", "title", "organization_id", "password", "image_url"))
           end
         end
 

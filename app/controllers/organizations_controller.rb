@@ -49,9 +49,7 @@ class OrganizationsController < ApplicationController
           organization_data = row.to_hash
   
           Organization.find_or_create_by(id: organization_data["id"]) do |organization|
-            organization.name = organization_data["name"]
-            organization.description = organization_data["description"]
-            organization.parent_id = organization_data["parent_id"]
+            organization.update(organization_data.slice("name", "description", "parent_id"))
           end
         end
   

@@ -12,16 +12,21 @@
 #
 class Organization < ApplicationRecord
   include ResponsibilitiesManagement
+
   belongs_to :parent_organization, class_name: "Organization", optional: true
   has_many :sub_organizations, class_name: "Organization", foreign_key: "parent_id"
   has_many :employees, class_name: "Employee", foreign_key: "organization_id", dependent: :nullify
   has_many :responsibilities, through: :employees
+
+  # Callback to ensure organization dependencies are checked before deletion
   before_destroy :check_dependencies
   
+  # Returns all employees in this organization and its sub-organizations
   def all_employees
     Employee.where(organization_id: all_organization_ids)
   end
 
+  # Returns the IDs of this organization and all its sub-organizations
   def all_organization_ids
     [id] + sub_organizations.flat_map(&:all_organization_ids)
   end
@@ -38,6 +43,7 @@ class Organization < ApplicationRecord
     ["employees", "parent"]
   end
 
+  # Callback to check dependencies before organization is destroyed
   def check_dependencies
     if employees.exists?
       errors.add(:base, "Cannot delete organization with employees assigned to it.")

@@ -15,11 +15,11 @@ class OrganizationPolicy
   end
 
   def new?
-    employee.admin?
+    admin_only?
   end
 
   def create?
-    employee.admin?
+    admin_only?
   end
 
   def edit?
@@ -27,10 +27,17 @@ class OrganizationPolicy
   end
 
   def update?
-    employee.admin?
+    admin_only?
   end
 
   def destroy?
+    admin_only?
+  end
+
+  private
+
+  # Helper method to check if the employee is an admin
+  def admin_only?
     employee.admin?
   end
 end
