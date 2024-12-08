@@ -15,38 +15,45 @@ class EmployeePolicy
   end
 
   def new?
-    current_employee.admin?
+    admin_only?
   end
 
   def create?
-    current_employee.admin?
+    admin_only?
   end
 
   def destroy?
-    current_employee.admin?
+    admin_only?
   end
 
   def can_manage_responsibilities?
-    current_employee.admin? || current_employee == employee
+    admin_only? || current_employee == employee
   end
 
   def upload_csv?
-    current_employee.admin? 
+    admin_only?
   end
 
   def edit_organization?
-    current_employee.admin?
+    admin_only?
   end
 
   def update_organization?
-    current_employee.admin?
+    admin_only?
   end
 
   def edit_manager?
-    current_employee.admin? 
+    admin_only?
   end
 
   def update_manager?
-    current_employee.admin? 
+    admin_only?
+  end
+
+  private
+
+  # Helper method to check if the current employee is an admin
+  def admin_only?
+    current_employee.admin?
   end
 end

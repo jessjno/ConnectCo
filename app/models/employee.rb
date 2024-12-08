@@ -31,18 +31,21 @@
 #  fk_rails_...  (manager_id => employees.id)
 #
 class Employee < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  # Include default devise modules for authentication
   include ResponsibilitiesManagement
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
+  # Associations: An employee belongs to an organization and can have a manager and subordinates.
   belongs_to :organization
   belongs_to :manager, class_name: "Employee", optional: true
-  belongs_to :member, optional: true 
   has_many :subordinates, class_name: "Employee", foreign_key: "manager_id"
   has_many :responsibilities
+
+  # Callbacks: Ensure dependencies are checked before destroying an employee
   before_destroy :check_dependencies
+
+  # Validations: Ensure required fields are present
   validates :first_name, :last_name, :organization_id, presence: true
   validates :organization_id, presence: true
  
@@ -58,6 +61,7 @@ class Employee < ApplicationRecord
     ["organization", "responsibilities"]
   end
 
+  # Instance method to return the employee's profile image or a default image if not set
   def profile_image
     image_url.presence || ActionController::Base.helpers.asset_path('default_profile.png')
   end
@@ -68,10 +72,11 @@ class Employee < ApplicationRecord
 
   private
 
+  # Callback to ensure employees with subordinates can't be deleted
   def check_dependencies
     if subordinates.any?
       errors.add(:base, "Cannot delete employee with subordinates. Reassign or remove subordinates first.")
-      throw(:abort) # Prevents the destroy action
+      throw(:abort)
     end
   end
  end
