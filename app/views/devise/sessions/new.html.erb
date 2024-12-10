@@ -7,57 +7,192 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
+    <style>
+      /* Color Palette */
+      :root {
+        --bg-light: #6f91a8;
+        --primary: #4e6b7e;
+        --secondary: #acc7e0;
+        --accent: #6A7F91;
+        --text-muted: #939ca5;
+        --dark: #3a4f60;
+      }
+
+      /* Global Styles */
+      body {
+        background-color: var(--bg-light);
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+      }
+
+      /* Flexbox container to hold both video and form */
+      .login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        padding: 20px;
+        min-height: 80vh;
+        background: var(--primary); /* Darkened Cool Gray */
+      }
+
+      /* Video Section */
+      .video-container {
+        flex: 1;
+        max-width: 45%;
+        margin-right: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+      }
+
+      .video-container video {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+      }
+
+      /* Form Section */
+      .form-container {
+        flex: 1;
+        max-width: 40%;
+        padding: 30px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff;
+        border-radius: 8px;
+        text-align: center;
+      }
+
+      /* Welcome Text Styles */
+      .welcome-text h1,
+      .welcome-text p {
+        color: var(--dark);
+      }
+
+      .welcome-text h1 {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+
+      .welcome-text p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+      }
+
+      /* Button Styling */
+      .form-container .btn {
+        width: 100%;
+        background-color: var(--primary);
+        color: white;
+        padding: 15px;
+        border-radius: 5px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        border: none;
+        transition: background-color 0.3s;
+      }
+
+      .form-container .btn:hover {
+        background-color: var(--accent);
+      }
+
+      .form-container .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-container .alert {
+        margin-bottom: 20px;
+      }
+
+      footer {
+        background-color: var(--primary);
+        color: white;
+        padding: 20px;
+        text-align: center;
+      }
+
+      footer a {
+        color: var(--secondary);
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      @media (max-width: 768px) {
+        .login-container {
+          flex-direction: column;
+        }
+        .video-container,
+        .form-container {
+          max-width: 100%;
+          margin-right: 0;
+        }
+      }
+    </style>
   </head>
   <body>
- <!--TO DO: Add Demo Video-->
-    <div class="container mt-5">
-      <div class="row justify-content-center">
-        <div class="col-md-6">
-          <h1 class="text-center">Welcome to ConnectCo</h1>
-          <p class="text-center mt-4
-          ">Sign in to manage your team and responsibilities.</p>
+    <div class="login-container">
+      <!-- Video Section -->
+      <div class="video-container">
+        <div class="demo-video-container">
+          <video width="100%" controls>
+            <source src="<%= '/videos/demo.mp4' %>" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
 
-          <div class="card shadow-sm">
-            <div class="card-body">
-              <%= form_with model: resource, as: resource_name, url: session_path(resource_name), html: { class: "form-signin" } do |f| %>
-                <% if flash[:alert] %>
-                  <div class="alert alert-danger"><%= flash[:alert] %></div>
-                <% end %>
-                <% if flash[:notice] %>
-                  <div class="alert alert-success"><%= flash[:notice] %></div>
-                <% end %>
+      <!-- Sign-In Form Section -->
+      <div class="form-container">
+        <div class="welcome-text">
+          <h1>Welcome to ConnectCo</h1>
+          <p>Sign in to manage your team and responsibilities.</p>
+        </div>
 
-                <div class="form-group">
-                  <%= f.label :email %>
-                  <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
-                </div>
-
-                <div class="form-group">
-                  <%= f.label :password %>
-                  <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
-                </div>
-
-                <div class="form-check mb-3">
-                  <%= f.check_box :remember_me, class: "form-check-input" if devise_mapping.rememberable? %>
-                  <%= f.label :remember_me, class: "form-check-label" if devise_mapping.rememberable? %>
-                </div>
-
-                <%= f.submit "Sign In", class: "btn btn-primary btn-block" %>
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <%= form_with model: resource, as: resource_name, url: session_path(resource_name), html: { class: "form-signin" } do |f| %>
+              <% if flash[:alert] %>
+                <div class="alert alert-danger"><%= flash[:alert] %></div>
+              <% end %>
+              <% if flash[:notice] %>
+                <div class="alert alert-success"><%= flash[:notice] %></div>
               <% end %>
 
-              <hr>
-              <p class="text-center">
-                <small>
-                  Having trouble? Contact your admin for help.
-                </small>
-              </p>
-            </div>
+              <div class="form-group">
+                <%= f.label :email %>
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+              </div>
+
+              <div class="form-group">
+                <%= f.label :password %>
+                <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
+              </div>
+
+              <div class="form-check mb-3">
+                <%= f.check_box :remember_me, class: "form-check-input" if devise_mapping.rememberable? %>
+                <%= f.label :remember_me, class: "form-check-label" if devise_mapping.rememberable? %>
+              </div>
+
+              <%= f.submit "Sign In", class: "btn btn-primary btn-block" %>
+            <% end %>
+
+            <hr>
+            <p class="text-center">
+              <small>
+                Having trouble? <a href="#">Contact your admin for help.</a>
+              </small>
+            </p>
           </div>
         </div>
       </div>
     </div>
 
-    <footer class="text-center mt-5">
+    <footer>
       <p>&copy; 2024 ConnectCo. All Rights Reserved.</p>
     </footer>
   </body>
