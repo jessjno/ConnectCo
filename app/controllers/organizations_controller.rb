@@ -9,7 +9,6 @@ class OrganizationsController < ApplicationController
   end
 
   def show
-    authorize @organization
     @employees = @organization.all_employees
     @sub_organizations = @organization.all_sub_organizations
   end
@@ -37,7 +36,6 @@ class OrganizationsController < ApplicationController
   end
 
   def update
-    authorize @organization
     if @organization.update(organization_params)
       redirect_to organization_path(@organization), notice: "Organization updated successfully."
     else

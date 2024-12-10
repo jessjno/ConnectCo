@@ -1,9 +1,11 @@
 class EmployeesController < ApplicationController
   include CsvUploadable
   before_action :set_employee, only: [:show, :edit, :update, :destroy, :edit_responsibility, :update_responsibility, :edit_organization, :update_organization, :edit_manager, :update_manager]
-  before_action :authorize_employee, only: [:index, :show, :edit, :update, :destroy, :upload_csv]
-  before_action :authenticate_admin!, only: [:new, :create]
   before_action :set_responsibility, only: [:edit_responsibility, :update_responsibility]
+
+  before_action :authorize_employee, only: [:index, :show, :edit, :update, :destroy, :upload_csv, :edit_responsibility, :update_responsibility, :edit_organization, :update_organization, :edit_manager, :update_manager]
+  before_action :authenticate_admin!, only: [:new, :create]
+
   after_action :verify_authorized, except: [:show]
 
   def sign_in
@@ -47,7 +49,6 @@ class EmployeesController < ApplicationController
     @employee = Employee.find(params[:id])
     @responsibilities = @employee.responsibilities
     @responsibility = Responsibility.new
-    authorize @employee
   end
 
   def edit
@@ -79,7 +80,6 @@ class EmployeesController < ApplicationController
   end
 
   def destroy
-    authorize @employee
     if @employee.destroy
       redirect_to employees_path, notice: "Employee was successfully deleted."
     else
@@ -90,12 +90,10 @@ class EmployeesController < ApplicationController
   def edit_organization
     @employee = Employee.find(params[:id])
     @organizations = Organization.all
-    authorize @employee, :edit_organization?
   end
 
   def update_organization
     @employee = Employee.find(params[:id])
-    authorize @employee, :update_organization?
     new_organization_id = params[:organization_id]
 
     if @employee.update(organization_id: new_organization_id)
@@ -107,12 +105,10 @@ class EmployeesController < ApplicationController
   end
 
   def edit_manager
-    authorize @employee
     @employees = Employee.where.not(id: @employee.id) # Exclude the employee being edited
   end
 
   def update_manager
-    authorize @employee
     if @employee.update(manager_id: params[:manager_id])
       redirect_to employee_path(@employee), notice: "Manager updated successfully."
     else
