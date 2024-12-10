@@ -1,8 +1,11 @@
 class EmployeesController < ApplicationController
+  include CsvUploadable
   before_action :set_employee, only: [:show, :edit, :update, :destroy, :edit_responsibility, :update_responsibility, :edit_organization, :update_organization, :edit_manager, :update_manager]
-  before_action :authorize_employee, only: [:index, :show, :edit, :update, :destroy, :upload_csv]
-  before_action :authenticate_admin!, only: [:new, :create]
   before_action :set_responsibility, only: [:edit_responsibility, :update_responsibility]
+
+  before_action :authorize_employee, only: [:index, :show, :edit, :update, :destroy, :upload_csv, :edit_responsibility, :update_responsibility, :edit_organization, :update_organization, :edit_manager, :update_manager]
+  before_action :authenticate_admin!, only: [:new, :create]
+
   after_action :verify_authorized, except: [:show]
 
   def sign_in
@@ -14,6 +17,10 @@ class EmployeesController < ApplicationController
   def new
     @employee = Employee.new
     authorize @employee
+  end
+
+  def upload_csv
+    upload_csv_logic(params[:file], "employee")
   end
 
   def create
@@ -42,7 +49,6 @@ class EmployeesController < ApplicationController
     @employee = Employee.find(params[:id])
     @responsibilities = @employee.responsibilities
     @responsibility = Responsibility.new
-    authorize @employee
   end
 
   def edit
@@ -74,7 +80,6 @@ class EmployeesController < ApplicationController
   end
 
   def destroy
-    authorize @employee
     if @employee.destroy
       redirect_to employees_path, notice: "Employee was successfully deleted."
     else
@@ -82,37 +87,13 @@ class EmployeesController < ApplicationController
     end
   end
 
-  def upload_csv
-    if params[:file].present?
-      file = params[:file]
-
-      begin
-        CSV.foreach(file.path, headers: true) do |row|
-          employee_data = row.to_hash
-
-          Employee.find_or_create_by(email: employee_data["email"]) do |employee|
-              employee.update(employee_data.slice("first_name", "last_name", "title", "organization_id", "password", "image_url"))
-          end
-        end
-
-        redirect_to employees_path, notice: "Employees uploaded successfully."
-      rescue StandardError => e
-        redirect_to employees_path, alert: "Error processing CSV: #{e.message}"
-      end
-    else
-      redirect_to employees_path, alert: "Please upload a valid CSV file."
-    end
-  end
-
   def edit_organization
     @employee = Employee.find(params[:id])
     @organizations = Organization.all
-    authorize @employee, :edit_organization?
   end
 
   def update_organization
     @employee = Employee.find(params[:id])
-    authorize @employee, :update_organization?
     new_organization_id = params[:organization_id]
 
     if @employee.update(organization_id: new_organization_id)
@@ -124,12 +105,10 @@ class EmployeesController < ApplicationController
   end
 
   def edit_manager
-    authorize @employee
     @employees = Employee.where.not(id: @employee.id) # Exclude the employee being edited
   end
 
   def update_manager
-    authorize @employee
     if @employee.update(manager_id: params[:manager_id])
       redirect_to employee_path(@employee), notice: "Manager updated successfully."
     else
@@ -170,5 +149,4 @@ class EmployeesController < ApplicationController
       redirect_to root_path, alert: "You are not authorized to perform this action."
     end
   end
-
 end

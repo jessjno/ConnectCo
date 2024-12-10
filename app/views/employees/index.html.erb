@@ -8,9 +8,12 @@
 
         <% if current_employee&.admin? %>
           <div class="d-flex gap-2">
+            <!-- Form to create a new individual employee -->
             <%= link_to new_employee_path, class: "btn btn-success btn-sm d-flex align-items-center" do %>
               <i class="bi bi-person-plus-fill me-1"></i> New Employee
             <% end %>
+
+            <!-- Form to upload the employee CSV -->
             <%= form_with url: upload_csv_employees_path, method: :post, multipart: true, local: true, html: { class: 'd-flex align-items-center' } do |f| %>
               <div class="me-2">
                 <%= f.file_field :file, class: "form-control form-control-sm" %>
@@ -59,13 +62,13 @@
     </div>
   </div>
 
-<div class="row justify-content-center mx-auto">
-  <% @employees.each do |employee| %>
-    <div class="col-lg-3 col-md-4 col-sm-6 mb-4 d-flex align-items-stretch">
-      <%= render partial: 'employee_card', locals: { employee: employee } %>
-    </div>
-  <% end %>
-</div>
+  <div class="row justify-content-center mx-auto">
+    <% @employees.each do |employee| %>
+      <div class="col-lg-3 col-md-4 col-sm-6 mb-4 d-flex align-items-stretch">
+        <%= render partial: 'employee_card', locals: { employee: employee } %>
+      </div>
+    <% end %>
+  </div>
 
   <div class="mt-4 d-flex justify-content-center">
     <%= paginate @employees %>

@@ -46,8 +46,8 @@ class Employee < ApplicationRecord
   before_destroy :check_dependencies
 
   # Validations: Ensure required fields are present
-  validates :first_name, :last_name, :organization_id, presence: true
-  validates :organization_id, presence: true
+  validates :first_name, :last_name,  presence: true
+
  
   def admin?
     self.admin
