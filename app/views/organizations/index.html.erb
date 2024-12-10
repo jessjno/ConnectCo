@@ -7,13 +7,15 @@
         </h1>
         <% if current_employee&.admin? %>
           <div class="d-flex align-items-center">
-            <%= form_with url: upload_csv_organizations_path, method: :post, multipart: true, local: true, html: { class: 'd-flex align-items-center me-3' } do |f| %>
-              <div class="me-2">
-                <%= f.file_field :file, class: 'form-control' %>
-              </div>
-              <%= f.submit "Upload CSV", class: "btn btn-primary" %>
+            <%= link_to new_organization_path, class: "btn btn-success btn-sm d-flex align-items-center" do %>
+              <i class="bi bi-person-plus-fill me-1"></i> New Organization
             <% end %>
-            <%= link_to "New Organization", new_organization_path, class: "btn btn-primary ms-3" %>
+            <%= form_with url: upload_csv_organizations_path, method: :post, multipart: true, local: true, html: { class: 'd-flex align-items-center' } do |f| %>
+              <div class="me-2">
+                <%= f.file_field :file, class: "form-control form-control-sm" %>
+              </div>
+              <%= f.submit "Upload CSV", class: "btn btn-primary btn-sm text-light" %>
+            <% end %>
           </div>
         <% end %>
       </div>

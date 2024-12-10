@@ -1,9 +1,10 @@
 class OrganizationsController < ApplicationController
   include Pundit
+  include CsvUploadable
   before_action :set_organization, only: [:edit, :update, :show, :destroy]
 
   def index
-    @q = Employee.ransack(params[:q]) 
+    @q = Employee.ransack(params[:q])
     @organizations = Organization.all
   end
 
@@ -16,6 +17,10 @@ class OrganizationsController < ApplicationController
   def new
     @organization = Organization.new
     authorize @organization
+  end
+
+  def upload_csv
+    upload_csv_logic(params[:file], "organization")
   end
 
   def create
@@ -40,28 +45,6 @@ class OrganizationsController < ApplicationController
     end
   end
 
-  def upload_csv
-    if params[:file].present?
-      file = params[:file]
-      
-      begin
-        CSV.foreach(file.path, headers: true) do |row|
-          organization_data = row.to_hash
-  
-          Organization.find_or_create_by(id: organization_data["id"]) do |organization|
-            organization.update(organization_data.slice("name", "description", "parent_id"))
-          end
-        end
-  
-        redirect_to organizations_path, notice: "CSV data uploaded successfully."
-      rescue StandardError => e
-        redirect_to organizations_path, alert: "Error processing CSV: #{e.message}"
-      end
-    else
-      redirect_to organizations_path, alert: "Please upload a valid CSV file."
-    end
-  end
-    
   def destroy
     @organization = Organization.find(params[:id])
     if @organization.destroy

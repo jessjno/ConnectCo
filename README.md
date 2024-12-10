@@ -51,6 +51,9 @@ Contributions are welcome! Please follow these guidelines:
 4. Push to the branch (`git push origin feature-branch`)
 5. Open a pull request
 
+## ERD
+![Domain Model](https://gist.github.com/user-attachments/assets/7384e66a-b962-4929-8be6-0c2366f841bc)
+
 ## License
 ConnectCo is licensed under the MIT License. See `LICENSE.md` for more information.
 

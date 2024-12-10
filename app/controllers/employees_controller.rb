@@ -1,4 +1,5 @@
 class EmployeesController < ApplicationController
+  include CsvUploadable
   before_action :set_employee, only: [:show, :edit, :update, :destroy, :edit_responsibility, :update_responsibility, :edit_organization, :update_organization, :edit_manager, :update_manager]
   before_action :authorize_employee, only: [:index, :show, :edit, :update, :destroy, :upload_csv]
   before_action :authenticate_admin!, only: [:new, :create]
@@ -14,6 +15,10 @@ class EmployeesController < ApplicationController
   def new
     @employee = Employee.new
     authorize @employee
+  end
+
+  def upload_csv
+    upload_csv_logic(params[:file], "employee")
   end
 
   def create
@@ -79,28 +84,6 @@ class EmployeesController < ApplicationController
       redirect_to employees_path, notice: "Employee was successfully deleted."
     else
       redirect_to employees_path, alert: "Failed to delete employee."
-    end
-  end
-
-  def upload_csv
-    if params[:file].present?
-      file = params[:file]
-
-      begin
-        CSV.foreach(file.path, headers: true) do |row|
-          employee_data = row.to_hash
-
-          Employee.find_or_create_by(email: employee_data["email"]) do |employee|
-              employee.update(employee_data.slice("first_name", "last_name", "title", "organization_id", "password", "image_url"))
-          end
-        end
-
-        redirect_to employees_path, notice: "Employees uploaded successfully."
-      rescue StandardError => e
-        redirect_to employees_path, alert: "Error processing CSV: #{e.message}"
-      end
-    else
-      redirect_to employees_path, alert: "Please upload a valid CSV file."
     end
   end
 
@@ -170,5 +153,4 @@ class EmployeesController < ApplicationController
       redirect_to root_path, alert: "You are not authorized to perform this action."
     end
   end
-
 end
