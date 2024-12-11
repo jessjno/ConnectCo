@@ -37,7 +37,7 @@ class EmployeesController < ApplicationController
 
   def index
     @q = Employee.ransack(params[:q])
-    @employees = @q.result.includes(:organization).order(:last_name).page(params[:page]).per(20)
+    @employees = @q.result.with_organization.by_last_name.paginate(params[:page]).includes(:organization)
 
     respond_to do |format|
       format.html
@@ -47,7 +47,7 @@ class EmployeesController < ApplicationController
 
   def show
     @q = Employee.ransack(params[:q])
-    @employee = Employee.find(params[:id])
+    @employee = Employee.with_organization.find(params[:id]) 
     @responsibilities = @employee.responsibilities
     @responsibility = Responsibility.new
   end
