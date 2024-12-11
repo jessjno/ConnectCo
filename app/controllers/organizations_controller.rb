@@ -5,12 +5,20 @@ class OrganizationsController < ApplicationController
 
   def index
     @q = Employee.ransack(params[:q])
-    @organizations = Organization.all
+    @q_organization = Organization.ransack(params[:q])
+  
+    @organizations = @q_organization.result.ordered_by_parent.page(params[:page]).per(20)
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def show
-    @employees = @organization.all_employees
-    @sub_organizations = @organization.all_sub_organizations
+    @organization = Organization.with_sub_organizations_and_employees.find(params[:id])
+    @employees = @organization.employees 
+    @sub_organizations = @organization.sub_organizations 
   end
 
   def new
