@@ -73,6 +73,10 @@ class Employee < ApplicationRecord
     "#{first_name} #{last_name} (#{title || "No Title"})"
   end
 
+  def to_s
+    "#{first_name} #{last_name}"
+  end
+
   private
 
   # Callback to ensure employees with subordinates can't be deleted

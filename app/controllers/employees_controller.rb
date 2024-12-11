@@ -47,7 +47,12 @@ class EmployeesController < ApplicationController
 
   def show
     @q = Employee.ransack(params[:q])
-    @employee = Employee.with_organization.find(params[:id]) 
+    @employee = Employee.with_organization.find(params[:id])
+    @breadcrumbs = [
+      { content: "Employees", href: employees_path },
+      { content: @employee.organization.name, href: organization_path(@employee.organization) },
+      { content: @employee.to_s },
+    ]
     @responsibilities = @employee.responsibilities
     @responsibility = Responsibility.new
   end
