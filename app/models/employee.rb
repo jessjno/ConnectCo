@@ -35,7 +35,7 @@ class Employee < ApplicationRecord
   include ResponsibilitiesManagement
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  
+
   # Associations: An employee belongs to an organization and can have a manager and subordinates.
   belongs_to :organization
   belongs_to :manager, class_name: "Employee", optional: true
@@ -46,9 +46,12 @@ class Employee < ApplicationRecord
   before_destroy :check_dependencies
 
   # Validations: Ensure required fields are present
-  validates :first_name, :last_name,  presence: true
+  validates :first_name, :last_name, presence: true
 
- 
+  scope :by_last_name, -> { order(:last_name) }
+  scope :with_organization, -> { includes(:organization) }
+  scope :paginate, ->(page = 1, per_page = 20) { page(page).per(per_page) }
+
   def admin?
     self.admin
   end
@@ -63,11 +66,11 @@ class Employee < ApplicationRecord
 
   # Instance method to return the employee's profile image or a default image if not set
   def profile_image
-    image_url.presence || ActionController::Base.helpers.asset_path('default_profile.png')
+    image_url.presence || ActionController::Base.helpers.asset_path("default_profile.png")
   end
 
   def full_name
-    "#{first_name} #{last_name} (#{title || 'No Title'})"
+    "#{first_name} #{last_name} (#{title || "No Title"})"
   end
 
   private
@@ -79,4 +82,4 @@ class Employee < ApplicationRecord
       throw(:abort)
     end
   end
- end
+end

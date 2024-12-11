@@ -24,10 +24,11 @@ class EmployeesController < ApplicationController
   end
 
   def create
-    @employee = Employee.new(employee_params)
-    authorize @employee
+    authorize_employee
+    service = EmployeeCreationService.new(employee_params)
+    @employee = service.call
 
-    if @employee.save
+    if @employee
       redirect_to employees_path, notice: "Employee created successfully."
     else
       render :new, alert: "Failed to create employee."
@@ -36,7 +37,7 @@ class EmployeesController < ApplicationController
 
   def index
     @q = Employee.ransack(params[:q])
-    @employees = @q.result.includes(:organization).order(:last_name).page(params[:page]).per(20)
+    @employees = @q.result.with_organization.by_last_name.paginate(params[:page]).includes(:organization)
 
     respond_to do |format|
       format.html
@@ -46,7 +47,7 @@ class EmployeesController < ApplicationController
 
   def show
     @q = Employee.ransack(params[:q])
-    @employee = Employee.find(params[:id])
+    @employee = Employee.with_organization.find(params[:id]) 
     @responsibilities = @employee.responsibilities
     @responsibility = Responsibility.new
   end
@@ -93,10 +94,8 @@ class EmployeesController < ApplicationController
   end
 
   def update_organization
-    @employee = Employee.find(params[:id])
-    new_organization_id = params[:organization_id]
-
-    if @employee.update(organization_id: new_organization_id)
+    service = UpdateEmployeeOrganizationService.new(@employee, params[:organization_id])
+    if service.call
       redirect_to employee_path(@employee), notice: "Organization updated successfully."
     else
       flash[:alert] = @employee.errors.full_messages.to_sentence

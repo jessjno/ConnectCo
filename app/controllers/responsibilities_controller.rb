@@ -19,12 +19,10 @@ class ResponsibilitiesController < ApplicationController
   end
 
   def create
-    @employee = Employee.find(params[:employee_id])
-    responsibility_params = params.require(:responsibility).permit(:description)
-  
-    responsibility = create_responsibility(@employee, responsibility_params)
-  
-    if responsibility
+    service = ResponsibilityCreationService.new(@employee, responsibility_params)
+    @responsibility = service.call
+
+    if @responsibility
       redirect_to employee_path(@employee), notice: "Responsibility created successfully."
     else
       redirect_to employee_path(@employee), alert: "Failed to create responsibility."
@@ -37,7 +35,10 @@ class ResponsibilitiesController < ApplicationController
   end
 
   def update
-    if update_responsibility(@responsibility, responsibility_params)
+    service = ResponsibilityUpdateService.new(@responsibility, responsibility_params)
+    @responsibility = service.call
+
+    if @responsibility
       redirect_to employee_path(@responsibility.employee), notice: "Responsibility updated successfully."
     else
       redirect_to employee_path(@responsibility.employee), alert: "Failed to update responsibility."
@@ -45,11 +46,11 @@ class ResponsibilitiesController < ApplicationController
   end
 
   def destroy
-    employee = @responsibility.employee
-    if destroy_responsibility(@responsibility)
-      redirect_to employee_path(employee), notice: "Responsibility deleted successfully."
+    service = ResponsibilityDeletionService.new(@responsibility)
+    if service.call
+      redirect_to employee_path(@responsibility.employee), notice: "Responsibility deleted successfully."
     else
-      redirect_to employee_path(employee), alert: "Failed to delete responsibility."
+      redirect_to employee_path(@responsibility.employee), alert: "Failed to delete responsibility."
     end
   end
 

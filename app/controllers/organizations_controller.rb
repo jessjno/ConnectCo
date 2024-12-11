@@ -5,12 +5,20 @@ class OrganizationsController < ApplicationController
 
   def index
     @q = Employee.ransack(params[:q])
-    @organizations = Organization.all
+    @q_organization = Organization.ransack(params[:q])
+  
+    @organizations = @q_organization.result.ordered_by_parent.page(params[:page]).per(20)
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def show
-    @employees = @organization.all_employees
-    @sub_organizations = @organization.all_sub_organizations
+    @organization = Organization.with_sub_organizations_and_employees.find(params[:id])
+    @employees = @organization.employees 
+    @sub_organizations = @organization.sub_organizations 
   end
 
   def new
@@ -23,12 +31,13 @@ class OrganizationsController < ApplicationController
   end
 
   def create
-    @organization = Organization.new(organization_params)
-    authorize @organization
-    if @organization.save
+    service = OrganizationCreationService.new(organization_params)
+    @organization = service.call
+
+    if @organization
       redirect_to organizations_path, notice: "Organization was successfully created."
     else
-      render :new, alert: @organization.errors.full_messages.to_sentence
+      render :new, alert: "Failed to create organization."
     end
   end
 
@@ -36,7 +45,10 @@ class OrganizationsController < ApplicationController
   end
 
   def update
-    if @organization.update(organization_params)
+    service = OrganizationUpdateService.new(@organization, organization_params)
+    @organization = service.call
+
+    if @organization
       redirect_to organization_path(@organization), notice: "Organization updated successfully."
     else
       render :edit, alert: @organization.errors.full_messages.to_sentence
@@ -44,8 +56,8 @@ class OrganizationsController < ApplicationController
   end
 
   def destroy
-    @organization = Organization.find(params[:id])
-    if @organization.destroy
+    service = OrganizationDeletionService.new(@organization)
+    if service.call
       flash[:success] = "Organization successfully deleted."
     else
       flash[:error] = @organization.errors.full_messages.to_sentence

@@ -20,7 +20,11 @@ class Organization < ApplicationRecord
 
   # Callback to ensure organization dependencies are checked before deletion
   before_destroy :check_dependencies
-  
+
+  scope :ordered_by_parent, -> { order(Arel.sql('parent_id IS NULL DESC, parent_id ASC, name ASC')) }
+  scope :with_sub_organizations_and_employees, -> { includes(:sub_organizations, :employees) }
+  scope :parent_organizations, -> { where(parent_id: nil) }
+
   # Returns all employees in this organization and its sub-organizations
   def all_employees
     Employee.where(organization_id: all_organization_ids)
@@ -50,7 +54,7 @@ class Organization < ApplicationRecord
       throw(:abort)
     elsif sub_organizations.exists?
       errors.add(:base, "Cannot delete organization with sub-organizations assigned to it.")
-      throw(:abort) 
+      throw(:abort)
     end
   end
 end
