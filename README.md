@@ -41,6 +41,11 @@ ConnectCo is a web application that helps employees navigate their organization'
 2. Open your browser and navigate to http://localhost:3000 Follow the on-screen instructions to use the application
 
 
+## Troubleshooting
+- **Database errors**: If you run into issues with the database, try running `rails db:reset` and `rails db:migrate` again.
+- **Missing gems**: If you encounter errors about missing gems, try running `bundle install` or `bundle update`.
+- **Missing dependencies**: If your app fails to start, ensure that all system dependencies (e.g., ImageMagick, Node.js) are installed.
+
 ## Contributing
 
 Contributions are welcome! Please follow these guidelines:
