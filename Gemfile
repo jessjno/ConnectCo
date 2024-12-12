@@ -106,6 +106,7 @@ group :development do
 end
 
 group :development, :test do
+  gem "rubocop"
   gem "rspec-rails", "~> 6.0.0"
 end
 
