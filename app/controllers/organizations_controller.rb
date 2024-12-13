@@ -6,7 +6,7 @@ class OrganizationsController < ApplicationController
   def index
     @q = Employee.ransack(params[:q])
     @q_organization = Organization.ransack(params[:q])
-  
+
     @organizations = @q_organization.result.ordered_by_parent.page(params[:page]).per(20)
 
     respond_to do |format|
@@ -17,8 +17,8 @@ class OrganizationsController < ApplicationController
 
   def show
     @organization = Organization.with_sub_organizations_and_employees.find(params[:id])
-    @employees = @organization.employees 
-    @sub_organizations = @organization.sub_organizations 
+    @employees = @organization.employees
+    @sub_organizations = @organization.sub_organizations
   end
 
   def new
@@ -48,9 +48,13 @@ class OrganizationsController < ApplicationController
     service = OrganizationUpdateService.new(@organization, organization_params)
     @organization = service.call
 
-    if @organization
+    if @organization && @organization.errors.empty?
       redirect_to organization_path(@organization), notice: "Organization updated successfully."
     else
+      
+      if @organization.nil?
+        @organization = Organization.find(params[:id]) 
+      end
       render :edit, alert: @organization.errors.full_messages.to_sentence
     end
   end
