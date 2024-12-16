@@ -34,6 +34,8 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 RSpec.configure do |config|
+  config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include Devise::Test::ControllerHelpers, type: :controller
   # Suppress RSpec warnings about potential false positives
   RSpec::Expectations.configuration.on_potential_false_positives = :nothing
   

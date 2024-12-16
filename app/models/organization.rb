@@ -12,7 +12,8 @@
 #
 class Organization < ApplicationRecord
   include ResponsibilitiesManagement
-
+  validates :name, presence: true, uniqueness: true
+  
   belongs_to :parent_organization, class_name: "Organization", optional: true
   has_many :sub_organizations, class_name: "Organization", foreign_key: "parent_id"
   has_many :employees, class_name: "Employee", foreign_key: "organization_id", dependent: :nullify
