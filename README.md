@@ -57,7 +57,7 @@ Contributions are welcome! Please follow these guidelines:
 5. Open a pull request
 
 ## ERD
-![Domain Model](https://gist.github.com/user-attachments/assets/7384e66a-b962-4929-8be6-0c2366f841bc)
+![Domain Model](https://gist.github.com/user-attachments/assets/7384e66a-b962-4929-8be6-0c2366f841bc) <!--This isn't really working. Try a different approach-->
 
 ## License
 ConnectCo is licensed under the MIT License. See `LICENSE.md` for more information.

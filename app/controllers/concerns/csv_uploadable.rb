@@ -1,4 +1,4 @@
-module CsvUploadable
+module CsvUploadable # Great job. This is a great place for this. Suggestion Csvable is a better name so you can have both upload and download
   extend ActiveSupport::Concern
 
   # This method will handle the CSV file upload logic
