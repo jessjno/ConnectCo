@@ -72,6 +72,7 @@ class ResponsibilitiesController < ApplicationController
     authorize @responsibility
   end
 
+  # Can be moved to a policy
   def ensure_employee_is_authorized
     if @responsibility.nil? || !ResponsibilityPolicy.new(current_employee, @responsibility).show?
       raise Pundit::NotAuthorizedError, "Not allowed"

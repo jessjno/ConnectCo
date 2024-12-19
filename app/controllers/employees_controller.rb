@@ -1,5 +1,5 @@
 class EmployeesController < ApplicationController
-  include CsvUploadable
+  include CsvUploadable #Do you need this here?
   before_action :set_employee, only: [:show, :edit, :update, :destroy, :edit_responsibility, :update_responsibility, :edit_organization, :update_organization, :edit_manager, :update_manager]
   before_action :set_responsibility, only: [:edit_responsibility, :update_responsibility]
 
