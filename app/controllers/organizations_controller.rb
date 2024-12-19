@@ -1,6 +1,6 @@
 class OrganizationsController < ApplicationController
   include Pundit
-  include CsvUploadable
+  include CsvUploadable # Do you need this here?
   before_action :set_organization, only: [:edit, :update, :show, :destroy]
 
   def index
